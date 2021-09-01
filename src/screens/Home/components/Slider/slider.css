@@ -1,0 +1,36 @@
+.banner-img {
+  width: 100%;
+  height: 550px;
+}
+.banner-title {
+  position: absolute;
+  margin-top: 100px;
+  top: 12%;
+  left: 10%;
+}
+.banner-title .head-title {
+  width: 245px;
+  border-bottom: 3px solid white;
+}
+.banner-title .bottom-title {
+  width: 500px;
+}
+.banner-title .bottom-title span {
+  font-weight: 450;
+  color: white;
+  font-size: 16px;
+}
+
+.banner-title .head-title span {
+  font-weight: 500;
+  color: white;
+  font-size: 18px;
+}
+
+.bg-title {
+  width: 100%;
+  height: 550px;
+  top: 0%;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.27);
+}

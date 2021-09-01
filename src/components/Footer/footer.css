@@ -1,0 +1,19 @@
+.footer-title {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.footer-lists ul {
+  list-style-type: none;
+  padding: 0px;
+}
+.footer-lists ul li {
+  font-size: 16px;
+  color: #989898;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.footer-lists ul li i {
+  margin-right: 10px;
+}
