@@ -1,10 +1,10 @@
-import { Route, Redirect, BrowserRouter } from "react-router-dom";
+import { Route, Redirect, BrowserRouter, HashRouter } from "react-router-dom";
 import HomePage from "./screens/Home/screens/HomePage";
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Route exact path="/" component={HomePage}></Route>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
