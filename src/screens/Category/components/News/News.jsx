@@ -46,6 +46,7 @@ const News = (props) => {
         setSeeMore(true);
       } else {
         setSeeMore(false);
+        setLoading(false);
       }
     });
   }, [subCategoryID, page]);
