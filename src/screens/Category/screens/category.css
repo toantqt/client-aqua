@@ -1,0 +1,9 @@
+.head-name {
+  color: #9a9a9a;
+  font-size: 18px;
+}
+
+.head-name .head-item:hover {
+  color: #08999c;
+  cursor: pointer;
+}

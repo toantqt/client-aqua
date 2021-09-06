@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import "./header.css";
 import { useHistory } from "react-router-dom";
@@ -34,43 +35,43 @@ export default function HeaderComponent() {
           <div className="menu-header">
             <ul className="menu">
               <li className="social-connect">
-                <a className="mr-3">
+                <Link to="/" className="mr-3">
                   <i class="fab fa-facebook"></i>
-                </a>
-                <a class="ml-3">
+                </Link>
+                <Link to="/" class="ml-3">
                   <i class="fab fa-youtube"></i>
-                </a>
+                </Link>
               </li>
               <li>
-                <a>
+                <Link to="/">
                   <i class="fas fa-user"></i>
                   <span className="ml-2">Đăng nhập</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a>
+                <Link to="/">
                   <i class="fas fa-pencil-alt"></i>
                   <span className="ml-2">Đăng kí</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a>
+                <Link to="/">
                   <i class="fas fa-search"></i>
                   <span className="ml-2">Tìm kiếm</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a>
+                <Link to="/">
                   <i class="fas fa-briefcase"></i>
                   <span className="ml-2">Liên kết đào tạo</span>
-                </a>
+                </Link>
               </li>
 
               <li>
-                <a>
+                <Link to="/">
                   <i class="fas fa-phone-alt"></i>
                   <span className="ml-2">Thông tin tuyển dụng và liên hệ</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -81,59 +82,59 @@ export default function HeaderComponent() {
           <div className="menu-header">
             <ul className="menu">
               <li className="menu-item menu-logo">
-                <a>
+                <Link to="/">
                   <img src={logo} alt="" />
-                </a>
+                </Link>
               </li>
               <li className="menu-item">
-                <a>
+                <Link to="/">
                   <span>Trang chủ</span>
-                </a>
+                </Link>
               </li>
               <li className="menu-item">
-                <a>
+                <Link to="/danh-muc/gioi-thieu">
                   <span>Giới thiệu</span>
-                </a>
+                </Link>
               </li>
               <li className="menu-item">
-                <a>
+                <Link to="/danh-muc/thanh-tich">
                   <span>Thành tích</span>
-                </a>
+                </Link>
               </li>
               <li className="menu-item">
-                <a>
+                <Link to="/danh-muc/tin-tuc">
                   <span>Tin tức </span>
-                </a>
+                </Link>
               </li>
               <li className="menu-item">
-                <a>
+                <Link to="/danh-muc/quy-trinh-nuoi-tom">
                   <span>Quy trình nuôi tôm</span>
-                </a>
+                </Link>
               </li>
               <li className="menu-item">
-                <a>
+                <Link to="/danh-muc/tom-giong">
                   <span>Tôm giống </span>
-                </a>
+                </Link>
               </li>
               <li className="menu-item">
-                <a>
+                <Link to="/danh-muc/san-pham">
                   <span>Sản phẩm </span>
-                </a>
+                </Link>
               </li>
               <li className="menu-item">
-                <a>
+                <Link to="/danh-muc/hinh-anh-video">
                   <span>Hình ảnh/video </span>
-                </a>
+                </Link>
               </li>
               <li className="menu-item">
-                <a>
+                <Link to="/danh-muc/kien-thuc">
                   <span>Kiến thức </span>
-                </a>
+                </Link>
               </li>
               <li className="menu-item">
-                <a>
+                <Link to="/danh-muc/van-phong-doi-tac">
                   <span>Văn phòng/ đối tác </span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

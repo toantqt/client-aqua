@@ -1,0 +1,23 @@
+.details-news {
+  text-align: center;
+}
+
+.details-news .header-title-news span {
+  font-size: 40px;
+  font-weight: 500;
+}
+
+.details-news .header-date-news span {
+  font-size: 18px;
+  color: #9a9a9a;
+}
+
+.details-news .header-border {
+  width: 40%;
+  margin: 0 auto;
+  border-bottom: 4px solid #08999c;
+}
+
+.details-news .news-content {
+  text-align: justify;
+}

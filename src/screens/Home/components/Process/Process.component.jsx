@@ -83,10 +83,10 @@ const ProcessComponent = () => {
                 </div>
                 <div className="process-title">
                   <div className="p-title mt-2 mb-2">
-                    <span>Vùng Miền</span>
+                    <span>Thời Tiết</span>
                   </div>
                   <div className="p-content mb-4">
-                    <span>Kỹ thuật nuôi dựa vào vị trí địa lý </span>
+                    <span>Chăm sóc tôm đúng cách khi thời tiết thay đổi </span>
                   </div>
                   <div className="p-function">
                     <div className="p-function-icon">
@@ -121,10 +121,10 @@ const ProcessComponent = () => {
                 </div>
                 <div className="process-title">
                   <div className="p-title mt-2 mb-2">
-                    <span>Vùng Miền</span>
+                    <span>Mùa vụ</span>
                   </div>
                   <div className="p-content mb-4">
-                    <span>Kỹ thuật nuôi dựa vào vị trí địa lý </span>
+                    <span>Giảm thiểu rủi ro, nâng cao hiệu quả nuôi tôm</span>
                   </div>
                   <div className="p-function">
                     <div className="p-function-icon">

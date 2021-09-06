@@ -5,7 +5,7 @@ import "./footer.css";
 const FooterComponent = () => {
   return (
     <footer>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} id="footer">
         <Grid item lg={6} md={6} xs={12}>
           <div>
             <div className="footer-title">

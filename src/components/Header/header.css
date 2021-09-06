@@ -13,7 +13,16 @@
   padding-top: 0px;
   padding-right: 0px;
 }
+#header-top .wrap-header ul a {
+  text-decoration: none;
+}
+#header-top .wrap-header ul a:hover {
+  text-decoration: none !important;
+}
 
+#header-top ul a:hover span {
+  color: red;
+}
 #header-top ul li {
   padding-left: 35px;
   padding-right: 35px;
@@ -68,4 +77,12 @@
   font-weight: 500;
   color: #f6f4ec;
   font-size: 15px;
+}
+
+#header ul li a:hover {
+  text-decoration: none;
+}
+#header ul li a:hover span {
+  color: rgb(245 232 127);
+  transition: all 300ms;
 }

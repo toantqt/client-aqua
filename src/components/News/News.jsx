@@ -4,7 +4,7 @@ import Image from "material-ui-image";
 import "./news.css";
 const News = (props) => {
   return (
-    <Grid>
+    <Grid className="wrap-news">
       <div className="news">
         <div className="img">
           <Image

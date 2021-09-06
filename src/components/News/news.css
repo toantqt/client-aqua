@@ -42,3 +42,14 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
 }
+
+.news .img:hover {
+  opacity: 0.8 !important;
+  cursor: pointer;
+}
+
+.wrap-news .title:hover span {
+  color: #08999c;
+  cursor: pointer;
+  transition: all 300ms;
+}

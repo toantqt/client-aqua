@@ -65,7 +65,7 @@ export default function HomePage() {
         title="Chúng tôi dẫn đầu trong
         “Quy trình nuôi tôm sạch”"
       />
-      <Grid style={{ width: "70%", margin: "0 auto", marginTop: "50px" }}>
+      <Grid style={{ width: "100%", marginTop: "100px" }}>
         <FooterComponent />
       </Grid>
     </Grid>
