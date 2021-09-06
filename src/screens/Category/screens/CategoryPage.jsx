@@ -8,8 +8,6 @@ import FooterComponent from "../../../components/Footer/Footer.component";
 import { getHomeBanner, getCategory } from "../../../api/API";
 import ClientRoutes from "../../../routes/ClientRoutes";
 import "./category.css";
-import LoadingComponent from "../../../components/Loading/Loading.component";
-import queryString from "query-string";
 
 export default function CategoryPage(props) {
   const params = props.match.params.slug;
