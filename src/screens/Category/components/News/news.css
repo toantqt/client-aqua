@@ -8,6 +8,8 @@
   padding: 0px;
   margin-bottom: 0px;
   text-align: center;
+  width: 100%;
+  border-bottom: 2px solid #08999c;
 }
 
 .subCategory ul li {
@@ -18,6 +20,7 @@
   padding-top: 15px;
   padding-bottom: 15px;
   border: 1px solid #08999c;
+  border-bottom: none;
   font-size: 16px;
   font-weight: 500;
 }

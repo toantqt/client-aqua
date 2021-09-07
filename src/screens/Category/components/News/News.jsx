@@ -63,6 +63,10 @@ const News = (props) => {
     history.push({ search: `?page=${a}` });
   };
   const lists = subCategory.map((e, index) => {
+    let padding = "12px 25px 12px 25px";
+    if (subCategory.length <= 3) {
+      padding = "12px 50px 12px 50px";
+    }
     return (
       <li
         onClick={() => {
@@ -70,6 +74,7 @@ const News = (props) => {
         }}
         className={"item " + (e.name === active ? "active" : "")}
         key={index}
+        style={{ padding: padding }}
       >
         <span>{e.name}</span>
       </li>

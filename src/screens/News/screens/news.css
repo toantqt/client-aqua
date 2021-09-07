@@ -21,3 +21,10 @@
 .details-news .news-content {
   text-align: justify;
 }
+.news-author {
+  text-align: right;
+}
+.news-author span {
+  font-weight: bold;
+  font-size: 18px;
+}

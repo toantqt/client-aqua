@@ -112,12 +112,12 @@ export default function HeaderComponent() {
                 </Link>
               </li>
               <li className="menu-item">
-                <Link to="/danh-muc/tom-giong">
+                <Link to="/tom-giong">
                   <span>Tôm giống </span>
                 </Link>
               </li>
               <li className="menu-item">
-                <Link to="/danh-muc/san-pham">
+                <Link to="/san-pham">
                   <span>Sản phẩm </span>
                 </Link>
               </li>

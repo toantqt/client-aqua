@@ -45,3 +45,25 @@ export const getDetailsNews = async (slug) => {
       return error.response;
     });
 };
+
+export const getIntroduce = async (slug) => {
+  return await axios
+    .get(`${url}/get-introduce`)
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const getAchievements = async (slug) => {
+  return await axios
+    .get(`${url}/get-achievements`)
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};

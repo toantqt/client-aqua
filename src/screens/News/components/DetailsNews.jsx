@@ -55,6 +55,9 @@ const DetailsNews = (props) => {
       </div>
       <div className="header-border"></div>
       <div className="news-content mt-5">{listsContent}</div>
+      <div className="news-author mt-5">
+        <span>{props?.news?.news.author}</span>
+      </div>
     </Grid>
   );
 };
