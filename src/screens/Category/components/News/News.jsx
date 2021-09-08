@@ -27,14 +27,17 @@ const News = (props) => {
   }, [props.location.search]);
   useEffect(() => {
     if (props.category) {
+      if (props.category.subCategory.length != 0) {
+        setSubCategoryID(props.category.subCategory[0]?._id);
+        setActive(props.category.subCategory[0]?.name);
+      } else {
+        setSubCategoryID("undefined");
+      }
       setSubCategory(props.category.subCategory);
-      setActive(props.category.subCategory[0]?.name);
-      setSubCategoryID(props.category.subCategory[0]?._id);
       setCategoryID(props.category._id);
       props.handleLoading(false);
     }
   }, [props.category]);
-  console.log(subCategory);
 
   useEffect(async () => {
     await getNewsCategory(categoryID, subCategoryID, page).then((res) => {
@@ -42,14 +45,20 @@ const News = (props) => {
         for (let item of res.data) {
           setNews((news) => [...news, item]);
         }
-        setLoading(false);
-        setSeeMore(true);
+        if (res.data.length < 9) {
+          setSeeMore(false);
+        } else {
+          setSeeMore(true);
+        }
       } else {
         setSeeMore(false);
-        setLoading(false);
       }
+      setLoading(false);
     });
   }, [subCategoryID, page]);
+  useEffect(async () => {
+    setNews([]);
+  }, [categoryID]);
 
   const handleClick = (name, subCategoryID) => {
     setActive(name);
@@ -57,7 +66,6 @@ const News = (props) => {
     setNews([]);
     setLoading(true);
   };
-  console.log(seeMore);
   const handleClickSeeMore = () => {
     let a = page + 1;
     history.push({ search: `?page=${a}` });
@@ -83,7 +91,11 @@ const News = (props) => {
   return (
     <Grid>
       <div className="subCategory">
-        <ul className="sub-item">{lists}</ul>
+        {subCategory.length !== 0 ? (
+          <ul className="sub-item">{lists}</ul>
+        ) : (
+          <></>
+        )}
       </div>
       {loading ? (
         <div

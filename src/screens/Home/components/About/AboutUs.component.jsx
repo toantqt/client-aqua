@@ -4,6 +4,7 @@ import about1 from "../../../../assets/image/about/1.png";
 import about2 from "../../../../assets/image/about/2.png";
 import Image from "material-ui-image";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { Link } from "react-router-dom";
 
 const AboutUSComponent = () => {
   return (
@@ -69,9 +70,9 @@ const AboutUSComponent = () => {
                 </span>
               </div>
               <div className="bottom-btn mt-5">
-                <a href="">
+                <Link to="/danh-muc/gioi-thieu">
                   <span>XEM THÊM</span>
-                </a>
+                </Link>
               </div>
             </div>
           </Grid>

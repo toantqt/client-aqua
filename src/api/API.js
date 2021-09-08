@@ -25,6 +25,7 @@ export const getCategory = async (slug) => {
 };
 
 export const getNewsCategory = async (categoryID, subCategoryID, page) => {
+  console.log(subCategoryID);
   return await axios
     .get(`${url}/get-news/${categoryID}/${subCategoryID}/${page}`)
     .then(async (res) => {
@@ -60,6 +61,61 @@ export const getIntroduce = async (slug) => {
 export const getAchievements = async (slug) => {
   return await axios
     .get(`${url}/get-achievements`)
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const getProduct = async (categoryID, subCategoryID, page) => {
+  return await axios
+    .get(`${url}/get-product/${categoryID}/${subCategoryID}/${page}`)
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const getAllProduct = async (categoryID, page) => {
+  return await axios
+    .get(`${url}/get-all-product/${categoryID}/${page}`)
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const getProductHighlight = async () => {
+  return await axios
+    .get(`${url}/get-product-highlight`)
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const getDetailsProduct = async (productID) => {
+  return await axios
+    .get(`${url}/get-details-product/${productID}`)
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const getInformation = async () => {
+  return await axios
+    .get(`${url}/get-information`)
     .then(async (res) => {
       return res.data;
     })

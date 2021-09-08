@@ -3,6 +3,7 @@ import HomePage from "./screens/Home/screens/HomePage";
 import CategoryPage from "./screens/Category/screens/CategoryPage";
 import NewsPage from "./screens/News/screens/NewsPage";
 import ProductPage from "./screens/Product/screens/ProductPage";
+import DetailsProductPage from "./screens/Details Product/screens/DetailsProductPage";
 import slug from "./resources/slug";
 function App() {
   return (
@@ -25,6 +26,10 @@ function App() {
       <Route
         path="/bai-viet/:slug"
         render={(props) => <NewsPage {...props} />}
+      ></Route>
+      <Route
+        path="/chi-tiet-san-pham/:productID"
+        render={(props) => <DetailsProductPage {...props} />}
       ></Route>
     </HashRouter>
   );

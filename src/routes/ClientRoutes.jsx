@@ -4,12 +4,18 @@ import News from "../screens/Category/components/News/News";
 import Introduce from "../screens/Category/components/Introduce/Introduce";
 import Achievements from "../screens/Category/components/Achievements/Achievements";
 import Product from "../screens/Product/components/Product";
+import Office from "../screens/Category/components/Office/Office";
 const ClientRoutes = (props) => {
   const category = props?.category;
   const handleLoading = props?.handleLoading;
   return (
     <>
       <Switch>
+        <Route
+          exact
+          path={slug.office}
+          render={() => <Office category={category} />}
+        ></Route>
         <Route
           exact
           path={slug.introduce}

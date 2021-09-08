@@ -1,0 +1,48 @@
+.wrap-details .details-img {
+  width: 30%;
+  margin: 0 auto;
+}
+
+.wrap-details .details-content {
+  width: 80%;
+  margin: 0 auto;
+  min-height: 200px;
+  background-color: #fbfaf6;
+  border-radius: 10px;
+  padding: 30px;
+}
+
+.wrap-details .details-content .details-name {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 500;
+  color: #08999c;
+}
+
+.details-title {
+  font-weight: bold;
+}
+.details-btn {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.details-btn a {
+  padding: 20px 20px 20px 20px;
+  border-radius: 10px;
+  background-color: #ff2525a8;
+}
+.details-btn a:hover {
+  cursor: pointer;
+}
+
+.details-btn a span {
+  font-size: 24px;
+  color: white;
+  font-weight: 500;
+}
+.details-btn a i {
+  font-size: 24px;
+  color: white;
+  font-weight: bold;
+}
