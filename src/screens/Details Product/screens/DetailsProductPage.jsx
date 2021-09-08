@@ -10,6 +10,7 @@ const DetailsProductPage = (props) => {
   const productID = props.match.params.productID;
   const [product, setProduct] = useState();
   useEffect(async () => {
+    window.scrollTo(0, 0);
     await getDetailsProduct(productID).then((res) => {
       setProduct(res.data);
     });

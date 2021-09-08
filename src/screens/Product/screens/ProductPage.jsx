@@ -12,6 +12,7 @@ export default function NewsPage(props) {
   const [category, setCategory] = useState();
 
   useEffect(async () => {
+    window.scrollTo(0, 0);
     setCategory();
     await getCategory(route).then((res) => {
       setCategory(res.data);

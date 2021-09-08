@@ -16,6 +16,7 @@ export default function CategoryPage(props) {
   const [category, setCategory] = useState();
   const [loading, setLoading] = useState(true);
   useEffect(async () => {
+    window.scrollTo(0, 0);
     setCategory();
     await getHomeBanner(params).then((res) => {
       setBanner(res.data);

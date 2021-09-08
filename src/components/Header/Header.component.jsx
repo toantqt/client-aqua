@@ -68,7 +68,7 @@ export default function HeaderComponent() {
               </li>
 
               <li>
-                <Link to="/">
+                <Link to="/danh-muc/thong-tin-tuyen-dung-va-lien-he">
                   <i class="fas fa-phone-alt"></i>
                   <span className="ml-2">Thông tin tuyển dụng và liên hệ</span>
                 </Link>

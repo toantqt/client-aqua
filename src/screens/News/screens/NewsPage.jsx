@@ -12,6 +12,7 @@ export default function NewsPage(props) {
   const [loading, setLoading] = useState(true);
   const [news, setNews] = useState();
   useEffect(async () => {
+    window.scrollTo(0, 0);
     await getDetailsNews(slug).then((res) => {
       setNews(res.data);
     });

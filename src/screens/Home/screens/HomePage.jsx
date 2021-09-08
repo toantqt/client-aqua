@@ -17,6 +17,7 @@ export default function HomePage() {
   const [banner4, setBanner4] = useState();
 
   useEffect(async () => {
+    window.scrollTo(0, 0);
     await getHomeBanner("home").then((res) => {
       for (let item of res.data) {
         switch (item.index) {
