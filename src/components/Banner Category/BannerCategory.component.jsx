@@ -5,7 +5,6 @@ import logo from "../../assets/image/logo.png";
 import "./bannerCategory.css";
 
 const BannerCategoryComponent = (props) => {
-  console.log(props);
   return (
     <Grid id="home-banner">
       <div className="wrapper-banner ">

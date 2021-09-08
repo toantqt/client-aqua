@@ -5,4 +5,5 @@ export default {
   product: "/san-pham",
   shrimp: "/tom-giong",
   office: "/danh-muc/van-phong-doi-tac",
+  library: "/danh-muc/hinh-anh-video",
 };

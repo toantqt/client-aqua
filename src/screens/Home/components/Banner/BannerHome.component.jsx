@@ -4,7 +4,6 @@ import Image from "material-ui-image";
 import logo from "../../../../assets/image/logo.png";
 
 const BannerHomeComponent = (props) => {
-  console.log(props);
   return (
     <Grid id="home-banner" className="mt-5">
       <div className="wrapper-banner ">

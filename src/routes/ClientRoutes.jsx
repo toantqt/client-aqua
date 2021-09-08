@@ -5,12 +5,18 @@ import Introduce from "../screens/Category/components/Introduce/Introduce";
 import Achievements from "../screens/Category/components/Achievements/Achievements";
 import Product from "../screens/Product/components/Product";
 import Office from "../screens/Category/components/Office/Office";
+import Lirary from "../screens/Category/components/Library/Library";
 const ClientRoutes = (props) => {
   const category = props?.category;
   const handleLoading = props?.handleLoading;
   return (
     <>
       <Switch>
+        <Route
+          exact
+          path={slug.library}
+          render={() => <Lirary category={category} />}
+        ></Route>
         <Route
           exact
           path={slug.office}

@@ -25,7 +25,6 @@ export const getCategory = async (slug) => {
 };
 
 export const getNewsCategory = async (categoryID, subCategoryID, page) => {
-  console.log(subCategoryID);
   return await axios
     .get(`${url}/get-news/${categoryID}/${subCategoryID}/${page}`)
     .then(async (res) => {
@@ -116,6 +115,17 @@ export const getDetailsProduct = async (productID) => {
 export const getInformation = async () => {
   return await axios
     .get(`${url}/get-information`)
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const getImage = async () => {
+  return await axios
+    .get(`${url}/get-image`)
     .then(async (res) => {
       return res.data;
     })

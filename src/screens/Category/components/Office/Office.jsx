@@ -13,7 +13,6 @@ const Office = (props) => {
       setPartner(res.data.partners);
     });
   }, []);
-  console.log(office);
 
   const listsOffice = office.map((e, index) => {
     return (
