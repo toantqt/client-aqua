@@ -47,6 +47,10 @@
   opacity: 0.8 !important;
   cursor: pointer;
 }
+.news:hover .bg-img {
+  opacity: 0.8 !important;
+  cursor: pointer;
+}
 
 .wrap-news .title:hover span {
   color: #08999c;

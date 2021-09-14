@@ -8,6 +8,7 @@ import moment from "moment";
 import { SRLWrapper } from "simple-react-lightbox";
 import SimpleReactLightbox from "simple-react-lightbox";
 import ReactPlayer from "react-player";
+import ModalVideoComponent from "../../../../components/Modal Video/ModalVideo.component";
 
 const Lirary = (props) => {
   const [subCategory, setSubCategory] = useState([]);
@@ -18,6 +19,9 @@ const Lirary = (props) => {
   const [loading, setLoading] = useState(true);
   const [image, setImage] = useState([]);
   const [video, setVideo] = useState([]);
+  const [urlPlay, setUrlPlay] = useState("");
+  const [open, setOpen] = useState(false);
+  const [light, setLight] = useState(true);
 
   useEffect(() => {
     if (props.category) {
@@ -70,6 +74,18 @@ const Lirary = (props) => {
     );
   });
 
+  const handlePlay = (event) => {
+    console.log(event);
+  };
+  const handleClickVideo = (url) => {
+    setLight(true);
+    setUrlPlay(url);
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const listImage = image.map((e, index) => {
     return (
       <Grid item lg={4} md={4} xs={12}>
@@ -89,18 +105,35 @@ const Lirary = (props) => {
   });
   const listVideo = video.map((e, index) => {
     return (
-      <Grid item lg={4} md={4} xs={12}>
+      <Grid
+        item
+        lg={4}
+        md={4}
+        xs={12}
+        onClick={() => {
+          handleClickVideo(e.video.url);
+        }}
+      >
         <Grid className="wrap-news">
           <div className="news">
             <div className="img">
               <ReactPlayer
                 url={e.video.url}
-                controls={true}
                 width="100%"
                 height="100%"
+                controls={true}
+                light={light}
               />
             </div>
-            <div className="news-date">{e?.date}</div>
+            <div
+              className="img-bg"
+              style={{
+                width: "100%",
+                height: "100%",
+                position: "absolute",
+                top: "0%",
+              }}
+            ></div>
           </div>
           <div className="title">
             <span>{e?.title}</span>
@@ -135,6 +168,11 @@ const Lirary = (props) => {
           {type === 0 ? listImage : listVideo}
         </Grid>
       )}
+      <ModalVideoComponent
+        url={urlPlay}
+        open={open}
+        handleClose={handleClose}
+      />
     </Grid>
   );
 };

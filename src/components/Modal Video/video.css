@@ -1,0 +1,5 @@
+.video .MuiPaper-root {
+  width: 100% !important;
+  height: 100%;
+  overflow: hidden;
+}
