@@ -16,7 +16,7 @@ const SliderBanner = (props) => {
 
   const listsBanner = props?.banner?.map((e, index) => {
     return (
-      <div className="banner-img">
+      <div className="banner-img" key={index}>
         <div style={{ width: "100%", height: "100%", position: "relative" }}>
           <ImageComponent url={e.image.url} />
         </div>

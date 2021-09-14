@@ -12,6 +12,8 @@ import ProductComponent from "../components/Product/Product.component";
 import FooterComponent from "../../../components/Footer/Footer.component";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import up from "../../../assets/image/up.png";
+import ScrollTop from "../../../components/Scroll Top/ScrollTop";
 export default function HomePage() {
   const [banner1, setBanner1] = useState([]);
   const [banner2, setBanner2] = useState();
@@ -49,6 +51,7 @@ export default function HomePage() {
     <Grid>
       <HeaderComponent />
       <SliderBanner banner={banner1} />
+      <ScrollTop />
       <Grid style={{ width: "80%", margin: "0 auto" }}>
         <div data-aos="fade-up">
           <AboutUSComponent />

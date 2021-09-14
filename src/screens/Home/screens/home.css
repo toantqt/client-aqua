@@ -93,7 +93,15 @@
   left: 10%;
   text-align: center;
 }
-
+#news .title-category:hover {
+  background-color: #089a9a;
+  transition: all 300ms;
+}
+#news .title-category:hover span {
+  cursor: pointer;
+  color: white;
+  transition: all 300ms;
+}
 #news .title-category span {
   color: #08999c;
   font-size: 20px;
@@ -222,10 +230,18 @@
   background-color: #08999c;
   padding: 10px;
 }
+#process .process-item .process-title .p-function .p-function-icon:hover {
+  cursor: pointer;
+  background-color: #fbbb63;
+  transition: all 300ms;
+}
 #process .process-item .process-title .p-function .p-function-icon i {
   font-size: 18px;
   color: white;
   vertical-align: middle;
+}
+#product .wrap-product {
+  box-shadow: none !important;
 }
 
 #product .wrap-product .product-main-title {
@@ -299,4 +315,12 @@
   opacity: 1;
   cursor: pointer;
   transition: 0.5s ease;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #08999c;
+}
+
+.slick-dots li button:before {
+  font-size: 10px;
 }

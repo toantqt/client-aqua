@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Image from "material-ui-image";
 import prc1 from "../../../../assets/image/process/process1.png";
@@ -9,6 +10,10 @@ import prc5 from "../../../../assets/image/process/process5.png";
 import prc6 from "../../../../assets/image/process/process6.png";
 
 const ProcessComponent = () => {
+  const history = useHistory();
+  const handleClick = () => {
+    history.push("/danh-muc/quy-trinh-nuoi-tom");
+  };
   return (
     <Grid id="process">
       <div className="wrap-process" style={{ position: "relative" }}>
@@ -51,7 +56,7 @@ const ProcessComponent = () => {
                     <span>Kỹ thuật nuôi dựa vào vị trí địa lý </span>
                   </div>
                   <div className="p-function">
-                    <div className="p-function-icon">
+                    <div className="p-function-icon" onClick={handleClick}>
                       <i class="fas fa-arrow-right"></i>
                     </div>
                   </div>
@@ -89,7 +94,7 @@ const ProcessComponent = () => {
                     <span>Chăm sóc tôm đúng cách khi thời tiết thay đổi </span>
                   </div>
                   <div className="p-function">
-                    <div className="p-function-icon">
+                    <div className="p-function-icon" onClick={handleClick}>
                       <i class="fas fa-arrow-right"></i>
                     </div>
                   </div>
@@ -127,7 +132,7 @@ const ProcessComponent = () => {
                     <span>Giảm thiểu rủi ro, nâng cao hiệu quả nuôi tôm</span>
                   </div>
                   <div className="p-function">
-                    <div className="p-function-icon">
+                    <div className="p-function-icon" onClick={handleClick}>
                       <i class="fas fa-arrow-right"></i>
                     </div>
                   </div>

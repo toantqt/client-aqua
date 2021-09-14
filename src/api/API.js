@@ -144,3 +144,14 @@ export const getVideo = async () => {
       return error.response;
     });
 };
+
+export const getHomeProduct = async () => {
+  return await axios
+    .get(`${url}/get-home-product`)
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};

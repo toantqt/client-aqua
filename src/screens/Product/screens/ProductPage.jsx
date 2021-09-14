@@ -7,6 +7,7 @@ import { getCategory } from "../../../api/API";
 import ClientRoutes from "../../../routes/ClientRoutes";
 
 export default function NewsPage(props) {
+  const history = useHistory();
   const location = useLocation();
   const route = location.pathname.replace("/", "");
   const [category, setCategory] = useState();
@@ -18,6 +19,10 @@ export default function NewsPage(props) {
       setCategory(res.data);
     });
   }, [route]);
+
+  const handleClick = () => {
+    history.push(`/${route}`);
+  };
 
   return (
     <Grid>
@@ -34,7 +39,9 @@ export default function NewsPage(props) {
             <span className="head-item">Trang chủ</span>
           </Link>
           <i className="fas fa-chevron-right ml-2 mr-2"></i>
-          <span className="head-item">{category?.categoryName}</span>
+          <span className="head-item" onClick={handleClick}>
+            {category?.categoryName}
+          </span>
         </div>
         <div className="mt-5">
           {/* {loading ? <LoadingComponent /> : <></>} */}
