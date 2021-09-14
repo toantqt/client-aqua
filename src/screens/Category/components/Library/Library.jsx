@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
-import { getImage } from "../../../../api/API";
+import { getImage, getVideo } from "../../../../api/API";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import News from "../../../../components/News/News";
+import "../../../../components/News/news.css";
+import moment from "moment";
+import { SRLWrapper } from "simple-react-lightbox";
+import SimpleReactLightbox from "simple-react-lightbox";
+import ReactPlayer from "react-player";
 
 const Lirary = (props) => {
   const [subCategory, setSubCategory] = useState([]);
@@ -11,6 +17,7 @@ const Lirary = (props) => {
   const [type, setType] = useState(0);
   const [loading, setLoading] = useState(true);
   const [image, setImage] = useState([]);
+  const [video, setVideo] = useState([]);
 
   useEffect(() => {
     if (props.category) {
@@ -29,6 +36,10 @@ const Lirary = (props) => {
     if (type === 0) {
       await getImage().then((res) => {
         setImage(res.data);
+      });
+    } else if (type === 1) {
+      await getVideo().then((res) => {
+        setVideo(res.data);
       });
     }
     setLoading(false);
@@ -58,6 +69,47 @@ const Lirary = (props) => {
       </li>
     );
   });
+
+  const listImage = image.map((e, index) => {
+    return (
+      <Grid item lg={4} md={4} xs={12}>
+        <SimpleReactLightbox>
+          <SRLWrapper>
+            <a href={props?.url}>
+              <News
+                img={e?.library[0]?.url}
+                title={e?.title}
+                date={moment(e?.created).format("DD/MM/YYYY")}
+              />
+            </a>
+          </SRLWrapper>
+        </SimpleReactLightbox>
+      </Grid>
+    );
+  });
+  const listVideo = video.map((e, index) => {
+    return (
+      <Grid item lg={4} md={4} xs={12}>
+        <Grid className="wrap-news">
+          <div className="news">
+            <div className="img">
+              <ReactPlayer
+                url={e.video.url}
+                controls={true}
+                width="100%"
+                height="100%"
+              />
+            </div>
+            <div className="news-date">{e?.date}</div>
+          </div>
+          <div className="title">
+            <span>{e?.title}</span>
+          </div>
+        </Grid>
+      </Grid>
+    );
+  });
+
   return (
     <Grid>
       <div className="subCategory">
@@ -79,7 +131,9 @@ const Lirary = (props) => {
           <CircularProgress />
         </div>
       ) : (
-        <></>
+        <Grid container spacing={3} className="mt-5">
+          {type === 0 ? listImage : listVideo}
+        </Grid>
       )}
     </Grid>
   );

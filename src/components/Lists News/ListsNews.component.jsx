@@ -9,7 +9,7 @@ const ListsNewsComponent = (props) => {
   const handleClickNews = (slug) => {
     history.push(`/bai-viet/${slug}`);
   };
-  const lists = props?.news.map((e, index) => {
+  const lists = props?.news?.map((e, index) => {
     return (
       <Grid
         item
@@ -21,9 +21,9 @@ const ListsNewsComponent = (props) => {
         }}
       >
         <News
-          img={e.thumbnail.url}
-          title={e.title}
-          date={moment(e.created).format("DD/MM/YYYY")}
+          img={e?.thumbnail?.url}
+          title={e?.title}
+          date={moment(e?.created).format("DD/MM/YYYY")}
         />
       </Grid>
     );

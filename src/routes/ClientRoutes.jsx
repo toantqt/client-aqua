@@ -6,12 +6,18 @@ import Achievements from "../screens/Category/components/Achievements/Achievemen
 import Product from "../screens/Product/components/Product";
 import Office from "../screens/Category/components/Office/Office";
 import Lirary from "../screens/Category/components/Library/Library";
+import Education from "../screens/Category/components/Education/Education";
 const ClientRoutes = (props) => {
   const category = props?.category;
   const handleLoading = props?.handleLoading;
   return (
     <>
       <Switch>
+        <Route
+          exact
+          path={slug.education}
+          render={() => <Education category={category} />}
+        ></Route>
         <Route
           exact
           path={slug.library}
@@ -49,6 +55,11 @@ const ClientRoutes = (props) => {
         <Route
           exact
           path={slug.product}
+          render={() => <Product category={category} />}
+        ></Route>
+        <Route
+          exact
+          path={slug.shrimp}
           render={() => <Product category={category} />}
         ></Route>
       </Switch>

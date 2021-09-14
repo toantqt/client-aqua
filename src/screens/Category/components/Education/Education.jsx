@@ -1,15 +1,28 @@
 import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
-import ReactPlayer from "react-player";
-import moment from "moment";
+import { getNewsCategory } from "../../../../api/API";
 import Image from "material-ui-image";
-const DetailsNews = (props) => {
-  const listsContent = props?.news?.news?.listContent.map((e) => {
+import ReactPlayer from "react-player";
+
+const Education = (props) => {
+  const [news, setNews] = useState([]);
+  useEffect(async () => {
+    if (props?.category?._id) {
+      await getNewsCategory(props.category._id, "undefined", 0).then((res) => {
+        if (res.data.length !== 0) {
+          setNews(res.data[0].listContent);
+        } else {
+          setNews([]);
+        }
+      });
+    }
+  }, [props?.category?._id]);
+  const lists = news.map((e, index) => {
     return (
       <div>
         <div
           dangerouslySetInnerHTML={{ __html: e.content }}
-          style={{ fontSize: "20px" }}
+          style={{ fontSize: "18px" }}
         ></div>
         <div>
           {e.library.map((el, index) => {
@@ -21,10 +34,10 @@ const DetailsNews = (props) => {
                     style={{
                       objectFit: "cover",
                       width: "100%",
-                      height: "500px",
+                      height: "700px",
                       paddingTop: "none",
                     }}
-                    imageStyle={{ width: "100%", height: "500px" }}
+                    imageStyle={{ width: "100%", height: "700px" }}
                   />
                 </div>
               );
@@ -45,21 +58,7 @@ const DetailsNews = (props) => {
       </div>
     );
   });
-  return (
-    <Grid className="details-news">
-      <div className="header-title-news">
-        <span>{props?.news?.news.title}</span>
-      </div>
-      <div className="header-date-news mt-2 mb-2">
-        <span>{moment(props?.news?.news.created).format("DD/MM/YYYY")}</span>
-      </div>
-      <div className="header-border"></div>
-      <div className="news-content mt-5">{listsContent}</div>
-      <div className="news-author mt-5">
-        <span>{props?.news?.news.author}</span>
-      </div>
-    </Grid>
-  );
+  return <Grid>{lists}</Grid>;
 };
 
-export default DetailsNews;
+export default Education;

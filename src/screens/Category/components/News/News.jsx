@@ -26,6 +26,7 @@ const News = (props) => {
     }
   }, [props.location.search]);
   useEffect(() => {
+    setNews([]);
     if (props.category) {
       if (props.category.subCategory.length != 0) {
         setSubCategoryID(props.category.subCategory[0]?._id);
@@ -41,6 +42,7 @@ const News = (props) => {
 
   useEffect(async () => {
     await getNewsCategory(categoryID, subCategoryID, page).then((res) => {
+      console.log(res.data);
       if (res.data.length != 0) {
         for (let item of res.data) {
           setNews((news) => [...news, item]);
@@ -55,10 +57,7 @@ const News = (props) => {
       }
       setLoading(false);
     });
-  }, [subCategoryID, page]);
-  useEffect(async () => {
-    setNews([]);
-  }, [categoryID]);
+  }, [categoryID, subCategoryID, page]);
 
   const handleClick = (name, subCategoryID) => {
     setActive(name);

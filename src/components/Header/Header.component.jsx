@@ -42,18 +42,7 @@ export default function HeaderComponent() {
                   <i class="fab fa-youtube"></i>
                 </Link>
               </li>
-              <li>
-                <Link to="/">
-                  <i class="fas fa-user"></i>
-                  <span className="ml-2">Đăng nhập</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/">
-                  <i class="fas fa-pencil-alt"></i>
-                  <span className="ml-2">Đăng kí</span>
-                </Link>
-              </li>
+
               <li>
                 <Link to="/">
                   <i class="fas fa-search"></i>
@@ -61,7 +50,7 @@ export default function HeaderComponent() {
                 </Link>
               </li>
               <li>
-                <Link to="/">
+                <Link to="/danh-muc/lien-ket-dao-tao">
                   <i class="fas fa-briefcase"></i>
                   <span className="ml-2">Liên kết đào tạo</span>
                 </Link>

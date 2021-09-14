@@ -133,3 +133,14 @@ export const getImage = async () => {
       return error.response;
     });
 };
+
+export const getVideo = async () => {
+  return await axios
+    .get(`${url}/get-video`)
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};

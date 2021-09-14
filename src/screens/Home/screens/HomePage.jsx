@@ -10,12 +10,19 @@ import BannerHomeComponent from "../components/Banner/BannerHome.component";
 import ProcessComponent from "../components/Process/Process.component";
 import ProductComponent from "../components/Product/Product.component";
 import FooterComponent from "../../../components/Footer/Footer.component";
+import AOS from "aos";
+import "aos/dist/aos.css";
 export default function HomePage() {
   const [banner1, setBanner1] = useState([]);
   const [banner2, setBanner2] = useState();
   const [banner3, setBanner3] = useState();
   const [banner4, setBanner4] = useState();
 
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+    });
+  }, []);
   useEffect(async () => {
     window.scrollTo(0, 0);
     await getHomeBanner("home").then((res) => {
@@ -43,15 +50,20 @@ export default function HomePage() {
       <HeaderComponent />
       <SliderBanner banner={banner1} />
       <Grid style={{ width: "80%", margin: "0 auto" }}>
-        <AboutUSComponent />
-        <NewsComponent />
+        <div data-aos="fade-up">
+          <AboutUSComponent />
+        </div>
+        <div data-aos="fade-up">
+          <NewsComponent />
+        </div>
       </Grid>
       <BannerHomeComponent
         banner={banner2}
         title="Bạn đồng hành với nhà nông"
       />
-
-      <ProcessComponent />
+      <div data-aos="fade-up">
+        <ProcessComponent />
+      </div>
       <BannerHomeComponent
         banner={banner3}
         title="Cung cấp nguồn giống tốt nhất cho người nông đân"
