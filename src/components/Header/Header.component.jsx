@@ -53,7 +53,7 @@ export default function HeaderComponent() {
               </li>
 
               <li className="search" onClick={handleClickSearch}>
-                <Link to="/">
+                <Link>
                   <i class="fas fa-search"></i>
                   <span className="ml-2">Tìm kiếm</span>
                 </Link>
