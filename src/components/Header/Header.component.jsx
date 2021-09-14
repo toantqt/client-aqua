@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import "./header.css";
 import { useHistory } from "react-router-dom";
 import logo from "../../assets/image/logo.png";
+import SearchComponent from "../Search/Search.component";
 export default function HeaderComponent() {
   const history = useHistory();
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     const header = document.getElementById("header");
     const sticky = header.offsetTop;
@@ -28,6 +30,13 @@ export default function HeaderComponent() {
       history.push(`/${param}`);
     }
   };
+
+  const handleClickSearch = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <Grid>
       <Grid id="header-top">
@@ -43,7 +52,7 @@ export default function HeaderComponent() {
                 </Link>
               </li>
 
-              <li>
+              <li className="search" onClick={handleClickSearch}>
                 <Link to="/">
                   <i class="fas fa-search"></i>
                   <span className="ml-2">Tìm kiếm</span>
@@ -129,6 +138,7 @@ export default function HeaderComponent() {
           </div>
         </Grid>
       </Grid>
+      <SearchComponent open={open} handleClose={handleClose} />
     </Grid>
   );
 }
