@@ -19,7 +19,6 @@ export default function CategoryPage(props) {
     window.scrollTo(0, 0);
     setCategory();
     await getHomeBanner(params).then((res) => {
-      console.log(res);
       setBanner(res.data);
     });
     await getCategory(params).then((res) => {

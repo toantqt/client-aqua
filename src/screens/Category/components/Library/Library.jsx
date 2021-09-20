@@ -74,9 +74,6 @@ const Lirary = (props) => {
     );
   });
 
-  const handlePlay = (event) => {
-    console.log(event);
-  };
   const handleClickVideo = (url) => {
     setLight(true);
     setUrlPlay(url);

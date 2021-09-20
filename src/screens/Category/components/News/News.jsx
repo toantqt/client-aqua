@@ -42,7 +42,6 @@ const News = (props) => {
 
   useEffect(async () => {
     await getNewsCategory(categoryID, subCategoryID, page).then((res) => {
-      console.log(res.data);
       if (res.data.length != 0) {
         for (let item of res.data) {
           setNews((news) => [...news, item]);
