@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Image from "material-ui-image";
-import logo from "../../assets/image/logo.png";
+// import logo from "../../assets/image/logo.png";
 import "./bannerCategory.css";
 
 const BannerCategoryComponent = (props) => {
@@ -17,7 +17,7 @@ const BannerCategoryComponent = (props) => {
             objectFit: "cover",
           }}
         />
-        <div className="bg-img"></div>
+        {/* <div className="bg-img"></div>
         <div
           className="banner-category-content"
           style={{ textAlign: "center" }}
@@ -28,7 +28,7 @@ const BannerCategoryComponent = (props) => {
           <div className="bottom-title mt-3">
             <span>{props?.title}</span>
           </div>
-        </div>
+        </div> */}
       </div>
     </Grid>
   );

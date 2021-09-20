@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Image from "material-ui-image";
-import logo from "../../../../assets/image/logo.png";
+import logo from "../../../../assets/image/logo1.png";
 
 const BannerHomeComponent = (props) => {
   return (

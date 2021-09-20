@@ -2,11 +2,8 @@
   width: 100%;
   height: 550px;
 }
-.banner-title {
-  position: absolute;
-  margin-top: 100px;
-  top: 12%;
-  left: 10%;
+.banner-img:hover {
+  cursor: pointer;
 }
 .banner-title .head-title {
   width: 245px;
@@ -27,10 +24,22 @@
   font-size: 18px;
 }
 
-.bg-title {
-  width: 100%;
-  height: 550px;
-  top: 0%;
-  position: absolute;
-  background: rgba(0, 0, 0, 0.27);
+#slider-banner .slick-arrow {
+  display: none !important;
+}
+
+#slider-banner .slick-prev {
+  display: none !important ;
+}
+#slider-banner .slick-dots {
+  bottom: 50px;
+}
+#slider-banner .slick-dots li button:before {
+  color: #ffffff !important;
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+#slider-banner .slick-dots li.slick-active button:before {
+  color: #08999c !important;
 }

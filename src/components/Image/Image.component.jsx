@@ -7,6 +7,7 @@ const ImageComponent = (props) => {
     <Image
       src={props.url}
       style={{ position: "none !important", objectFit: "cover" }}
+      imageStyle={{ objectFit: "cover" }}
     />
   );
 };
