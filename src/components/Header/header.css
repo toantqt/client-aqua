@@ -63,19 +63,22 @@
 .wrap-header ul li {
   display: inline-block;
 }
-.menu {
-  padding-left: 0px !important;
+#header ul li:first-child {
 }
+
 .menu-logo {
   width: 150px;
-  margin-left: 0px !important;
+  margin: 0 auto;
 }
 .menu-logo img {
   width: 100%;
 }
+.menu {
+  padding-left: 0px;
+}
 
 .menu-item {
-  margin-left: 15px;
+  padding: 15px 10px 15px 10px;
 }
 .menu-item span {
   font-weight: 500;
@@ -101,6 +104,9 @@
 }
 .sticky .wrap-header {
   padding: 5px !important;
+}
+.sticky .wrap-header .menu-item {
+  padding: 7px;
 }
 .sticky img {
   width: 70%;

@@ -78,59 +78,65 @@ export default function HeaderComponent() {
       <Grid id="header">
         <Grid className="wrap-header">
           <div className="menu-header">
-            <ul className="menu">
-              <li className="menu-item menu-logo">
-                <Link to="/">
-                  <img src={logo} alt="" />
-                </Link>
-              </li>
-              <li className="menu-item">
-                <Link to="/">
-                  <span>Trang chủ</span>
-                </Link>
-              </li>
-              <li className="menu-item">
-                <Link to="/danh-muc/gioi-thieu">
-                  <span>Giới thiệu</span>
-                </Link>
-              </li>
-              {/* <li className="menu-item">
-                <Link to="/danh-muc/thanh-tich">
-                  <span>Thành tích</span>
-                </Link>
-              </li> */}
-              <li className="menu-item">
-                <Link to="/danh-muc/tin-tuc">
-                  <span>Tin tức </span>
-                </Link>
-              </li>
-              <li className="menu-item">
-                <Link to="/danh-muc/quy-trinh-nuoi-tom">
-                  <span>Quy trình nuôi tôm</span>
-                </Link>
-              </li>
-              <li className="menu-item">
-                <Link to="/tom-giong">
-                  <span>Tôm giống </span>
-                </Link>
-              </li>
-              <li className="menu-item">
-                <Link to="/san-pham">
-                  <span>Sản phẩm </span>
-                </Link>
-              </li>
+            <Grid container spacing={1}>
+              <Grid item lg={3}>
+                <div className="menu-logo">
+                  <Link to="/">
+                    <img src={logo} alt="" />
+                  </Link>
+                </div>
+              </Grid>
+              <Grid item lg={9}>
+                <ul className="menu">
+                  <li className="menu-item">
+                    <Link to="/">
+                      <span>Trang chủ</span>
+                    </Link>
+                  </li>
+                  <li className="menu-item">
+                    <Link to="/danh-muc/gioi-thieu">
+                      <span>Giới thiệu</span>
+                    </Link>
+                  </li>
+                  {/* <li className="menu-item">
+               <Link to="/danh-muc/thanh-tich">
+                 <span>Thành tích</span>
+               </Link>
+             </li> */}
+                  <li className="menu-item">
+                    <Link to="/danh-muc/tin-tuc">
+                      <span>Tin tức </span>
+                    </Link>
+                  </li>
+                  <li className="menu-item">
+                    <Link to="/danh-muc/quy-trinh-nuoi-tom">
+                      <span>Quy trình nuôi tôm</span>
+                    </Link>
+                  </li>
+                  <li className="menu-item">
+                    <Link to="/tom-giong">
+                      <span>Tôm giống </span>
+                    </Link>
+                  </li>
+                  <li className="menu-item">
+                    <Link to="/san-pham">
+                      <span>Sản phẩm </span>
+                    </Link>
+                  </li>
 
-              <li className="menu-item">
-                <Link to="/danh-muc/kien-thuc">
-                  <span>Kiến thức </span>
-                </Link>
-              </li>
-              <li className="menu-item">
-                <Link to="/danh-muc/van-phong-doi-tac">
-                  <span>Văn phòng/ đối tác </span>
-                </Link>
-              </li>
-            </ul>
+                  <li className="menu-item">
+                    <Link to="/danh-muc/kien-thuc">
+                      <span>Kiến thức </span>
+                    </Link>
+                  </li>
+                  <li className="menu-item">
+                    <Link to="/danh-muc/van-phong-doi-tac">
+                      <span>Liên hệ</span>
+                    </Link>
+                  </li>
+                </ul>
+              </Grid>
+            </Grid>
           </div>
         </Grid>
       </Grid>
