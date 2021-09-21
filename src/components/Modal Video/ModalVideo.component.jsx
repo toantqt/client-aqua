@@ -18,7 +18,7 @@ export default function ModalVideoComponent(props) {
     <Dialog
       open={props?.open}
       onClose={props?.handleClose}
-      style={{ width: "900px important" }}
+      style={{ width: "900px !important", margin: "0 auto" }}
       className="video"
     >
       <div style={{ width: "100%", height: "100%" }} className="wrap-video">

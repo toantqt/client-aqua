@@ -43,7 +43,7 @@
 .MuiTabs-root button:last-child {
   border-radius: 0 10px 0 0;
 }
-.PrivateTabIndicator-root-3 {
+.MuiTabs-indicator {
   display: none !important;
 }
 .MuiTab-textColorInherit.Mui-selected {
