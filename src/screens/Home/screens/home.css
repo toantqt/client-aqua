@@ -341,10 +341,10 @@
 @media (min-width: 1920px) {
   #slider-banner {
     width: 100%;
-    height: 800px !important;
+    height: 650px !important;
   }
   .banner-img {
-    height: 800px !important;
+    height: 650px !important;
   }
 
   .wrap-home {

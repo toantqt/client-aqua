@@ -56,7 +56,7 @@ export default function HomePage() {
         <div className="home-content">
           <AboutUSComponent />
         </div>
-        <div data-aos="fade-up">
+        <div>
           <NewsComponent />
         </div>
       </Grid>
