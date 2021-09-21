@@ -3,13 +3,21 @@ import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import "./news.css";
 import ListsNewsComponent from "../../../../components/Lists News/ListsNews.component";
-import { getNewsCategory } from "../../../../api/API";
+import { getNewsCategory, getImage, getVideo } from "../../../../api/API";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import queryString from "query-string";
 import Button from "@material-ui/core/Button";
-
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import Library from "../Library/Library";
 const News = (props) => {
   const history = useHistory();
+  const [value, setValue] = React.useState(0);
   const [subCategory, setSubCategory] = useState([]);
   const [active, setActive] = useState();
   const [subCategoryID, setSubCategoryID] = useState();
@@ -18,7 +26,12 @@ const News = (props) => {
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(true);
   const [seeMore, setSeeMore] = useState(true);
+  const [type, setType] = useState(1);
 
+  console.log(news);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   useEffect(() => {
     if (props.location.search) {
       const search = queryString.parse(props.location.search);
@@ -26,7 +39,7 @@ const News = (props) => {
     }
   }, [props.location.search]);
   useEffect(() => {
-    setNews([]);
+    setType(1);
     if (props.category) {
       if (props.category.subCategory.length != 0) {
         setSubCategoryID(props.category.subCategory[0]?._id);
@@ -39,30 +52,38 @@ const News = (props) => {
       props.handleLoading(false);
     }
   }, [props.category]);
-
+  console.log(subCategory);
   useEffect(async () => {
-    await getNewsCategory(categoryID, subCategoryID, page).then((res) => {
-      if (res.data.length != 0) {
-        for (let item of res.data) {
-          setNews((news) => [...news, item]);
-        }
-        if (res.data.length < 9) {
-          setSeeMore(false);
+    setNews([]);
+    if (type != 2 && type != 3) {
+      await getNewsCategory(categoryID, subCategoryID, page).then((res) => {
+        if (res.data.length != 0) {
+          for (let item of res.data) {
+            setNews((news) => [...news, item]);
+          }
+          if (res.data.length < 9) {
+            setSeeMore(false);
+          } else {
+            setSeeMore(true);
+          }
         } else {
-          setSeeMore(true);
+          setSeeMore(false);
         }
-      } else {
-        setSeeMore(false);
-      }
-      setLoading(false);
-    });
-  }, [categoryID, subCategoryID, page]);
+        setLoading(false);
+      });
+    }
+  }, [categoryID, subCategoryID, page, type]);
 
-  const handleClick = (name, subCategoryID) => {
+  const handleClick = (name, subCategoryID, type) => {
     setActive(name);
     setSubCategoryID(subCategoryID);
     setNews([]);
-    setLoading(true);
+    if (type != 1) {
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
+    setType(type);
   };
   const handleClickSeeMore = () => {
     let a = page + 1;
@@ -74,23 +95,46 @@ const News = (props) => {
       padding = "12px 50px 12px 50px";
     }
     return (
-      <li
+      // <li
+      // onClick={() => {
+      //   handleClick(e.name, e._id);
+      // }}
+      //   className={"item " + (e.name === active ? "active" : "")}
+      //   key={index}
+      //   style={{ padding: padding }}
+      // >
+      //   <span>{e.name}</span>
+      // </li>
+      <Tab
+        label={e.name}
         onClick={() => {
-          handleClick(e.name, e._id);
+          handleClick(e.name, e._id, e.type || 1);
         }}
-        className={"item " + (e.name === active ? "active" : "")}
         key={index}
-        style={{ padding: padding }}
-      >
-        <span>{e.name}</span>
-      </li>
+      />
     );
   });
+
+  const handleLoading = (status) => {
+    console.log(status);
+    setLoading(status);
+  };
   return (
     <Grid>
       <div className="subCategory">
         {subCategory.length !== 0 ? (
-          <ul className="sub-item">{lists}</ul>
+          // <ul className="sub-item">{lists}</ul>
+          <AppBar position="static" className="sub-item">
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              variant={subCategory.length > 5 ? "scrollable" : ""}
+              scrollButtons="auto"
+              centered
+            >
+              {lists}
+            </Tabs>
+          </AppBar>
         ) : (
           <></>
         )}
@@ -108,38 +152,50 @@ const News = (props) => {
         </div>
       ) : (
         <>
-          {news.length !== 0 ? (
+          {type === 1 ? (
             <>
-              <ListsNewsComponent news={news} />
-              <div className="mt-4" style={{ textAlign: "center" }}>
-                {seeMore ? (
-                  <Button
-                    variant="outlined"
-                    onClick={() => {
-                      handleClickSeeMore();
-                    }}
-                    style={{
-                      padding: "10px 30px 10px 30px",
-                      color: "white",
-                      backgroundColor: "#08999C",
-                    }}
-                  >
-                    <span>Xem thêm</span>
-                  </Button>
-                ) : (
-                  <></>
-                )}
-              </div>
+              {news.length !== 0 ? (
+                <>
+                  <ListsNewsComponent news={news} />
+                  <div className="mt-4" style={{ textAlign: "center" }}>
+                    {seeMore ? (
+                      <Button
+                        variant="outlined"
+                        onClick={() => {
+                          handleClickSeeMore();
+                        }}
+                        style={{
+                          padding: "10px 30px 10px 30px",
+                          color: "white",
+                          backgroundColor: "#08999C",
+                        }}
+                      >
+                        <span>Xem thêm</span>
+                      </Button>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                </>
+              ) : (
+                <div
+                  style={{
+                    width: "100%",
+                    textAlign: "center",
+                    height: "300px",
+                  }}
+                  className="mt-5"
+                >
+                  <span style={{ color: "#6E7673" }}>
+                    Hiện tại chưa có bài viết trong danh mục
+                  </span>
+                </div>
+              )}
             </>
           ) : (
-            <div
-              style={{ width: "100%", textAlign: "center", height: "300px" }}
-              className="mt-5"
-            >
-              <span style={{ color: "#6E7673" }}>
-                Hiện tại chưa có bài viết trong danh mục
-              </span>
-            </div>
+            <>
+              <Library type={type} handleLoading={handleLoading} />
+            </>
           )}
         </>
       )}

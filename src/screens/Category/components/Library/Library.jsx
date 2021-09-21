@@ -11,6 +11,7 @@ import ReactPlayer from "react-player";
 import ModalVideoComponent from "../../../../components/Modal Video/ModalVideo.component";
 
 const Lirary = (props) => {
+  console.log(props);
   const [subCategory, setSubCategory] = useState([]);
   const [active, setActive] = useState();
   const [subCategoryID, setSubCategoryID] = useState();
@@ -23,56 +24,20 @@ const Lirary = (props) => {
   const [open, setOpen] = useState(false);
   const [light, setLight] = useState(true);
 
-  useEffect(() => {
-    if (props.category) {
-      if (props.category.subCategory.length != 0) {
-        setSubCategoryID(props.category.subCategory[0]?._id);
-        setActive(props.category.subCategory[0]?.name);
-      } else {
-        setSubCategoryID("undefined");
-      }
-      setSubCategory(props.category.subCategory);
-      setCategoryID(props.category._id);
-    }
-  }, [props.category]);
-
   useEffect(async () => {
-    if (type === 0) {
+    setLoading(true);
+    if (props?.type === 2) {
       await getImage().then((res) => {
+        console.log(res.data);
         setImage(res.data);
       });
-    } else if (type === 1) {
+    } else if (props?.type === 3) {
       await getVideo().then((res) => {
         setVideo(res.data);
       });
     }
     setLoading(false);
-  }, [type]);
-
-  const handleClick = (index, name) => {
-    setType(index);
-    setActive(name);
-    setLoading(true);
-  };
-
-  const lists = subCategory.map((e, index) => {
-    let padding = "12px 25px 12px 25px";
-    if (subCategory.length <= 3) {
-      padding = "12px 50px 12px 50px";
-    }
-    return (
-      <li
-        className={"item " + (e.name === active ? "active" : "")}
-        key={index}
-        style={{ padding: padding }}
-        onClick={() => {
-          handleClick(index, e.name);
-        }}
-      >
-        <span>{e.name}</span>
-      </li>
-    );
-  });
+  }, [props.type]);
 
   const handleClickVideo = (url) => {
     setLight(true);
@@ -142,13 +107,6 @@ const Lirary = (props) => {
 
   return (
     <Grid>
-      <div className="subCategory">
-        {subCategory.length !== 0 ? (
-          <ul className="sub-item">{lists}</ul>
-        ) : (
-          <></>
-        )}
-      </div>
       {loading ? (
         <div
           style={{
@@ -162,7 +120,7 @@ const Lirary = (props) => {
         </div>
       ) : (
         <Grid container spacing={3} className="mt-5">
-          {type === 0 ? listImage : listVideo}
+          {props?.type === 2 ? listImage : listVideo}
         </Grid>
       )}
       <ModalVideoComponent

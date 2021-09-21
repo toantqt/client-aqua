@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import "./header.css";
 import { useHistory } from "react-router-dom";
-import logo from "../../assets/image/logo.png";
+import logo from "../../assets/image/Logo.png";
 import SearchComponent from "../Search/Search.component";
 export default function HeaderComponent() {
   const history = useHistory();
@@ -94,11 +94,11 @@ export default function HeaderComponent() {
                   <span>Giới thiệu</span>
                 </Link>
               </li>
-              <li className="menu-item">
+              {/* <li className="menu-item">
                 <Link to="/danh-muc/thanh-tich">
                   <span>Thành tích</span>
                 </Link>
-              </li>
+              </li> */}
               <li className="menu-item">
                 <Link to="/danh-muc/tin-tuc">
                   <span>Tin tức </span>
@@ -119,11 +119,7 @@ export default function HeaderComponent() {
                   <span>Sản phẩm </span>
                 </Link>
               </li>
-              <li className="menu-item">
-                <Link to="/danh-muc/hinh-anh-video">
-                  <span>Hình ảnh/video </span>
-                </Link>
-              </li>
+
               <li className="menu-item">
                 <Link to="/danh-muc/kien-thuc">
                   <span>Kiến thức </span>
