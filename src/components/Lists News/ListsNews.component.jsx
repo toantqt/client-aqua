@@ -13,8 +13,8 @@ const ListsNewsComponent = (props) => {
     return (
       <Grid
         item
-        lg={4}
-        md={4}
+        lg={3}
+        md={3}
         xs={12}
         onClick={() => {
           handleClickNews(e.slug);

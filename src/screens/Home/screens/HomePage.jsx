@@ -52,8 +52,8 @@ export default function HomePage() {
       <HeaderComponent />
       <SliderBanner banner={banner1} />
       <ScrollTop />
-      <Grid style={{ width: "80%", margin: "0 auto" }}>
-        <div data-aos="fade-up">
+      <Grid style={{ width: "80%", margin: "0 auto" }} className="wrap-home">
+        <div className="home-content">
           <AboutUSComponent />
         </div>
         <div data-aos="fade-up">
@@ -67,12 +67,8 @@ export default function HomePage() {
       <div data-aos="fade-up">
         <ProcessComponent />
       </div>
-      <BannerHomeComponent
-        banner={banner3}
-        title="Cung cấp nguồn giống tốt nhất cho người nông đân"
-      />
 
-      <Grid style={{ width: "70%", margin: "0 auto", marginTop: "50px" }}>
+      <Grid style={{ width: "70%", margin: "0 auto" }} data-aos="fade-up">
         <ProductComponent />
       </Grid>
 

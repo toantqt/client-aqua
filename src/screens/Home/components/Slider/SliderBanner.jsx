@@ -29,7 +29,7 @@ function SamplePrevArrow(props) {
 const SliderBanner = (props) => {
   let settings = {
     dots: true,
-    autoplay: true,
+    // autoplay: true,
     autoplaySpeed: 2000,
     infinite: true,
     speed: 800,

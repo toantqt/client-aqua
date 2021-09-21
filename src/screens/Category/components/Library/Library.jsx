@@ -50,7 +50,7 @@ const Lirary = (props) => {
 
   const listImage = image.map((e, index) => {
     return (
-      <Grid item lg={4} md={4} xs={12}>
+      <Grid item lg={3} md={3} xs={12}>
         <SimpleReactLightbox>
           <SRLWrapper>
             <a href={props?.url}>
@@ -69,8 +69,8 @@ const Lirary = (props) => {
     return (
       <Grid
         item
-        lg={4}
-        md={4}
+        lg={3}
+        md={3}
         xs={12}
         onClick={() => {
           handleClickVideo(e.video.url);

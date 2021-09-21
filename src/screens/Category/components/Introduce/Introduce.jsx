@@ -3,6 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import { getIntroduce } from "../../../../api/API";
 import Image from "material-ui-image";
 import "./introduce.css";
+import Achievements from "../Achievements/Achievements";
 const Introduce = (props) => {
   const [introduce, setIntroduce] = useState();
   useEffect(async () => {
@@ -10,9 +11,49 @@ const Introduce = (props) => {
       setIntroduce(res.data);
     });
   }, []);
+
+  const listsImage1 = introduce?.history?.image.map((e, index) => {
+    return (
+      <Image
+        src={e.url}
+        style={{
+          position: "none !important",
+          objectFit: "cover",
+          width: "100%",
+          paddingTop: "0px !important",
+          borderRadius: "6px",
+        }}
+        imageStyle={{
+          position: "none !important",
+          height: "100%",
+          borderRadius: "6px",
+        }}
+      />
+    );
+  });
+
+  const listsImage2 = introduce?.structure?.image.map((e, index) => {
+    return (
+      <Image
+        src={e.url}
+        style={{
+          position: "none !important",
+          objectFit: "cover",
+          width: "100%",
+          paddingTop: "0px !important",
+          borderRadius: "6px",
+        }}
+        imageStyle={{
+          position: "none !important",
+          height: "100%",
+          borderRadius: "6px",
+        }}
+      />
+    );
+  });
   return (
     <Grid className="mt-5 mb-5">
-      <div className="wrap-aboutUs">
+      {/* <div className="wrap-aboutUs">
         <Grid container spacing={2}>
           <Grid item lg={6} md={6} xs={12}>
             <div className="wrap-content">
@@ -54,68 +95,36 @@ const Introduce = (props) => {
             </div>
           </Grid>
         </Grid>
-      </div>
+      </div> */}
       <div className="introduce-content">
         <div className="introduce-title">
-          <span>Giá trị cốt lõi</span>
+          <span>{introduce?.history?.title}</span>
         </div>
         <div
-          dangerouslySetInnerHTML={{ __html: introduce?.value }}
+          dangerouslySetInnerHTML={{ __html: introduce?.history?.content }}
           style={{ fontSize: "16px" }}
         ></div>
-      </div>
-
-      <div className="introduce-content">
-        <div className="introduce-title">
-          <span>Triết lý</span>
-        </div>
-        <div
-          dangerouslySetInnerHTML={{ __html: introduce?.philosophy }}
-          style={{ fontSize: "16px" }}
-        ></div>
+        <div>{listsImage1}</div>
       </div>
 
       <div className="introduce-content">
         <div className="introduce-title">
-          <span>Tầm nhìn</span>
+          <span>{introduce?.structure?.title}</span>
         </div>
         <div
-          dangerouslySetInnerHTML={{ __html: introduce?.vision }}
+          dangerouslySetInnerHTML={{ __html: introduce?.structure?.content }}
           style={{ fontSize: "16px" }}
         ></div>
+        <div>{listsImage2}</div>
       </div>
 
       <div className="introduce-content">
         <div className="introduce-title">
-          <span>Sứ mệnh</span>
+          <span>Thành tích đã đạt được</span>
         </div>
-        <div
-          dangerouslySetInnerHTML={{ __html: introduce?.mission1 }}
-          style={{ fontSize: "16px" }}
-        ></div>
-        <div className="mt-3 mb-3">
-          <Image
-            src={introduce?.imgMission.url}
-            style={{
-              position: "none !important",
-              objectFit: "cover",
-              width: "100%",
-              paddingTop: "0px !important",
-              height: "500px",
-              borderRadius: "6px",
-            }}
-            imageStyle={{
-              position: "none !important",
-              height: "100%",
-              borderRadius: "6px",
-            }}
-          />
+        <div className="mt-4">
+          <Achievements />
         </div>
-
-        <div
-          dangerouslySetInnerHTML={{ __html: introduce?.mission2 }}
-          style={{ fontSize: "16px" }}
-        ></div>
       </div>
     </Grid>
   );

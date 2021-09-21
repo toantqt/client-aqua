@@ -10,7 +10,7 @@ import Image from "material-ui-image";
 
 const NewsComponent = () => {
   const history = useHistory();
-  const arr = [1, 2, 3, 4, 5, 6];
+  const arr = [1, 2, 3, 4, 5, 6, 7, 8];
 
   const handleClickNews = () => {
     history.push(
@@ -19,7 +19,7 @@ const NewsComponent = () => {
   };
   const listsNews = arr.map((e, index) => {
     return (
-      <Grid item lg={4} md={4} xs={12} onClick={handleClickNews}>
+      <Grid item lg={3} md={3} xs={12} onClick={handleClickNews}>
         <News
           img={img1}
           title="Giải cứu doanh nghiệp thủy sản ‘mắc cạn’ vì COVID-19"
@@ -34,78 +34,13 @@ const NewsComponent = () => {
   };
   return (
     <Grid id="news">
-      <Grid className="wrapper-news mt-5">
-        <div className="news-title mt-4 mb-4">
+      <Grid className="wrapper-news mt-1">
+        <div className="news-title  mb-4">
           <span>Tin tức hoạt động</span>
         </div>
         <div>
           <Grid container spacing={3}>
             {listsNews}
-          </Grid>
-        </div>
-        <div className="mt-5">
-          <Grid container spacing={3}>
-            <Grid item lg={4} md={4} xs={12}>
-              <div
-                className="news-category"
-                style={{ height: "450px", position: "relative" }}
-              >
-                <div style={{ height: "100%" }}>
-                  <Image
-                    src={img3}
-                    style={{
-                      height: "100%",
-                      objectFit: "cover",
-                    }}
-                    imageStyle={{ borderRadius: "15px" }}
-                  />
-                </div>
-                <div className="title-category">
-                  <span onClick={handleClick}>Tin tức thủy sản</span>
-                </div>
-              </div>
-            </Grid>
-            <Grid item lg={4} md={4} xs={12}>
-              <div
-                className="news-category"
-                style={{ height: "450px", position: "relative" }}
-              >
-                <div style={{ height: "100%" }}>
-                  <Image
-                    src={img4}
-                    style={{
-                      height: "100%",
-                      objectFit: "cover",
-                    }}
-                    imageStyle={{ borderRadius: "15px" }}
-                  />
-                </div>
-                <div className="title-category">
-                  <span onClick={handleClick}>Giá cả thị trường</span>
-                </div>
-              </div>
-            </Grid>
-            <Grid item lg={4} md={4} xs={12}>
-              <div
-                className="news-category"
-                style={{ height: "450px", position: "relative" }}
-              >
-                <div style={{ height: "100%" }}>
-                  <Image
-                    src={img2}
-                    style={{
-                      height: "100%",
-                      objectFit: "cover",
-                    }}
-                    imageStyle={{ borderRadius: "15px" }}
-                  />
-                </div>
-                <div className="title-category">
-                  <span onClick={handleClick}>Quỹ hổ trợ </span> <br />
-                  <span onClick={handleClick}>người nuôi tôm</span>
-                </div>
-              </div>
-            </Grid>
           </Grid>
         </div>
       </Grid>

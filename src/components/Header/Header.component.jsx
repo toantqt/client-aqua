@@ -51,21 +51,19 @@ export default function HeaderComponent() {
                   <i class="fab fa-youtube"></i>
                 </Link>
               </li>
-
               <li className="search" onClick={handleClickSearch}>
                 <Link>
                   <i class="fas fa-search"></i>
                   <span className="ml-2">Tìm kiếm</span>
                 </Link>
               </li>
-              <li>
+              <li className="h-connect">
                 <Link to="/danh-muc/lien-ket-dao-tao">
                   <i class="fas fa-briefcase"></i>
                   <span className="ml-2">Liên kết đào tạo</span>
                 </Link>
               </li>
-
-              <li>
+              <li className="h-contact">
                 <Link to="/danh-muc/thong-tin-tuyen-dung-va-lien-he">
                   <i class="fas fa-phone-alt"></i>
                   <span className="ml-2">Thông tin tuyển dụng và liên hệ</span>
@@ -124,11 +122,6 @@ export default function HeaderComponent() {
                     </Link>
                   </li>
 
-                  <li className="menu-item">
-                    <Link to="/danh-muc/kien-thuc">
-                      <span>Kiến thức </span>
-                    </Link>
-                  </li>
                   <li className="menu-item">
                     <Link to="/danh-muc/van-phong-doi-tac">
                       <span>Liên hệ</span>

@@ -16,7 +16,6 @@ const ProductComponent = () => {
   }, []);
   let settings = {
     dots: true,
-    autoplay: true,
     autoplaySpeed: 3000,
     infinite: true,
     speed: 500,
@@ -30,7 +29,7 @@ const ProductComponent = () => {
   };
   const lists = products.map((e, index) => {
     return (
-      <Grid item lg={3} md={3} xs={6} key={index}>
+      <Grid item lg={3} md={3} xs={6} key={index} className="mt-3">
         <div
           className="product"
           onClick={() => {
@@ -97,7 +96,7 @@ const ProductComponent = () => {
   return (
     <Grid id="product">
       <div className="wrap-product">
-        <div className="product-main-title mt-3 mb-5">
+        <div className="product-main-title mt-3 mb-3">
           <span>Sản phẩm nuôi tôm trúc anh</span>
         </div>
         <div>

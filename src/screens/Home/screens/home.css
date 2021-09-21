@@ -10,11 +10,14 @@
 
 .wrap-aboutUs .img {
   width: 93%;
-  height: 550px;
+  height: 400px;
   margin: 0 auto;
-  border-radius: 6px !important;
   position: relative;
+  border-radius: 15px 15px 15px 0px !important;
   /* position: absolute; */
+}
+.wrap-aboutUs .img img {
+  border-radius: 15px 15px 15px 0px !important;
 }
 
 .wrap-aboutUs .title-img {
@@ -32,10 +35,11 @@
 
 .wrap-aboutUs .wrap-content {
   padding: 30px;
+  padding-top: 0px;
 }
 .wrap-aboutUs .wrap-content .header-title p {
-  font-size: 45px;
-  font-weight: 500;
+  font-size: 40px;
+  font-weight: 00;
   color: #08999c;
   margin-bottom: 0 !important;
 }
@@ -145,16 +149,20 @@
   width: 100%;
 }
 #process .bg-process {
-  height: 400px;
+  height: 334px;
 }
 
 #process .process1 {
   background-color: rgba(8, 153, 156, 0.04);
   text-align: center;
 }
+#process .process2 {
+  height: 280px;
+}
 
 #process .process-main-title {
   padding-top: 50px;
+  padding-bottom: 100px;
 }
 
 #process .process-main-title span {
@@ -166,14 +174,14 @@
 #process .process-item {
   width: 72%;
   left: 14%;
-  top: 15%;
+  top: 18%;
   height: 300px;
   padding: 30px;
   position: absolute;
 }
 #process .process-item .process-image {
   width: 100%;
-  height: 250px;
+  height: 190px;
   border-radius: 15px 15px 0px 0px;
 }
 #process .process-item .process-image img {
@@ -192,8 +200,8 @@
   top: 39%;
 }
 #process .process-item .process-icon .icon {
-  width: 95px;
-  height: 95px;
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
   margin: 0 auto;
   text-align: center;
@@ -207,7 +215,7 @@
   vertical-align: middle;
 }
 #process .process-item .process-title {
-  padding: 40px;
+  padding: 12px;
   text-align: center;
 }
 #process .process-item .process-title .p-title span {
@@ -217,7 +225,7 @@
 }
 
 #process .process-item .process-title .p-content span {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
   color: #656565;
 }
@@ -323,4 +331,86 @@
 
 .slick-dots li button:before {
   font-size: 10px;
+}
+.home-content {
+  margin-top: 50px;
+}
+
+/* reponsive */
+
+@media (min-width: 1920px) {
+  #slider-banner {
+    width: 100%;
+    height: 800px !important;
+  }
+  .banner-img {
+    height: 800px !important;
+  }
+
+  .wrap-home {
+    width: 70% !important;
+  }
+  .wrap-aboutUs .wrap-content .bottom-title span {
+    line-height: 35px;
+    color: #838383;
+  }
+  .wrap-aboutUs .title-img {
+    top: 88% !important;
+    width: 70%;
+    margin-left: 15%;
+  }
+  .wrap-aboutUs .wrap-content .bottom-btn a {
+    padding: 20px 60px 20px 60px;
+    font-size: 20px;
+    border-radius: 8px;
+  }
+  .news .img {
+    height: 180px !important;
+  }
+  .news .news-date {
+    top: 88% !important;
+  }
+  .title span {
+    font-size: 20px !important;
+  }
+  #process .process-item .process-image {
+    height: 219px !important;
+  }
+  #process .process-item .process-icon .icon {
+    width: 95px !important;
+    height: 95px !important;
+  }
+  #process .process-item .process-title {
+    padding: 25px !important;
+  }
+  #process .process-item .process-title .p-content {
+    padding: 10px;
+  }
+  #process .process-item .process-title .p-content span {
+    font-size: 18px !important;
+  }
+  #process .process-item .process-icon {
+    top: 34%;
+  }
+  #process .process-item .process-title .p-title {
+    margin-top: 2rem !important;
+  }
+  #process .bg-process {
+    height: 387px;
+  }
+  #process .process2 {
+    height: 300px;
+  }
+  #product .wrap-product .product-image {
+    height: 300px;
+  }
+  #product .wrap-product .product-bg {
+    height: 300px;
+  }
+  #product .wrap-product .product-description {
+    top: 74%;
+  }
+  #product .wrap-product .product-main-title {
+    margin-bottom: 2rem !important;
+  }
 }

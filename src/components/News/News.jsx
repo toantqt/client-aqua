@@ -10,7 +10,7 @@ const News = (props) => {
           <Image
             src={props?.img}
             style={{
-              height: "230px ",
+              height: "100% ",
               objectFit: "cover",
               paddingTop: "0px",
               borderRadius: "6px",

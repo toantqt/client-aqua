@@ -111,3 +111,44 @@
 .sticky img {
   width: 70%;
 }
+
+@media (min-width: 1920px) {
+  .menu-item span {
+    font-size: 17px;
+  }
+  .menu-item {
+    padding: 15px 22px 15px 22px !important;
+  }
+  .sticky {
+    height: 70px !important;
+  }
+  .wrap-header {
+    width: 70%;
+  }
+  .menu-logo {
+    float: left;
+  }
+  #header .wrap-header ul {
+    float: right;
+  }
+  .sticky .menu-logo {
+    width: 190px;
+    float: left;
+  }
+  .sticky .wrap-header ul {
+    float: right;
+  }
+  .menu .social-connect {
+    float: left;
+  }
+  /* .menu .h-connect {
+    float: right;
+  }
+  .menu .h-contact {
+    float: right;
+  }
+  */
+  .menu .search {
+    margin-left: 10%;
+  }
+}

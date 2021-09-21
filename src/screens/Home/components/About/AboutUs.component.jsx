@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const AboutUSComponent = () => {
   return (
-    <Grid className="mt-5 mb-5">
+    <Grid className="mt-2 mb-5">
       <div className="wrap-aboutUs">
         <Grid container spacing={2}>
           <Grid item lg={6} md={6} xs={12}>
@@ -22,13 +22,11 @@ const AboutUSComponent = () => {
                     objectFit: "cover",
                     width: "100%",
                     paddingTop: "0px !important",
-                    height: "550px",
-                    borderRadius: "6px",
+                    height: "100%",
                   }}
                   imageStyle={{
                     position: "none !important",
                     height: "100%",
-                    borderRadius: "6px",
                   }}
                 />
               </div>
@@ -56,17 +54,21 @@ const AboutUSComponent = () => {
           </Grid>
           <Grid item lg={6} md={6} xs={12}>
             <div className="wrap-content">
-              <div className="header-title mt-5">
+              <div className="header-title ">
                 <p>Giới thiệu về</p>
                 <p>Trúc Anh BiOtech</p>
               </div>
-              <div className="mt-4 mb-4 middle-title">
-                <span>Dịch vụ tôm giống thủy sản chất lượng cao.</span>
-              </div>
+
               <div className="bottom-title">
                 <span>
-                  Bằng sự tận tâm với người nông dân, lấy thành công của người
-                  nuôi trồng thuỷ sản làm tiêu chí để thành công cho công ty ...
+                  Công ty TNHH CNSH Trúc Anh, tiền thân là công ty TNHH SX & TM
+                  Trúc Anh, được thành lập năm 2004, theo giấy phép kinh doanh
+                  và mã số thuế 1900295157 do Sở Kế hoạch & đầu tư Bạc Liêu cấp,
+                  là đơn vị chuyên sản xuất kinh doanh thuốc thú y thuỷ sản; Tư
+                  vấn, phát triển vùng nuôi...xác định tầm quan trọng của các
+                  chế phẩm sinh học trong việc bảo vệ môi trường và tạo ra sản
+                  phẩm tôm sạch nên từ khi thành lập đến nay các chế phẩm sinh
+                  học của công ty Trúc Anh luôn được nghiên cứu kỷ,
                 </span>
               </div>
               <div className="bottom-btn mt-5">

@@ -3,6 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import { getInformation } from "../../../../api/API";
 import Image from "material-ui-image";
 import "./office.css";
+import FormContactComponent from "../../../../components/Form Contact/FormContact.component";
 
 const Office = (props) => {
   const [office, setOffice] = useState([]);
@@ -38,7 +39,7 @@ const Office = (props) => {
             />
           </Grid>
           <Grid item lg={7} md={7} xs={12}>
-            <div>
+            <div className="mb-3">
               <span className="infor-name">{e.name}</span>
             </div>
             <div>
@@ -68,16 +69,6 @@ const Office = (props) => {
                 </Grid>
                 <Grid item xs={11}>
                   <span>{e.email}</span>
-                </Grid>
-              </Grid>
-            </div>
-            <div>
-              <Grid container spacing={1}>
-                <Grid item xs={1}>
-                  <i class="fas fa-clipboard-list"></i>
-                </Grid>
-                <Grid item xs={11}>
-                  <span>{e.infor}</span>
                 </Grid>
               </Grid>
             </div>
@@ -97,7 +88,7 @@ const Office = (props) => {
         key={index}
         className="infor-item mt-3"
       >
-        <Grid container spacing={2}>
+        <Grid container spacing={1}>
           <Grid item lg={5} md={5} xs={12}>
             <Image
               src={e.image?.url}
@@ -111,7 +102,7 @@ const Office = (props) => {
             />
           </Grid>
           <Grid item lg={7} md={7} xs={12}>
-            <div>
+            <div className="mb-3">
               <span className="infor-name">{e.name}</span>
             </div>
             <div>
@@ -144,16 +135,6 @@ const Office = (props) => {
                 </Grid>
               </Grid>
             </div>
-            <div>
-              <Grid container spacing={1}>
-                <Grid item xs={1}>
-                  <i class="fas fa-clipboard-list"></i>
-                </Grid>
-                <Grid item xs={11}>
-                  <span>{e.infor}</span>
-                </Grid>
-              </Grid>
-            </div>
           </Grid>
         </Grid>
       </Grid>
@@ -164,7 +145,7 @@ const Office = (props) => {
       <div id="office">
         <div>
           <div className="infor-title mb-4">
-            <span>VĂN PHÒNG</span>
+            <span>Trụ sở chính</span>
           </div>
           <Grid container spacing={2}>
             {listsOffice}
@@ -172,12 +153,13 @@ const Office = (props) => {
         </div>
         <div>
           <div className="infor-title mt-5 mb-4">
-            <span>ĐỐI TÁC</span>
+            <span>Chi nhánh</span>
           </div>
           <Grid container spacing={2}>
             {listsPartner}
           </Grid>
         </div>
+        <div className="mt-5">{/* <FormContactComponent /> */}</div>
       </div>
     </Grid>
   );

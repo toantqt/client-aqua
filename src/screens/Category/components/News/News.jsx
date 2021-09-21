@@ -15,7 +15,16 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Library from "../Library/Library";
+const useTabStyles = makeStyles({
+  root: {
+    justifyContent: "center",
+  },
+  scroller: {
+    flexGrow: "0",
+  },
+});
 const News = (props) => {
+  const classes = useTabStyles();
   const history = useHistory();
   const [value, setValue] = React.useState(0);
   const [subCategory, setSubCategory] = useState([]);
@@ -126,11 +135,11 @@ const News = (props) => {
           // <ul className="sub-item">{lists}</ul>
           <AppBar position="static" className="sub-item">
             <Tabs
+              classes={{ root: classes.root, scroller: classes.scroller }}
               value={value}
               onChange={handleChange}
-              variant={subCategory.length > 5 ? "scrollable" : ""}
+              variant={"scrollable"}
               scrollButtons="auto"
-              centered
             >
               {lists}
             </Tabs>
