@@ -143,7 +143,7 @@ const Office = (props) => {
   return (
     <Grid>
       <div id="office">
-        <div>
+        <div className="office">
           <div className="infor-title mb-4">
             <span>Trụ sở chính</span>
           </div>
@@ -151,7 +151,7 @@ const Office = (props) => {
             {listsOffice}
           </Grid>
         </div>
-        <div>
+        <div className="office">
           <div className="infor-title mt-5 mb-4">
             <span>Chi nhánh</span>
           </div>

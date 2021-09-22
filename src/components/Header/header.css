@@ -144,11 +144,18 @@
   /* .menu .h-connect {
     float: right;
   }
-  .menu .h-contact {
-    float: right;
-  }
   */
+
   .menu .search {
-    margin-left: 10%;
+    margin-left: 43%;
+    border-left: none !important;
   }
+  .menu .social-connect {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+#header-top ul li {
+  padding-left: 40px;
+  padding-right: 40px;
 }

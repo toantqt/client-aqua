@@ -36,7 +36,7 @@ const NewsComponent = () => {
     <Grid id="news">
       <Grid className="wrapper-news mt-1">
         <div className="news-title  mb-4">
-          <span>Tin tức hoạt động</span>
+          <span>Tin tức</span>
         </div>
         <div>
           <Grid container spacing={3}>

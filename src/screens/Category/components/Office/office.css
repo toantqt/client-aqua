@@ -30,4 +30,13 @@
   #office {
     width: 66%;
   }
+  #office img {
+    height: 180px !important;
+  }
+  .office {
+    margin-bottom: 120px;
+  }
+  #office .infor-item span {
+    font-size: 20px;
+  }
 }
