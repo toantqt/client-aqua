@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
     },
+    backgroundColor: "#009999 !important",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -87,7 +88,7 @@ export default function HomePage(props) {
       <AppBar
         position="fixed"
         className={classes.appBar}
-        style={{ backgroundColor: "#009999" }}
+        style={{ backgroundColor: "#009999 " }}
       >
         <Toolbar>
           <IconButton
@@ -138,8 +139,9 @@ export default function HomePage(props) {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <div className="dashboard-content">
-          <AdminRoutes handleLoading={handleLoading} data={props} />
           {showLoading ? <LoadingComponent /> : <></>}
+
+          <AdminRoutes handleLoading={handleLoading} data={props} />
         </div>
       </main>
     </div>

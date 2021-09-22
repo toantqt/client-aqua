@@ -28,6 +28,7 @@ export default function HomePage() {
   useEffect(async () => {
     window.scrollTo(0, 0);
     await getHomeBanner("home").then((res) => {
+      console.log(res);
       for (let item of res.data) {
         switch (item.index) {
           case 1:

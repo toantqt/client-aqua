@@ -9,7 +9,7 @@ export default function TableComponent(props) {
         <DataGrid
           rows={props?.rows}
           columns={props?.columns}
-          pageSize={20}
+          pageSize={10}
           disableColumnMenu={true}
           rowHeight={props?.rowHeight}
         />
