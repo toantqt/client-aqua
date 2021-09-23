@@ -63,6 +63,7 @@ export default function SelectCategory(props) {
           {...params}
           variant="outlined"
           defaultValue={defaultValue.categoryName || defaultValue.name}
+          label="Chọn danh mục"
         />
       )}
       onChange={handeChange}

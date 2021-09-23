@@ -134,6 +134,17 @@ export const getImage = async () => {
     });
 };
 
+export const getDetailsImage = async (imgID) => {
+  return await axios
+    .get(`${url}/get-details-image/${imgID}`)
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
 export const getVideo = async () => {
   return await axios
     .get(`${url}/get-video`)

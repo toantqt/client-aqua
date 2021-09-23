@@ -55,8 +55,7 @@ const AboutUSComponent = () => {
           <Grid item lg={6} md={6} xs={12}>
             <div className="wrap-content">
               <div className="header-title ">
-                <p>Giới thiệu về</p>
-                <p>Trúc Anh BiOtech</p>
+                <p>Giới thiệu về Trúc Anh BiOtech</p>
               </div>
 
               <div className="bottom-title">

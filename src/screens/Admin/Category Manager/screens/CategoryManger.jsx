@@ -8,6 +8,8 @@ import {
   covertDate,
   deleteBanner,
   getAllCategory,
+  addCategory,
+  deleteCategory,
 } from "../../../../api/AdminAPI";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import EditIcon from "@material-ui/icons/Edit";
@@ -17,8 +19,9 @@ import ModalImageComponent from "../../../../components/Modal Image/ModalImage.c
 import ModalConfirmComponent from "../../../../components/Modal/ModalConfirm.component";
 import SelectCategory from "../../../../components/Category Select/CategorySelect.component";
 import Button from "@material-ui/core/Button";
+import ModalAddSubCategoryComponent from "../../../../components/Modal/ModalAddSubCategory.component";
 
-export default function BannerManager(props) {
+export default function CategoryManager(props) {
   const history = useHistory();
   const [banner, setBanner] = useState([]);
   const [open, setOpen] = useState(false);
@@ -29,27 +32,15 @@ export default function BannerManager(props) {
   const [category, setCategory] = useState([]);
   const [defaultCategory, setDefaultCategory] = useState();
   const [categorySelect, setCategorySelect] = useState("");
+  const [openAdd, setOpenAdd] = useState(false);
+  const [categoryName, setCategoryName] = useState("");
 
   useEffect(async () => {
-    await getAllBanner().then((res) => {
-      // console.log(res);
-      setBanner(res.data);
-    });
     await getAllCategory().then((result) => {
       setCategory(result.data);
     });
     props.handleLoading(false);
   }, [reload]);
-
-  const handleClickViewImage = (image) => {
-    setOpen(true);
-    setUrl(image);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    setUrl("");
-  };
 
   const handleClickDelete = (id) => {
     setSelectID(id);
@@ -60,22 +51,18 @@ export default function BannerManager(props) {
     setOpenConfirm(false);
   };
 
-  const handleDeleteBanner = async () => {
-    setSelectID("");
-    setOpenConfirm(false);
-    props.handleLoading(true);
-    let data = {
-      bannerID: selectID,
+  const handleDeleteCategory = async () => {
+    const data = {
+      categoryID: selectID,
     };
-    await deleteBanner(data)
-      .then((res) => {
-        setReload(true);
-      })
-      .catch((error) => {});
+    await deleteCategory(data).then((res) => {
+      handleCloseConfirm();
+      setReload(!reload);
+    });
   };
 
   const handleClickEdit = (id) => {
-    history.push({ pathname: AdminSlug.editBanner, search: `?id=${id}` });
+    history.push({ pathname: AdminSlug.editCategory, search: `?id=${id}` });
   };
 
   const handleChangeCategory = (value) => {
@@ -86,11 +73,42 @@ export default function BannerManager(props) {
     }
   };
 
+  const handleClickAdd = () => {
+    setOpenAdd(true);
+  };
+  const handleCloseAdd = () => {
+    setOpenAdd(false);
+  };
+
+  const handleChaneCategoryName = (event) => {
+    setCategoryName(event.target.value);
+  };
+
+  const handleAddCategory = async () => {
+    const data = {
+      categoryName: categoryName,
+    };
+    if (data.categoryName === "") {
+      alert("Xin vui lòng nhập đầy đủ thông tin!");
+    } else {
+      await addCategory(data).then((res) => {
+        handleCloseAdd();
+        setReload(!reload);
+      });
+    }
+  };
   const columns = [
     { field: "stt", headerName: "STT", width: 90 },
 
     { field: "category", headerName: "Danh mục", width: 250 },
-    { field: "index", headerName: "Vị trí", width: 110 },
+    {
+      field: "subCategory",
+      headerName: "Danh mục con",
+      width: 200,
+      renderCell: (subCategory) => {
+        return subCategory.row.subCategory.length;
+      },
+    },
     { field: "date", headerName: "Ngày tạo", width: 150 },
     {
       field: "action",
@@ -99,16 +117,6 @@ export default function BannerManager(props) {
       renderCell: (action) => {
         return (
           <>
-            <IconButton
-              aria-label="delete"
-              className="btn-action btn-a-1"
-              onClick={() => {
-                handleClickViewImage(action.row?.action?.image?.url);
-              }}
-            >
-              <VisibilityIcon />
-            </IconButton>
-
             <IconButton
               aria-label="delete"
               className="btn-action btn-a-2"
@@ -133,29 +141,43 @@ export default function BannerManager(props) {
     },
   ];
 
-  const rows = banner
+  const rows = category
     .filter((category) => {
       if (categorySelect === "") {
         return category;
       } else {
-        return category.banner.categoryID === categorySelect;
+        return category._id === categorySelect;
       }
     })
     .map((e, index) => {
+      console.log(e);
       return {
         id: index,
         stt: index + 1,
-        category: e.category?.categoryName,
-        index: e.banner?.index,
-        date: covertDate(e.banner?.created),
-        action: e.banner,
+        category: e.categoryName,
+        subCategory: e.subCategory,
+        date: covertDate(e.createAt),
+        action: e,
       };
     });
 
   return (
     <Grid>
       <div className="header-title mb-3">
-        <span>Quản Lý Banner: ({banner.length}) </span>
+        <span>Quản Lý Danh Mục: ({category.length}) </span>{" "}
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          startIcon={<EditIcon />}
+          style={{
+            textTransform: "none",
+            float: "right",
+          }}
+          onClick={handleClickAdd}
+        >
+          Tạo danh mục
+        </Button>
       </div>
       <div style={{ width: "30%" }} className="mb-3">
         <SelectCategory
@@ -167,14 +189,20 @@ export default function BannerManager(props) {
 
       <div>
         <TableComponent columns={columns} rows={rows} />
-        <ModalImageComponent open={open} url={url} handleClose={handleClose} />
         <ModalConfirmComponent
           open={openConfirm}
           handleClose={handleCloseConfirm}
-          title="Xác nhận xóa banner"
-          handleDelete={handleDeleteBanner}
+          title="Xác nhận xóa danh mục"
+          handleDelete={handleDeleteCategory}
         />
       </div>
+      <ModalAddSubCategoryComponent
+        open={openAdd}
+        handleClose={handleCloseAdd}
+        title="Tạo danh mục"
+        handleAdd={handleAddCategory}
+        handleChangeName={handleChaneCategoryName}
+      />
     </Grid>
   );
 }

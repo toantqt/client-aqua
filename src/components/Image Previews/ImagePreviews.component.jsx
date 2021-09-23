@@ -32,6 +32,7 @@ const ImagePreivewsComponent = (props) => {
           height: "100%",
           paddingTop: "0px !important",
         }}
+        imageStyle={{ width: "60%", height: "auto" }}
       />
     </div>
   );

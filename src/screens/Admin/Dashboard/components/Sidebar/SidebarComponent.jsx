@@ -37,11 +37,11 @@ export default function SideBarComponent(props) {
     setParam(param);
     history.push(url);
   };
-  const handleClickSlugProduct = (param, url) => {
+  const handleClickSlugLibrary = (param, url) => {
     setParam(param);
     history.push({
-      pathname: AdminSlug.productManager,
-      search: `?product=${param}`,
+      pathname: url,
+      search: `?q=${param}`,
     });
   };
   const handleClick = () => {
@@ -79,7 +79,24 @@ export default function SideBarComponent(props) {
     //     <img src={logo} alt="" width="100%" />
     //   </div>
     <List style={{ padding: "0px !important" }} className="sidebar">
-      <ListItem button onClick={handleClick1}>
+      <ListItem
+        button
+        onClick={() =>
+          handleClickSlug("categoryManager", AdminSlug.categoryManager)
+        }
+      >
+        <ListItemIcon>
+          <InsertChartIcon />
+        </ListItemIcon>
+        <ListItemText primary="Quản Lý danh mục" />
+      </ListItem>
+
+      <ListItem
+        button
+        onClick={() =>
+          handleClickSlug("bannerManager", AdminSlug.bannerManager)
+        }
+      >
         <ListItemIcon>
           <InsertChartIcon />
         </ListItemIcon>
@@ -90,7 +107,7 @@ export default function SideBarComponent(props) {
         <ListItemIcon>
           <InsertChartIcon />
         </ListItemIcon>
-        <ListItemText primary="Đặt hàng" />
+        <ListItemText primary="Quản lý thư viện" />
         {open2 ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open2} timeout="auto" unmountOnExit>
@@ -101,26 +118,26 @@ export default function SideBarComponent(props) {
               classes.nested + (param == "orderManager" ? " active" : "")
             }
             onClick={() =>
-              handleClickSlug("orderManager", AdminSlug.orderManager)
+              handleClickSlugLibrary("image", AdminSlug.libraryManager)
             }
           >
             <ListItemIcon>
               <AssignmentIndIcon />
             </ListItemIcon>
-            <ListItemText primary="Tất cả" />
+            <ListItemText primary="Hình ảnh" />
           </ListItem>
 
           <ListItem
             button
             className={classes.nested + (param == "approved" ? " active" : "")}
             onClick={() =>
-              handleClickSlug("approved", AdminSlug.approvedAuthor)
+              handleClickSlugLibrary("video", AdminSlug.libraryManager)
             }
           >
             <ListItemIcon>
               <AssignmentIndIcon />
             </ListItemIcon>
-            <ListItemText primary="Chờ xác nhận" />
+            <ListItemText primary="Video" />
           </ListItem>
         </List>
       </Collapse>
