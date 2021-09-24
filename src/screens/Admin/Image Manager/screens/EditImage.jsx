@@ -87,7 +87,7 @@ export default function EditImage(props) {
           handleChangeImage={handleChangeImage}
         />
       </div>
-      <div style={{ marginTop: "70px" }}>
+      <div style={{ marginTop: "70px", bottom: 0 }}>
         <Button
           variant="contained"
           color="primary"

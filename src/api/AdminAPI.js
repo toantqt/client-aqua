@@ -7,7 +7,9 @@ export const covertDate = (date) => {
   return moment(date).format("DD/MM/YYYY");
 };
 
-const url = "https://truc-anh.herokuapp.com/api";
+// const url = "https://truc-anh.herokuapp.com/api";
+const url = "http://localhost:6699/api";
+
 const headers = { Authorization: `${getAccessToken()}` };
 export const login = async (data) => {
   console.log(data);
@@ -254,6 +256,92 @@ export const addImage = async (data) => {
     })
     .catch((error) => {
       console.log(error);
+      return error.response;
+    });
+};
+
+export const addVideo = async (data) => {
+  const formData = new FormData();
+  if (data.video.file) {
+    formData.append("video", data.video.file);
+  } else {
+    formData.append("video", data.video.url);
+  }
+  formData.append("title", data.title);
+
+  return await axios
+    .post(`${url}/add-video`, formData, {
+      headers: headers,
+    })
+    .then((res) => {
+      console.log(res);
+      return res.data;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error.response;
+    });
+};
+
+export const deleteVideo = async (data) => {
+  return await axios
+    .post(`${url}/delete-video`, data, {
+      headers: headers,
+    })
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const updateVideo = async (data) => {
+  const formData = new FormData();
+  if (data.video.file) {
+    formData.append("video", data.video.file);
+  } else {
+    formData.append("video", data.video.url);
+  }
+  formData.append("title", data.title);
+  formData.append("videoID", data.videoID);
+
+  return await axios
+    .post(`${url}/update-video`, formData, {
+      headers: headers,
+    })
+    .then((res) => {
+      console.log(res);
+      return res.data;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error.response;
+    });
+};
+
+export const getCategoryNews = async (slug) => {
+  return await axios
+    .get(`${url}/get-category-news/${slug}`, {
+      headers: headers,
+    })
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const getNewsCategory = async (slug) => {
+  return await axios
+    .get(`${url}/get-news-category/${slug}`, {
+      headers: headers,
+    })
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
       return error.response;
     });
 };

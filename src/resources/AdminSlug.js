@@ -9,4 +9,7 @@ export default {
   createImage: "/admin/create-image",
   editVideo: "/admin/edit-video",
   createVideo: "/admin/create-video",
+
+  newsManager: "/admin/news-manager",
+  createNews: "/admin/create-news",
 };

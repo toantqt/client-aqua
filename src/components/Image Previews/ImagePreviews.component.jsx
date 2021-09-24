@@ -4,7 +4,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import Button from "@material-ui/core/Button";
 const ImagePreivewsComponent = (props) => {
   return (
-    <div style={{ width: "100%", height: "300px" }}>
+    <div style={{ width: "100%", height: "100%" }}>
       <div className="mb-3">
         <input
           accept="image/*"
@@ -25,15 +25,19 @@ const ImagePreivewsComponent = (props) => {
           </Button>
         </label>
       </div>
-      <Image
-        src={props.url?.url}
-        style={{
-          width: "100%",
-          height: "100%",
-          paddingTop: "0px !important",
-        }}
-        imageStyle={{ width: "60%", height: "auto" }}
-      />
+      {props.url?.url ? (
+        <Image
+          src={props.url?.url}
+          style={{
+            width: "100%",
+            height: "100%",
+            paddingTop: "0px !important",
+          }}
+          imageStyle={{ width: "60%", height: "auto", position: "none" }}
+        />
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

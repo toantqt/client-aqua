@@ -11,6 +11,18 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import AdminSlug from "../../../../../resources/AdminSlug";
+import FindInPageIcon from "@material-ui/icons/FindInPage";
+import CategoryIcon from "@material-ui/icons/Category";
+import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
+import AspectRatioIcon from "@material-ui/icons/AspectRatio";
+import PhotoLibraryIcon from "@material-ui/icons/PhotoLibrary";
+import YouTubeIcon from "@material-ui/icons/YouTube";
+import ImageIcon from "@material-ui/icons/Image";
+import ListAltIcon from "@material-ui/icons/ListAlt";
+import HomeWorkIcon from "@material-ui/icons/HomeWork";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import ContactSupportIcon from "@material-ui/icons/ContactSupport";
+import CastForEducationIcon from "@material-ui/icons/CastForEducation";
 import "./sidebar.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +35,11 @@ const useStyles = makeStyles((theme) => ({
   nested: {
     paddingLeft: theme.spacing(4),
   },
+  title: {
+    color: "black",
+  },
 }));
+
 export default function SideBarComponent(props) {
   const history = useHistory();
   const classes = useStyles();
@@ -81,6 +97,86 @@ export default function SideBarComponent(props) {
     <List style={{ padding: "0px !important" }} className="sidebar">
       <ListItem
         button
+        onClick={() => handleClickSlugLibrary("tin-tuc", AdminSlug.newsManager)}
+      >
+        <ListItemIcon>
+          <HomeWorkIcon />
+        </ListItemIcon>
+        <ListItemText primary="Giới thiệu công ty" className={classes.title} />
+      </ListItem>
+      <ListItem
+        button
+        onClick={() => handleClickSlugLibrary("tin-tuc", AdminSlug.newsManager)}
+      >
+        <ListItemIcon>
+          <FindInPageIcon />
+        </ListItemIcon>
+        <ListItemText primary="Quản lý tin tức" className={classes.title} />
+      </ListItem>
+
+      <ListItem
+        button
+        onClick={() =>
+          handleClickSlugLibrary("quy-trinh-nuoi-tom", AdminSlug.newsManager)
+        }
+      >
+        <ListItemIcon>
+          <ListAltIcon />
+        </ListItemIcon>
+        <ListItemText primary="Quy trình nuôi tôm" className={classes.title} />
+      </ListItem>
+      <ListItem
+        button
+        onClick={() =>
+          handleClickSlug("bannerManager", AdminSlug.bannerManager)
+        }
+      >
+        <ListItemIcon>
+          <PersonAddIcon />
+        </ListItemIcon>
+        <ListItemText primary="Tin tuyển dụng" className={classes.title} />
+      </ListItem>
+      <ListItem
+        button
+        onClick={() =>
+          handleClickSlug("categoryManager", AdminSlug.categoryManager)
+        }
+      >
+        <ListItemIcon>
+          <CastForEducationIcon />
+        </ListItemIcon>
+        <ListItemText
+          primary="Liên kết đào tạo
+        "
+          className={classes.title}
+        />
+      </ListItem>
+      <ListItem
+        button
+        onClick={() =>
+          handleClickSlug("categoryManager", AdminSlug.categoryManager)
+        }
+      >
+        <ListItemIcon>
+          <FormatListBulletedIcon />
+        </ListItemIcon>
+        <ListItemText primary="Quản lý danh mục" className={classes.title} />
+      </ListItem>
+
+      <ListItem
+        button
+        onClick={() =>
+          handleClickSlug("categoryManager", AdminSlug.categoryManager)
+        }
+      >
+        <ListItemIcon>
+          <CategoryIcon />
+        </ListItemIcon>
+        <ListItemText primary="Quản lý sản phẩm" className={classes.title} />
+      </ListItem>
+
+      <ListItem
+        button
         onClick={() =>
           handleClickSlug("categoryManager", AdminSlug.categoryManager)
         }
@@ -88,7 +184,7 @@ export default function SideBarComponent(props) {
         <ListItemIcon>
           <InsertChartIcon />
         </ListItemIcon>
-        <ListItemText primary="Quản Lý danh mục" />
+        <ListItemText primary="Quản lý tôm giống" className={classes.title} />
       </ListItem>
 
       <ListItem
@@ -98,16 +194,16 @@ export default function SideBarComponent(props) {
         }
       >
         <ListItemIcon>
-          <InsertChartIcon />
+          <AspectRatioIcon />
         </ListItemIcon>
-        <ListItemText primary="Quản Lý Banner" />
+        <ListItemText primary="Quản lý banner" className={classes.title} />
       </ListItem>
 
       <ListItem button onClick={handleClick2}>
         <ListItemIcon>
-          <InsertChartIcon />
+          <PhotoLibraryIcon />
         </ListItemIcon>
-        <ListItemText primary="Quản lý thư viện" />
+        <ListItemText primary="Quản lý thư viện" className={classes.title} />
         {open2 ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open2} timeout="auto" unmountOnExit>
@@ -122,9 +218,9 @@ export default function SideBarComponent(props) {
             }
           >
             <ListItemIcon>
-              <AssignmentIndIcon />
+              <ImageIcon />
             </ListItemIcon>
-            <ListItemText primary="Hình ảnh" />
+            <ListItemText primary="Hình ảnh" className={classes.title} />
           </ListItem>
 
           <ListItem
@@ -135,12 +231,24 @@ export default function SideBarComponent(props) {
             }
           >
             <ListItemIcon>
-              <AssignmentIndIcon />
+              <YouTubeIcon />
             </ListItemIcon>
-            <ListItemText primary="Video" />
+            <ListItemText primary="Video" className={classes.title} />
           </ListItem>
         </List>
       </Collapse>
+
+      <ListItem
+        button
+        onClick={() =>
+          handleClickSlug("categoryManager", AdminSlug.categoryManager)
+        }
+      >
+        <ListItemIcon>
+          <ContactSupportIcon />
+        </ListItemIcon>
+        <ListItemText primary="Liên hệ" className={classes.title} />
+      </ListItem>
     </List>
     // </div>
   );

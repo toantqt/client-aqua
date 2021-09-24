@@ -61,11 +61,11 @@ const News = (props) => {
       props.handleLoading(false);
     }
   }, [props.category]);
-  console.log(subCategory);
   useEffect(async () => {
     setNews([]);
     if (type != 2 && type != 3) {
       await getNewsCategory(categoryID, subCategoryID, page).then((res) => {
+        console.log(res.data);
         if (res.data.length != 0) {
           for (let item of res.data) {
             setNews((news) => [...news, item]);
@@ -94,6 +94,7 @@ const News = (props) => {
     }
     setType(type);
   };
+
   const handleClickSeeMore = () => {
     let a = page + 1;
     history.push({ search: `?page=${a}` });

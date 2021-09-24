@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const url = "https://truc-anh.herokuapp.com/api";
+// const url = "https://truc-anh.herokuapp.com/api";
+const url = "http://localhost:6699/api";
 
 export const getHomeBanner = async (slug) => {
   return await axios
@@ -148,6 +149,17 @@ export const getDetailsImage = async (imgID) => {
 export const getVideo = async () => {
   return await axios
     .get(`${url}/get-video`)
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const getDetailsVideo = async (videoID) => {
+  return await axios
+    .get(`${url}/get-details-video/${videoID}`)
     .then(async (res) => {
       return res.data;
     })

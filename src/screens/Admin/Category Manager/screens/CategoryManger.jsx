@@ -126,7 +126,7 @@ export default function CategoryManager(props) {
             >
               <EditIcon />
             </IconButton>
-            <IconButton
+            {/* <IconButton
               aria-label="delete"
               className="btn-action btn-a-3"
               onClick={() => {
@@ -134,7 +134,7 @@ export default function CategoryManager(props) {
               }}
             >
               <DeleteForeverIcon />
-            </IconButton>
+            </IconButton> */}
           </>
         );
       },
@@ -165,7 +165,7 @@ export default function CategoryManager(props) {
     <Grid>
       <div className="header-title mb-3">
         <span>Quản Lý Danh Mục: ({category.length}) </span>{" "}
-        <Button
+        {/* <Button
           variant="contained"
           color="primary"
           size="small"
@@ -177,7 +177,7 @@ export default function CategoryManager(props) {
           onClick={handleClickAdd}
         >
           Tạo danh mục
-        </Button>
+        </Button> */}
       </div>
       <div style={{ width: "30%" }} className="mb-3">
         <SelectCategory

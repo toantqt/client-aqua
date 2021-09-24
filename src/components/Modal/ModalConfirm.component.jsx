@@ -12,7 +12,7 @@ import { Close } from "@material-ui/icons";
 import warning from "../../assets/image/Modal/warning.png";
 const ModalConfirmComponent = (props) => {
   return (
-    <Dialog open={props.open} maxWidth="sm">
+    <Dialog open={props.open} onClose={props.handleClose} maxWidth="sm">
       <Box position="absolute" top={0} right={0}>
         <IconButton onClick={props.handleClose}>
           <Close />

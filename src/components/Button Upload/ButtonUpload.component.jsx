@@ -6,7 +6,6 @@ const ButtonUploadComponent = (props) => {
   return (
     <div className="mb-3">
       <input
-        accept="image/*"
         id="contained-button-file"
         type="file"
         style={{ display: "none" }}
@@ -20,7 +19,7 @@ const ButtonUploadComponent = (props) => {
           style={{ textTransform: "none" }}
           component="span"
         >
-          Chọn hình ảnh
+          {props.title}
         </Button>
       </label>
     </div>

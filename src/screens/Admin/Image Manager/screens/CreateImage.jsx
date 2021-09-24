@@ -68,7 +68,10 @@ export default function CreateImage(props) {
       </div>
       <div className="mt-3">
         <label style={{ fontSize: "16px", fontWeight: "500" }}>Hình ảnh:</label>
-        <ButtonUploadComponent handleChangeImage={handleChangeImage} />
+        <ButtonUploadComponent
+          handleChangeImage={handleChangeImage}
+          title="Chọn hình ảnh"
+        />
         {image ? <PreivewsImageComponent url={image} /> : <></>}
       </div>
       <div style={{ marginTop: "70px" }}>

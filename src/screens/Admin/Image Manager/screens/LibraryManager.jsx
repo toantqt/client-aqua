@@ -15,7 +15,8 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import Image from "material-ui-image";
 import ModalConfirmComponent from "../../../../components/Modal/ModalConfirm.component";
-import { deleteImage } from "../../../../api/AdminAPI";
+import { deleteImage, deleteVideo } from "../../../../api/AdminAPI";
+import ModalVideoComponent from "../../../../components/Modal Video/ModalVideo.component";
 
 export default function LibraryManager(props) {
   const search = queryString.parse(props.location.search);
@@ -27,6 +28,10 @@ export default function LibraryManager(props) {
   const [imageID, setImageID] = useState("");
   const [openImage, setOpenImage] = useState(false);
   const [reload, setReload] = useState(false);
+  const [url, setUrl] = useState("");
+  const [openVideo, setOpenVideo] = useState(false);
+  const [openConfirmVideo, setOpenConfirmVideo] = useState(false);
+  const [videoID, setVideoID] = useState("");
   useEffect(async () => {
     if (type === "image") {
       await getImage().then((res) => {
@@ -73,6 +78,37 @@ export default function LibraryManager(props) {
     } else if (type === "video") {
       history.push(AdminSlug.createVideo);
     }
+  };
+
+  const handleClickVideo = (url) => {
+    setUrl(url);
+    setOpenVideo(true);
+  };
+  const handleCloseVideo = () => {
+    setUrl("");
+    setOpenVideo(false);
+  };
+  const handleDeleteVideo = (id) => {
+    setVideoID(id);
+    setOpenConfirmVideo(true);
+  };
+  const handleCloseConfirmVideo = () => {
+    setVideoID("");
+    setOpenConfirmVideo(false);
+  };
+
+  const submitDeleteVideo = async () => {
+    const data = {
+      videoID: videoID,
+    };
+    await deleteVideo(data).then((res) => {
+      handleCloseConfirmVideo();
+      setReload(!reload);
+    });
+  };
+
+  const handleEditVideo = (id) => {
+    history.push({ pathname: AdminSlug.editVideo, search: `?id=${id}` });
   };
 
   let lists;
@@ -133,17 +169,14 @@ export default function LibraryManager(props) {
   } else {
     lists = video.map((e, index) => {
       return (
-        <Grid
-          item
-          lg={3}
-          md={3}
-          xs={12}
-          // onClick={() => {
-          //   handleClickVideo(e.video.url);
-          // }}
-        >
+        <Grid item lg={3} md={3} xs={12}>
           <Grid className="wrap-news">
-            <div className="news">
+            <div
+              className="news"
+              onClick={() => {
+                handleClickVideo(e.video.url);
+              }}
+            >
               <div className="img">
                 <ReactPlayer
                   url={e.video.url}
@@ -165,6 +198,26 @@ export default function LibraryManager(props) {
             </div>
             <div className="title">
               <span>{e?.title}</span>
+              <div style={{ float: "right" }}>
+                <IconButton
+                  aria-label="delete"
+                  className="btn-action btn-a-3"
+                  onClick={() => {
+                    handleEditVideo(e._id);
+                  }}
+                >
+                  <EditIcon style={{ color: "blue" }} />
+                </IconButton>
+                <IconButton
+                  aria-label="delete"
+                  className="btn-action btn-a-3"
+                  onClick={() => {
+                    handleDeleteVideo(e._id);
+                  }}
+                >
+                  <DeleteForeverIcon style={{ color: "red" }} />
+                </IconButton>
+              </div>
             </div>
           </Grid>
         </Grid>
@@ -202,6 +255,17 @@ export default function LibraryManager(props) {
         handleClose={handleCloseConfirmImage}
         title="Xác nhận xóa hình ảnh"
         handleDelete={submitDeleteImage}
+      />
+      <ModalConfirmComponent
+        open={openConfirmVideo}
+        handleClose={handleCloseConfirmVideo}
+        title="Xác nhận xóa video"
+        handleDelete={submitDeleteVideo}
+      />
+      <ModalVideoComponent
+        url={url}
+        open={openVideo}
+        handleClose={handleCloseVideo}
       />
     </Grid>
   );
