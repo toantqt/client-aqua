@@ -64,7 +64,7 @@ export default function HeaderComponent() {
                 </Link>
               </li>
               <li className="h-contact">
-                <Link to="/danh-muc/thong-tin-tuyen-dung-va-lien-he">
+                <Link to="/danh-muc/tuyen-dung">
                   <i class="fas fa-phone-alt"></i>
                   <span className="ml-2">Tuyển dụng</span>
                 </Link>

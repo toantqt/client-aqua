@@ -63,9 +63,10 @@ const News = (props) => {
   }, [props.category]);
   useEffect(async () => {
     setNews([]);
+
     if (type != 2 && type != 3) {
       await getNewsCategory(categoryID, subCategoryID, page).then((res) => {
-        console.log(res.data);
+        console.log("data", res.data);
         if (res.data.length != 0) {
           for (let item of res.data) {
             setNews((news) => [...news, item]);
@@ -78,8 +79,8 @@ const News = (props) => {
         } else {
           setSeeMore(false);
         }
-        setLoading(false);
       });
+      setLoading(false);
     }
   }, [categoryID, subCategoryID, page, type]);
 
@@ -118,7 +119,7 @@ const News = (props) => {
       <Tab
         label={e.name}
         onClick={() => {
-          handleClick(e.name, e._id, e.type || 1);
+          handleClick(e.name, e._id, parseInt(e.type));
         }}
         key={index}
       />
@@ -126,7 +127,6 @@ const News = (props) => {
   });
 
   const handleLoading = (status) => {
-    console.log(status);
     setLoading(status);
   };
   return (
@@ -149,6 +149,8 @@ const News = (props) => {
           <></>
         )}
       </div>
+      {/* <ListsNewsComponent news={news} /> */}
+
       {loading ? (
         <div
           style={{

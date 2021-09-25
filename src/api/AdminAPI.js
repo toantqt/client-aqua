@@ -345,3 +345,87 @@ export const getNewsCategory = async (slug) => {
       return error.response;
     });
 };
+
+export const deleteNews = async (data) => {
+  return await axios
+    .post(`${url}/delete-news`, data, {
+      headers: headers,
+    })
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const updateIntroduce = async (data) => {
+  const formData = new FormData();
+  let i = 0;
+  for (let item of data.history.image) {
+    console.log(item);
+    let title = "lists1Img" + i;
+    if (item.file) {
+      formData.append(title, item.file);
+    } else {
+      formData.append(title, JSON.stringify(item));
+    }
+    i++;
+  }
+
+  let y = 0;
+  for (let item of data.structure.image) {
+    let title = "lists2Img" + y;
+    if (item.file) {
+      formData.append(title, item.file);
+    } else {
+      formData.append(title, JSON.stringify(item));
+    }
+    y++;
+  }
+
+  formData.append("historyTitle", data.history.title);
+  formData.append("historyTotal", data.history.total);
+
+  formData.append("historyContent", data.history.content);
+  formData.append("structureTitle", data.structure.title);
+  formData.append("structureContent", data.structure.content);
+  formData.append("structureTotal", data.structure.total);
+
+  return await axios
+    .post(`${url}/update-introduce`, formData, {
+      headers: headers,
+    })
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const productManager = async (slug) => {
+  return await axios
+    .get(`${url}/manager-product/${slug}`, {
+      headers: headers,
+    })
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const deleteProduct = async (data) => {
+  return await axios
+    .post(`${url}/delete-product`, data, {
+      headers: headers,
+    })
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};

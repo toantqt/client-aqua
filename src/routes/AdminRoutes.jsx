@@ -11,6 +11,9 @@ import CreateVideo from "../screens/Admin/Image Manager/screens/Video/CreateVide
 import EditVideo from "../screens/Admin/Image Manager/screens/Video/EditVideo";
 import NewsManager from "../screens/Admin/News Manager/screens/NewsManager";
 import CreateNews from "../screens/Admin/Create News/screens/CreateNews";
+import InforManager from "../screens/Admin/Infor Manager/screens/InforManager";
+import ProductManager from "../screens/Admin/Product Manager/screens/ProductManager";
+import EditProduct from "../screens/Admin/Product Manager/screens/EditProduct";
 const AdminRoutes = (props) => {
   const handleLoading = props.handleLoading;
   return (
@@ -93,6 +96,30 @@ const AdminRoutes = (props) => {
         path={adminSlug.createNews}
         render={(props) => (
           <CreateNews {...props} handleLoading={handleLoading} />
+        )}
+      ></Route>
+
+      <Route
+        exact
+        path={adminSlug.inforManager}
+        render={(props) => (
+          <InforManager {...props} handleLoading={handleLoading} />
+        )}
+      ></Route>
+
+      <Route
+        exact
+        path={adminSlug.productManager}
+        render={(props) => (
+          <ProductManager {...props} handleLoading={handleLoading} />
+        )}
+      ></Route>
+
+      <Route
+        exact
+        path={adminSlug.editProduct}
+        render={(props) => (
+          <EditProduct {...props} handleLoading={handleLoading} />
         )}
       ></Route>
     </>

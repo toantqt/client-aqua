@@ -12,4 +12,8 @@ export default {
 
   newsManager: "/admin/news-manager",
   createNews: "/admin/create-news",
+  inforManager: "/admin/infor-manager",
+
+  productManager: "/admin/product-manager",
+  editProduct: "/admin/edit-product",
 };

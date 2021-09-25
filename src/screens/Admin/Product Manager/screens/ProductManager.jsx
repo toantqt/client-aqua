@@ -6,55 +6,45 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import IconButton from "@material-ui/core/IconButton";
 import queryString from "query-string";
+import { deleteProduct } from "../../../../api/AdminAPI";
 import {
   getCategoryNews,
   getNewsCategory,
   covertDate,
   deleteNews,
+  productManager,
 } from "../../../../api/AdminAPI";
 import SelectCategory from "../../../../components/Category Select/CategorySelect.component";
 import TableComponent from "../../../../components/Table/Table.component";
 import Button from "@material-ui/core/Button";
 import AdminSlug from "../../../../resources/AdminSlug";
 import ModalConfirmComponent from "../../../../components/Modal/ModalConfirm.component";
-export default function NewsManager(props) {
+export default function ProductManager(props) {
   const history = useHistory();
-  const search = queryString.parse(props.location.search);
-  const slug = search.q;
+
+  const [product, setProduct] = useState([]);
   const [categoryName, setCategoryName] = useState("");
   const [subCategory, setSubCategory] = useState([]);
   const [categoryID, setCategoryID] = useState("");
   const [categorySelect, setCategorySelect] = useState("");
-  const [news, setNews] = useState([]);
   const [openConfirm, setOpenConfirm] = useState(false);
   const [newsID, setNewsID] = useState("");
+  const [productID, setProductID] = useState("");
   const [reload, setReload] = useState(false);
 
   useEffect(async () => {
-    if (slug) {
-      props.handleLoading(true);
-      switch (slug) {
-        case "tin-tuc":
-          setCategoryName("Tin Tức");
-          break;
-        case "quy-trinh-nuoi-tom":
-          setCategoryName("Quy Trình Nuôi Tôm");
-          break;
-        case "tuyen-dung":
-          setCategoryName("Tin Tuyển dụng");
-          break;
-      }
-      await getCategoryNews(slug).then((res) => {
-        setCategoryID(res.data.categoryID);
-        setSubCategory(res.data.subCategory);
-      });
+    props.handleLoading(true);
+    const slug = "san-pham";
+    await getCategoryNews(slug).then((res) => {
+      setCategoryID(res.data.categoryID);
+      setSubCategory(res.data.subCategory);
+    });
+    await productManager(slug).then((res) => {
+      setProduct(res.data);
+    });
 
-      await getNewsCategory(slug).then((res) => {
-        setNews(res.data);
-      });
-      props.handleLoading(false);
-    }
-  }, [slug, reload]);
+    props.handleLoading(false);
+  }, [reload]);
 
   const handleChangeCategory = (value) => {
     if (value !== "") {
@@ -64,30 +54,29 @@ export default function NewsManager(props) {
     }
   };
 
-  const rows = news
-    .filter((news) => {
+  console.log(product);
+  const rows = product
+    .filter((product) => {
       if (categorySelect === "") {
-        console.log(news);
-        return news;
+        return product;
       } else {
-        return news.news.subCategoryID === categorySelect;
+        return product.product.subCategoryID === categorySelect;
       }
     })
     .map((e, index) => {
       return {
         id: index,
         stt: index + 1,
-        name: e.news.title,
+        name: e.product?.name,
         category: e.subCategoryName,
-        date: covertDate(e.news?.created),
-        action: e.news,
+        date: covertDate(e.product?.created),
+        action: e.product,
       };
     });
 
-  console.log(rows);
   const columns = [
     { field: "stt", headerName: "STT", width: 90 },
-    { field: "name", headerName: "Bài viết", width: 300 },
+    { field: "name", headerName: "Sản phẩm", width: 300 },
     { field: "category", headerName: "Danh mục", width: 250 },
     { field: "date", headerName: "Ngày tạo", width: 150 },
     {
@@ -99,20 +88,10 @@ export default function NewsManager(props) {
           <>
             <IconButton
               aria-label="delete"
-              className="btn-action btn-a-1"
-              onClick={() => {
-                handleClickView(action.row?.action?.slug);
-              }}
-            >
-              <VisibilityIcon />
-            </IconButton>
-
-            <IconButton
-              aria-label="delete"
               className="btn-action btn-a-2"
-              //   onClick={() => {
-              //     handleClickEdit(action.row?.action?._id);
-              //   }}
+              onClick={() => {
+                handleClickEdit(action.row?.action?._id);
+              }}
             >
               <EditIcon />
             </IconButton>
@@ -136,36 +115,43 @@ export default function NewsManager(props) {
   };
 
   const handleClickAdd = () => {
-    history.push({
-      pathname: AdminSlug.createNews,
-      search: `?q=${slug}`,
-    });
+    // history.push({
+    //   pathname: AdminSlug.createNews,
+    //   search: `?q=${slug}`,
+    // });
   };
 
   const handleClickDelete = (id) => {
-    setNewsID(id);
+    setProductID(id);
     setOpenConfirm(true);
   };
 
   const handleCloseConfirm = () => {
-    setNewsID("");
+    setProductID("");
     setOpenConfirm(false);
   };
 
-  const submitDeleteNews = async () => {
+  const submitDeleteProduct = async () => {
     const data = {
-      newsID: newsID,
+      productID: productID,
     };
-    await deleteNews(data).then((res) => {
+    await deleteProduct(data).then((res) => {
       handleCloseConfirm();
       setReload(!reload);
+    });
+  };
+
+  const handleClickEdit = (id) => {
+    history.push({
+      pathname: AdminSlug.editProduct,
+      search: `?id=${id}`,
     });
   };
 
   return (
     <Grid>
       <div className="header-title mb-3">
-        <span>Quản Lý {categoryName}: () </span>
+        <span>Quản Lý sản phẩm: () </span>
         <Button
           variant="contained"
           color="primary"
@@ -177,7 +163,7 @@ export default function NewsManager(props) {
           }}
           onClick={handleClickAdd}
         >
-          Tạo bài viết
+          Thêm sản phẩm
         </Button>
       </div>
 
@@ -199,8 +185,8 @@ export default function NewsManager(props) {
       <ModalConfirmComponent
         open={openConfirm}
         handleClose={handleCloseConfirm}
-        title="Xác nhận xóa bài viết"
-        handleDelete={submitDeleteNews}
+        title="Xác nhận xóa sản phẩm"
+        handleDelete={submitDeleteProduct}
       />
     </Grid>
   );

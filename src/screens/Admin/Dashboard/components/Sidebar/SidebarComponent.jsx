@@ -60,6 +60,7 @@ export default function SideBarComponent(props) {
       search: `?q=${param}`,
     });
   };
+
   const handleClick = () => {
     setOpen(!open);
   };
@@ -97,7 +98,9 @@ export default function SideBarComponent(props) {
     <List style={{ padding: "0px !important" }} className="sidebar">
       <ListItem
         button
-        onClick={() => handleClickSlugLibrary("tin-tuc", AdminSlug.newsManager)}
+        onClick={() =>
+          handleClickSlugLibrary("gioi-thieu", AdminSlug.inforManager)
+        }
       >
         <ListItemIcon>
           <HomeWorkIcon />
@@ -128,7 +131,7 @@ export default function SideBarComponent(props) {
       <ListItem
         button
         onClick={() =>
-          handleClickSlug("bannerManager", AdminSlug.bannerManager)
+          handleClickSlugLibrary("tuyen-dung", AdminSlug.newsManager)
         }
       >
         <ListItemIcon>
@@ -166,7 +169,7 @@ export default function SideBarComponent(props) {
       <ListItem
         button
         onClick={() =>
-          handleClickSlug("categoryManager", AdminSlug.categoryManager)
+          handleClickSlug("productManager", AdminSlug.productManager)
         }
       >
         <ListItemIcon>
