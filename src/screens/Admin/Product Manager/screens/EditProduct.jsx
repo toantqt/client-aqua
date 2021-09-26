@@ -31,14 +31,20 @@ export default function EditProduct(props) {
   const [uses, setUses] = useState("");
   const [dosage, setDosage] = useState("");
 
+  const [editorState1, setEditorState1] = useState(EditorState.createEmpty());
+  const [editorState2, setEditorState2] = useState(EditorState.createEmpty());
+  const [editorState3, setEditorState3] = useState(EditorState.createEmpty());
+  const [subCategorySelect, setSubCategorySelect] = useState("");
+
   useEffect(async () => {
     const slug = "tin-tuc";
-
+    props.handleLoading(true);
     await getDetailsProduct(productID).then((res) => {
+      console.log(res.data);
       setProduct(res.data.product);
       setCategoryID(res.data.category._id);
       setSubCategory(res.data.category.subCategory);
-      console.log(res.data);
+      setSubCategorySelect(res.data.product.subCategoryID);
       setName(res.data.product.name);
       for (let item of res.data.category.subCategory) {
         if (item._id === res.data.product.subCategoryID) {
@@ -49,8 +55,80 @@ export default function EditProduct(props) {
         }
       }
       setImagePreview(res.data.product.image[0]);
+
+      const blocksFromHTML1 = convertFromHTML(res.data.product.ingredient);
+      const content1 = ContentState.createFromBlockArray(blocksFromHTML1);
+      setEditorState1(EditorState.createWithContent(content1));
+      setIngredient(res.data.product.ingredient);
+
+      const blocksFromHTML2 = convertFromHTML(res.data.product.uses);
+      const content2 = ContentState.createFromBlockArray(blocksFromHTML2);
+      setEditorState2(EditorState.createWithContent(content2));
+      setUses(res.data.product.uses);
+
+      const blocksFromHTML3 = convertFromHTML(res.data.product.dosage);
+      const content3 = ContentState.createFromBlockArray(blocksFromHTML3);
+      setEditorState3(EditorState.createWithContent(content3));
+      setDosage(res.data.product.dosage);
     });
+    props.handleLoading(false);
   }, [productID]);
+
+  const onEditorStateChange = (editorState, status) => {
+    const converHtml = draftToHtml(
+      convertToRaw(editorState.getCurrentContent())
+    );
+    if (status === 1) {
+      setEditorState1(editorState);
+      setIngredient(converHtml);
+    } else if (status === 2) {
+      setEditorState2(editorState);
+      setUses(converHtml);
+    } else {
+      setEditorState3(editorState);
+      setDosage(converHtml);
+    }
+  };
+
+  const handleChangeCategory = (value) => {
+    if (value !== "") {
+      setSubCategorySelect(value._id);
+    } else {
+      setSubCategorySelect("");
+    }
+  };
+
+  const handleChangeTitle = (event) => {
+    setName(event.target.value);
+  };
+
+  const handleChangeImage = (event) => {
+    if (event.target.type === "file") {
+      let files = Array.from(event.target.files);
+      files.forEach((file) => {
+        let reader = new FileReader();
+        console.log(reader.result);
+        reader.onloadend = () => {
+          setImagePreview({ url: reader.result, file: file });
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+  };
+
+  const handleSubmit = () => {
+    const data = {
+      subCategoryID: subCategorySelect,
+      name: name,
+      ingredient: ingredient,
+      uses: uses,
+      dosage: dosage,
+    };
+    if (data.subCategoryID === "" || data.name === "") {
+      alert("Xin vui lòng điền đầy đủ thông tin!");
+    } else {
+    }
+  };
   return (
     <Grid>
       <div className="header-title mb-3">
@@ -63,7 +141,7 @@ export default function EditProduct(props) {
               <SelectCategory
                 data={subCategory}
                 value={defaultSelect}
-                //   handleChange={handleChangeCategory}
+                handleChange={handleChangeCategory}
               />
             ) : (
               <></>
@@ -77,14 +155,14 @@ export default function EditProduct(props) {
               style={{ width: "100%" }}
               key={product?.name}
               defaultValue={product?.name}
-              //   onChange={handleChangeTitle}
+              onChange={handleChangeTitle}
             />
           </Grid>
           <div className="mb-5">
             <label>Hình ảnh</label>
             <ImagePreivewsComponent
               url={imagePreview}
-              //   handleChangeImage={handleChangeImage}
+              handleChangeImage={handleChangeImage}
             />
           </div>
           <Grid item lg={12}>
@@ -92,8 +170,10 @@ export default function EditProduct(props) {
               <p>Thành phần</p>
 
               <Editor
-                // editorState={editorState1}
-                // onEditorStateChange={onEditorState1Change}
+                editorState={editorState1}
+                onEditorStateChange={(e) => {
+                  onEditorStateChange(e, 1);
+                }}
                 wrapperClassName="wrapper-class"
                 editorClassName="editor-class"
                 toolbarClassName="toolbar-class"
@@ -103,8 +183,10 @@ export default function EditProduct(props) {
               <p>Công dụng</p>
 
               <Editor
-                // editorState={editorState1}
-                // onEditorStateChange={onEditorState1Change}
+                editorState={editorState2}
+                onEditorStateChange={(e) => {
+                  onEditorStateChange(e, 2);
+                }}
                 wrapperClassName="wrapper-class"
                 editorClassName="editor-class"
                 toolbarClassName="toolbar-class"
@@ -114,8 +196,10 @@ export default function EditProduct(props) {
               <p>Liều lượng</p>
 
               <Editor
-                // editorState={editorState1}
-                // onEditorStateChange={onEditorState1Change}
+                editorState={editorState3}
+                onEditorStateChange={(e) => {
+                  onEditorStateChange(e, 3);
+                }}
                 wrapperClassName="wrapper-class"
                 editorClassName="editor-class"
                 toolbarClassName="toolbar-class"
@@ -131,7 +215,7 @@ export default function EditProduct(props) {
           size="large"
           startIcon={<SaveIcon />}
           style={{ float: "right" }}
-          //   onClick={handleSubmit}
+          onClick={handleSubmit}
         >
           Xác nhận
         </Button>

@@ -17,7 +17,6 @@ const useStyles = makeStyles({
 });
 
 export default function SelectCategory(props) {
-  console.log(props);
   const classes = useStyles();
   const [defaultValue, setDefaultValue] = useState({
     categoryName: props.value?.categoryName,
