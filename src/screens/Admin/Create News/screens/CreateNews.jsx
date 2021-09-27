@@ -7,10 +7,11 @@ import "./createNews.css";
 // import SelectCategoryAuthorComponent from "../../components/Select Category Author/SelectCategoryAuthor.component";
 // import { createNews } from "../../../../api/AdminAPI";
 import TextField from "@material-ui/core/TextField";
-import { getCategoryNews } from "../../../../api/AdminAPI";
+import { addNews, getCategoryNews } from "../../../../api/AdminAPI";
 import queryString from "query-string";
 import SelectCategory from "../../../../components/Category Select/CategorySelect.component";
 import ImagePreivewsComponent from "../../../../components/Image Previews/ImagePreviews.component";
+import AdminSlug from "../../../../resources/AdminSlug";
 export default function CreateNews(props) {
   const history = useHistory();
   const search = queryString.parse(props.location.search);
@@ -24,11 +25,10 @@ export default function CreateNews(props) {
   const [homePage, setHomePage] = useState("normal");
   const [categoryPage, setCategoryPage] = useState("normal");
   const [subCategoryPage, setSubCategoryPage] = useState("normal");
-  const [display, setDisplay] = useState([]);
-  const [ListsHashtag, setListsHashtag] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [categorySelect, setCategorySelect] = useState();
   const [thumbnail, setThumnail] = useState();
+  const [author, setAuthor] = useState("");
 
   const [hashTag, setHashTag] = useState("");
 
@@ -42,11 +42,7 @@ export default function CreateNews(props) {
       props.handleLoading(false);
     }
   }, [slug]);
-  useEffect(() => {
-    for (let i = count; i <= count; i++) {
-      setDisplay((display) => [...display, 1]);
-    }
-  }, [count]);
+
   const handleClickCount = () => {
     const newCount = count + 1;
     setCount(newCount);
@@ -76,46 +72,31 @@ export default function CreateNews(props) {
   const handChangeSubCategory = (id) => {
     setSubCategoryID(id);
   };
-  const handleChangeDisplay = (data, index) => {
-    let items = [...display];
-    let item = { ...display[index] };
-    item = data;
-    items[index] = item;
-    setDisplay(items);
+
+  const handleClickCreateNews = async () => {
+    const data = {
+      categoryID: mainCategoryID,
+      subCategoryID: categorySelect,
+      mainTitle: title,
+      listsContent: content,
+      listImage: image,
+      totalContent: count,
+      thumbnail: thumbnail,
+      author: author,
+    };
+
+    if (data.categoryID == "") {
+      alert("Xin vui lòng chọn danh mục!");
+    } else if (data.mainTitle === "") {
+      alert("Xin vui lòng thêm tiêu đề!");
+    } else {
+      props.handleLoading(true);
+      await addNews(data).then((res) => {
+        props.handleLoading(false);
+        history.push(AdminSlug.newsManager);
+      });
+    }
   };
-
-  //   const handleClickCreateNews = async () => {
-  //     const data = {
-  //       categoryID: mainCategoryID,
-  //       subCategoryID: subCategoryID,
-  //       mainTitle: title,
-  //       listsContent: content,
-  //       listImage: image,
-  //       display: display,
-  //       hashtag: ListsHashtag,
-
-  //       totalContent: count,
-  //       show: {
-  //         home: homePage,
-  //         category: categoryPage,
-  //         subCategory: subCategoryPage,
-  //       },
-  //     };
-  //     if (data.categoryID == "") {
-  //       alert("Xin vui lòng chọn danh mục!");
-  //     } else if (data.mainTitle === "") {
-  //       alert("Xin vui lòng thêm tiêu đề!");
-  //     } else if (data.listImage.length === 0) {
-  //       alert("Xin vui lòng thêm ảnh hoặc video");
-  //     } else {
-  //       props.handleLoading(true);
-
-  //       await createNews(data).then((res) => {
-  //         props.handleLoading(false);
-  //         history.push(slug.authorNews);
-  //       });
-  //     }
-  //   };
 
   const handleChangeCategory = (value) => {
     if (value !== "") {
@@ -137,6 +118,10 @@ export default function CreateNews(props) {
         reader.readAsDataURL(file);
       });
     }
+  };
+
+  const handleChangeAuthor = (event) => {
+    setAuthor(event.target.value);
   };
 
   return (
@@ -179,16 +164,26 @@ export default function CreateNews(props) {
             handleChangeImage={handleChangeImage}
             handleDeleteImage={handleDeleteImage}
             handleChangeContent={handleChangeContent}
-            handleChangeDisplay={handleChangeDisplay}
           />
         ))}
+      </Grid>
+      <Grid item lg={12}>
+        <div className="news-title ">
+          <p>Tác giả:</p>
+          <TextField
+            id="outlined-basic"
+            variant="outlined"
+            style={{ width: "100%" }}
+            onChange={handleChangeAuthor}
+          />
+        </div>
       </Grid>
 
       <div className="button-add">
         <button
           type="button"
           className="btn btn-outline-success  "
-          //   onClick={handleClickCreateNews}
+          onClick={handleClickCreateNews}
         >
           Tạo bài viết
         </button>

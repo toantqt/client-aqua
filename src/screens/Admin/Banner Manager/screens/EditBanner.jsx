@@ -13,6 +13,7 @@ import SelectIndex from "../../../../components/Index Select/IndexSelect.compone
 import ImagePreivewsComponent from "../../../../components/Image Previews/ImagePreviews.component";
 import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
+import TextField from "@material-ui/core/TextField";
 
 export default function BannerManager(props) {
   const search = queryString.parse(props.location.search);
@@ -101,10 +102,13 @@ export default function BannerManager(props) {
           <Grid item lg={4}>
             <label>Danh mục:</label>
             {defaultCatgory ? (
-              <SelectCategory
-                value={defaultCatgory}
-                data={category}
-                handleChange={handleChangeCategory}
+              <TextField
+                id="outlined-basic"
+                variant="outlined"
+                style={{ width: "100%" }}
+                key={defaultCatgory?.categoryName}
+                defaultValue={defaultCatgory?.categoryName}
+                disabled={true}
               />
             ) : (
               <></>

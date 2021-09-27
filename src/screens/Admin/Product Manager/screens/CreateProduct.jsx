@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import queryString from "query-string";
 import { useHistory } from "react-router-dom";
-import { getCategoryNews, updateProduct } from "../../../../api/AdminAPI";
-import { getDetailsProduct } from "../../../../api/API";
+import { addProduct } from "../../../../api/AdminAPI";
+import {
+  getCategory,
+  getDetailsProduct,
+  getSubCategory,
+} from "../../../../api/API";
 import SelectCategory from "../../../../components/Category Select/CategorySelect.component";
 import TextField from "@material-ui/core/TextField";
 import ImagePreivewsComponent from "../../../../components/Image Previews/ImagePreviews.component";
@@ -22,11 +26,10 @@ import SaveIcon from "@material-ui/icons/Save";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
-export default function EditProduct(props) {
+export default function CreateProduct(props) {
   const history = useHistory();
   const search = queryString.parse(props.location.search);
-  const productID = search.id;
-  const [categoryID, setCategoryID] = useState("");
+  const categoryID = search.id;
   const [subCategory, setSubCategory] = useState([]);
   const [name, setName] = useState("");
   const [product, setProduct] = useState();
@@ -43,43 +46,14 @@ export default function EditProduct(props) {
   const [subCategorySelect, setSubCategorySelect] = useState("");
 
   useEffect(async () => {
-    const slug = "tin-tuc";
     props.handleLoading(true);
-    await getDetailsProduct(productID).then((res) => {
-      console.log(res.data);
-      setProduct(res.data.product);
-      setCategoryID(res.data.category._id);
-      setSubCategory(res.data.category.subCategory);
-      setSubCategorySelect(res.data.product.subCategoryID);
-      setName(res.data.product.name);
-      setHighlight(res.data.product.highlight);
-      for (let item of res.data.category.subCategory) {
-        if (item._id === res.data.product.subCategoryID) {
-          setDefaultSelect({
-            categoryName: item.name,
-            _id: item._id,
-          });
-        }
-      }
-      setImagePreview(res.data.product.image[0]);
-
-      const blocksFromHTML1 = convertFromHTML(res.data.product.ingredient);
-      const content1 = ContentState.createFromBlockArray(blocksFromHTML1);
-      setEditorState1(EditorState.createWithContent(content1));
-      setIngredient(res.data.product.ingredient);
-
-      const blocksFromHTML2 = convertFromHTML(res.data.product.uses);
-      const content2 = ContentState.createFromBlockArray(blocksFromHTML2);
-      setEditorState2(EditorState.createWithContent(content2));
-      setUses(res.data.product.uses);
-
-      const blocksFromHTML3 = convertFromHTML(res.data.product.dosage);
-      const content3 = ContentState.createFromBlockArray(blocksFromHTML3);
-      setEditorState3(EditorState.createWithContent(content3));
-      setDosage(res.data.product.dosage);
+    await getSubCategory(categoryID).then((res) => {
+      //   console.log(res.data);
+      setSubCategory(res.data.subCategory);
+      setDefaultSelect({ categoryName: "", _id: "" });
     });
     props.handleLoading(false);
-  }, [productID]);
+  }, [categoryID]);
 
   const onEditorStateChange = (editorState, status) => {
     const converHtml = draftToHtml(
@@ -125,6 +99,7 @@ export default function EditProduct(props) {
 
   const handleSubmit = async () => {
     const data = {
+      categoryID: categoryID,
       subCategoryID: subCategorySelect,
       name: name,
       ingredient: ingredient,
@@ -132,12 +107,11 @@ export default function EditProduct(props) {
       dosage: dosage,
       highlight: highlight,
       image: imagePreview,
-      productID: productID,
     };
-    if (data.subCategoryID === "" || data.name === "") {
+    if (data.subCategoryID === "" || data.name === "" || !data.image) {
       alert("Xin vui lòng điền đầy đủ thông tin!");
     } else {
-      await updateProduct(data).then((res) => {
+      await addProduct(data).then((res) => {
         history.push("/admin/product-manager");
       });
     }
@@ -170,8 +144,6 @@ export default function EditProduct(props) {
               label="Tên sản phẩm"
               variant="outlined"
               style={{ width: "100%" }}
-              key={product?.name}
-              defaultValue={product?.name}
               onChange={handleChangeTitle}
             />
           </Grid>

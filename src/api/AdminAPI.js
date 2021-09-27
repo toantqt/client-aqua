@@ -7,8 +7,8 @@ export const covertDate = (date) => {
   return moment(date).format("DD/MM/YYYY");
 };
 
-const url = "https://truc-anh.herokuapp.com/api";
-// const url = "http://localhost:6699/api";
+// const url = "https://truc-anh.herokuapp.com/api";
+const url = "http://localhost:6699/api";
 
 const headers = { Authorization: `${getAccessToken()}` };
 export const login = async (data) => {
@@ -426,6 +426,151 @@ export const deleteProduct = async (data) => {
       return res.data;
     })
     .catch((error) => {
+      return error.response;
+    });
+};
+
+export const updateProduct = async (data) => {
+  const formData = new FormData();
+  if (data.image.file) {
+    formData.append("image", data.image.file);
+  } else {
+    formData.append("image", JSON.stringify(data.image));
+  }
+  formData.append("productID", data.productID);
+  formData.append("subCategoryID", data.subCategoryID);
+  formData.append("name", data.name);
+  formData.append("ingredient", data.ingredient);
+  formData.append("uses", data.uses);
+  formData.append("dosage", data.dosage);
+  formData.append("highlight", data.highlight);
+
+  return await axios
+    .post(`${url}/update-product`, formData, {
+      headers: headers,
+    })
+    .then((res) => {
+      console.log(res);
+      return res.data;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error.response;
+    });
+};
+
+export const addProduct = async (data) => {
+  const formData = new FormData();
+
+  formData.append("image", data.image.file);
+
+  formData.append("categoryID", data.categoryID);
+  formData.append("subCategoryID", data.subCategoryID);
+  formData.append("name", data.name);
+  formData.append("ingredient", data.ingredient);
+  formData.append("uses", data.uses);
+  formData.append("dosage", data.dosage);
+  formData.append("highlight", data.highlight);
+
+  return await axios
+    .post(`${url}/add-product`, formData, {
+      headers: headers,
+    })
+    .then((res) => {
+      console.log(res);
+      return res.data;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error.response;
+    });
+};
+
+export const addNews = async (data) => {
+  console.log(data);
+  const formData = new FormData();
+
+  for (let i = 0; i < data.totalContent; i++) {
+    let title = "listsImage" + i;
+    const arrImg = data.listImage.filter((e) => {
+      return e.list === i + 1;
+    });
+    for (let img of arrImg) {
+      formData.append(title, img.image);
+    }
+  }
+
+  formData.append("thumbnail", data.thumbnail.file);
+
+  formData.append("categoryID", data.categoryID);
+  formData.append("subCategoryID", data.subCategoryID);
+  formData.append("title", data.mainTitle);
+  formData.append("listsContent", JSON.stringify(data.listsContent));
+  formData.append("author", data.author);
+  formData.append("totalContent", data.totalContent);
+
+  return await axios
+    .post(`${url}/add-news`, formData, {
+      headers: headers,
+    })
+    .then((res) => {
+      console.log(res);
+      return res.data;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error.response;
+    });
+};
+
+export const getNewsEdit = async (id) => {
+  return await axios
+    .get(`${url}/get-news-edit/${id}`, {
+      headers: headers,
+    })
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const updateNews = async (data) => {
+  const formData = new FormData();
+
+  for (let i = 0; i < data.totalContent; i++) {
+    let title = "listsImage" + i;
+    const arrImg = data.listImage.filter((e) => {
+      return e.list === i + 1;
+    });
+    for (let img of arrImg) {
+      formData.append(title, JSON.stringify(img.image));
+    }
+  }
+  if (data.thumbnail.file) {
+    formData.append("thumbnail", data.thumbnail.file);
+  } else {
+    formData.append("thumbnail", JSON.stringify(data.thumbnail));
+  }
+
+  formData.append("newsID", data.newsID);
+  formData.append("subCategoryID", data.subCategoryID);
+  formData.append("title", data.title);
+  formData.append("listsContent", JSON.stringify(data.listsContent));
+  formData.append("author", data.author);
+  formData.append("totalContent", data.totalContent);
+
+  return await axios
+    .post(`${url}/update-news`, formData, {
+      headers: headers,
+    })
+    .then((res) => {
+      console.log(res);
+      return res.data;
+    })
+    .catch((error) => {
+      console.log(error);
       return error.response;
     });
 };

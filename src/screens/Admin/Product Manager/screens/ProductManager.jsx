@@ -115,10 +115,10 @@ export default function ProductManager(props) {
   };
 
   const handleClickAdd = () => {
-    // history.push({
-    //   pathname: AdminSlug.createNews,
-    //   search: `?q=${slug}`,
-    // });
+    history.push({
+      pathname: AdminSlug.createProduct,
+      search: `?id=${categoryID}`,
+    });
   };
 
   const handleClickDelete = (id) => {
@@ -151,7 +151,7 @@ export default function ProductManager(props) {
   return (
     <Grid>
       <div className="header-title mb-3">
-        <span>Quản Lý sản phẩm: () </span>
+        <span>Quản Lý sản phẩm: ({product.length}) </span>
         <Button
           variant="contained"
           color="primary"

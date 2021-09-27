@@ -14,6 +14,8 @@ import CreateNews from "../screens/Admin/Create News/screens/CreateNews";
 import InforManager from "../screens/Admin/Infor Manager/screens/InforManager";
 import ProductManager from "../screens/Admin/Product Manager/screens/ProductManager";
 import EditProduct from "../screens/Admin/Product Manager/screens/EditProduct";
+import CreateProduct from "../screens/Admin/Product Manager/screens/CreateProduct";
+import EditNews from "../screens/Admin/Create News/screens/EditNews";
 const AdminRoutes = (props) => {
   const handleLoading = props.handleLoading;
   return (
@@ -120,6 +122,22 @@ const AdminRoutes = (props) => {
         path={adminSlug.editProduct}
         render={(props) => (
           <EditProduct {...props} handleLoading={handleLoading} />
+        )}
+      ></Route>
+
+      <Route
+        exact
+        path={adminSlug.createProduct}
+        render={(props) => (
+          <CreateProduct {...props} handleLoading={handleLoading} />
+        )}
+      ></Route>
+
+      <Route
+        exact
+        path={adminSlug.editNews}
+        render={(props) => (
+          <EditNews {...props} handleLoading={handleLoading} />
         )}
       ></Route>
     </>

@@ -110,9 +110,9 @@ export default function NewsManager(props) {
             <IconButton
               aria-label="delete"
               className="btn-action btn-a-2"
-              //   onClick={() => {
-              //     handleClickEdit(action.row?.action?._id);
-              //   }}
+              onClick={() => {
+                handleClickEdit(action.row?.action?._id);
+              }}
             >
               <EditIcon />
             </IconButton>
@@ -162,10 +162,19 @@ export default function NewsManager(props) {
     });
   };
 
+  const handleClickEdit = (id) => {
+    history.push({
+      pathname: AdminSlug.editNews,
+      search: `?id=${id}`,
+    });
+  };
+
   return (
     <Grid>
       <div className="header-title mb-3">
-        <span>Quản Lý {categoryName}: () </span>
+        <span>
+          Quản Lý {categoryName}: ({news.length}){" "}
+        </span>
         <Button
           variant="contained"
           color="primary"
