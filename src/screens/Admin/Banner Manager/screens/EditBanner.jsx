@@ -16,6 +16,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import TextField from "@material-ui/core/TextField";
 
 export default function BannerManager(props) {
+  const history = useHistory();
   const search = queryString.parse(props.location.search);
   const bannerID = search.id;
   const [banner, setBanner] = useState();
@@ -87,7 +88,7 @@ export default function BannerManager(props) {
       alert("Xin vui lòng điền đầy đủ thông tin");
     } else {
       await updateBanner(data).then((res) => {
-        console.log(res.data);
+        history.push(AdminSlug.bannerManager);
       });
     }
   };

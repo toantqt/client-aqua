@@ -74,7 +74,7 @@ export default function HomePage() {
       </Grid>
 
       <BannerHomeComponent
-        banner={banner4}
+        banner={banner3}
         title="Chúng tôi dẫn đầu trong
         “Quy trình nuôi tôm sạch”"
       />
