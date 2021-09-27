@@ -16,6 +16,7 @@ import ProductManager from "../screens/Admin/Product Manager/screens/ProductMana
 import EditProduct from "../screens/Admin/Product Manager/screens/EditProduct";
 import CreateProduct from "../screens/Admin/Product Manager/screens/CreateProduct";
 import EditNews from "../screens/Admin/Create News/screens/EditNews";
+import AddBanner from "../screens/Admin/Banner Manager/screens/AddBanner";
 const AdminRoutes = (props) => {
   const handleLoading = props.handleLoading;
   return (
@@ -25,6 +26,12 @@ const AdminRoutes = (props) => {
           exact
           path={adminSlug.bannerManager}
           render={() => <BannerManager {...props} />}
+        ></Route>
+
+        <Route
+          exact
+          path={adminSlug.addBanner}
+          render={() => <AddBanner {...props} />}
         ></Route>
         <Route
           exact

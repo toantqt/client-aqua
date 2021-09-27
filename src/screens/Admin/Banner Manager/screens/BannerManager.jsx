@@ -152,10 +152,27 @@ export default function BannerManager(props) {
       };
     });
 
+  const handleClickAdd = () => {
+    history.push(AdminSlug.addBanner);
+  };
+
   return (
     <Grid>
       <div className="header-title mb-3">
         <span>Quản Lý Banner: ({banner.length}) </span>
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          startIcon={<EditIcon />}
+          style={{
+            textTransform: "none",
+            float: "right",
+          }}
+          onClick={handleClickAdd}
+        >
+          Thêm banner mới
+        </Button>
       </div>
       <div style={{ width: "30%" }} className="mb-3">
         <SelectCategory

@@ -1,6 +1,7 @@
 export default {
   bannerManager: "/admin/banner-manager",
   editBanner: "/admin/edit-banner",
+  addBanner: "/admin/add-banner",
   categoryManager: "/admin/category-manager",
   editCategory: "/admin/edit-category",
 

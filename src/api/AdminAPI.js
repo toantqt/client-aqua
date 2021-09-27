@@ -574,3 +574,24 @@ export const updateNews = async (data) => {
       return error.response;
     });
 };
+
+export const addBanner = async (data) => {
+  const formData = new FormData();
+  formData.append("banner", data.banner.file);
+  formData.append("categoryID", data.categoryID);
+  formData.append("index", data.index);
+  formData.append("display", data.display);
+
+  return await axios
+    .post(`${url}/add-banner`, formData, {
+      headers: headers,
+    })
+    .then((res) => {
+      console.log(res);
+      return res.data;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error.response;
+    });
+};
