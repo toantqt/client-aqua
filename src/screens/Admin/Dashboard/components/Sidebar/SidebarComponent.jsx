@@ -243,9 +243,7 @@ export default function SideBarComponent(props) {
 
       <ListItem
         button
-        onClick={() =>
-          handleClickSlug("categoryManager", AdminSlug.categoryManager)
-        }
+        onClick={() => handleClickSlug("contact", AdminSlug.categoryManager)}
       >
         <ListItemIcon>
           <ContactSupportIcon />

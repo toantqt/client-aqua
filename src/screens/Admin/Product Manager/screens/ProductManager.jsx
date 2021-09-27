@@ -33,7 +33,6 @@ export default function ProductManager(props) {
   const [reload, setReload] = useState(false);
 
   useEffect(async () => {
-    window.scrollTo(0, 0);
     props.handleLoading(true);
     const slug = "san-pham";
     await getCategoryNews(slug).then((res) => {

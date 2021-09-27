@@ -20,4 +20,6 @@ export default {
   productManager: "/admin/product-manager",
   editProduct: "/admin/edit-product",
   createProduct: "/admin/create-product",
+
+  contact: "/admin/contact-manager",
 };
