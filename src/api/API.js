@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const url = "https://truc-anh.herokuapp.com/api";
-// const url = "http://localhost:6699/api";
+// const url = "https://truc-anh.herokuapp.com/api";
+const url = "http://localhost:6699/api";
 
 export const getHomeBanner = async (slug) => {
   return await axios

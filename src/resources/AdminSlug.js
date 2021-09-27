@@ -21,5 +21,6 @@ export default {
   editProduct: "/admin/edit-product",
   createProduct: "/admin/create-product",
 
-  contact: "/admin/contact-manager",
+  contactManager: "/admin/contact-manager",
+  addContact: "/admin/add-contact",
 };

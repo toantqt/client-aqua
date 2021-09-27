@@ -164,7 +164,7 @@ export default function EditProduct(props) {
               <></>
             )}
           </Grid>
-          <Grid item lg={6}>
+          <Grid item lg={8}>
             <TextField
               id="outlined-basic"
               label="Tên sản phẩm"

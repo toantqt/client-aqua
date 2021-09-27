@@ -7,8 +7,8 @@ export const covertDate = (date) => {
   return moment(date).format("DD/MM/YYYY");
 };
 
-const url = "https://truc-anh.herokuapp.com/api";
-// const url = "http://localhost:6699/api";
+// const url = "https://truc-anh.herokuapp.com/api";
+const url = "http://localhost:6699/api";
 
 const headers = { Authorization: `${getAccessToken()}` };
 export const login = async (data) => {
@@ -584,6 +584,32 @@ export const addBanner = async (data) => {
 
   return await axios
     .post(`${url}/add-banner`, formData, {
+      headers: headers,
+    })
+    .then((res) => {
+      console.log(res);
+      return res.data;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error.response;
+    });
+};
+
+export const addContact = async (data) => {
+  const formData = new FormData();
+
+  if (data.image.file) {
+    formData.append("image", data.image.file);
+  }
+  formData.append("name", data.name);
+  formData.append("address", data.address);
+  formData.append("phoneNumber", data.phoneNumber);
+  formData.append("email", data.email);
+  formData.append("type", data.type);
+
+  return await axios
+    .post(`${url}/add-contact`, formData, {
       headers: headers,
     })
     .then((res) => {

@@ -419,4 +419,9 @@
   #product .wrap-product .product-main-title {
     margin-bottom: 2rem !important;
   }
+  #home-banner {
+    width: 100%;
+    height: 500px;
+    position: relative;
+  }
 }

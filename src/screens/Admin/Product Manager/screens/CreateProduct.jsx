@@ -138,7 +138,7 @@ export default function CreateProduct(props) {
               <></>
             )}
           </Grid>
-          <Grid item lg={6}>
+          <Grid item lg={8}>
             <TextField
               id="outlined-basic"
               label="Tên sản phẩm"
@@ -147,7 +147,6 @@ export default function CreateProduct(props) {
               onChange={handleChangeTitle}
             />
           </Grid>
-
           <Grid item lg={12}>
             <label>Hình ảnh</label>
           </Grid>

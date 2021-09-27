@@ -12,6 +12,7 @@ export default function TableComponent(props) {
           pageSize={10}
           disableColumnMenu={true}
           rowHeight={props?.rowHeight}
+          justify="center"
         />
       </div>
     </Grid>

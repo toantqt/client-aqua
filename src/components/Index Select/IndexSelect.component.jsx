@@ -17,11 +17,14 @@ const useStyles = makeStyles({
 });
 
 export default function SelectIndex(props) {
+  console.log(props);
   const classes = useStyles();
   const [defaultValue, setDefaultValue] = useState({
-    index: "1",
+    index: props?.index?.toString(),
   });
   const [select, setSelect] = useState([]);
+
+  console.log(defaultValue);
 
   const handeChange = (event, value) => {
     if (value) {
@@ -32,8 +35,8 @@ export default function SelectIndex(props) {
   };
   useEffect(() => {
     let data;
-    if (props.display) {
-      setDefaultValue({ index: props?.index });
+    if (props.display && props?.index) {
+      setDefaultValue({ index: props?.index.toString() });
       if (props.display == "home") {
         data = [{ index: "1" }, { index: "2" }, { index: "3" }];
         setSelect(data);
@@ -43,6 +46,8 @@ export default function SelectIndex(props) {
       }
     }
   }, [props.display]);
+
+  console.log(defaultValue);
 
   return (
     <Autocomplete

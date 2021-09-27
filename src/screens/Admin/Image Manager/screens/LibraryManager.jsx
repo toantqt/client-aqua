@@ -117,7 +117,7 @@ export default function LibraryManager(props) {
   if (type === "image") {
     lists = image.map((e, index) => {
       return (
-        <Grid item lg={3} md={3} xs={12}>
+        <Grid item xl={2} lg={3} md={3} xs={12}>
           <SimpleReactLightbox>
             <SRLWrapper>
               <Grid className="wrap-news">
@@ -170,7 +170,7 @@ export default function LibraryManager(props) {
   } else {
     lists = video.map((e, index) => {
       return (
-        <Grid item lg={3} md={3} xs={12}>
+        <Grid item xl={2} lg={3} md={3} xs={12}>
           <Grid className="wrap-news">
             <div
               className="news"

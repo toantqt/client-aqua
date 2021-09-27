@@ -200,10 +200,9 @@ export default function NewsManager(props) {
       ) : (
         <></>
       )}
-
-      <div>
+      <Grid>
         <TableComponent columns={columns} rows={rows} />
-      </div>
+      </Grid>
 
       <ModalConfirmComponent
         open={openConfirm}

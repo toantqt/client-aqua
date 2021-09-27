@@ -22,7 +22,7 @@ export default function BannerManager(props) {
   const [banner, setBanner] = useState();
   const [defaultCatgory, setDefaultCategory] = useState();
   const [category, setCategory] = useState([]);
-  const [categoryID, setCategoryID] = useState("");
+  const [categoryID, setCategoryID] = useState();
   const [index, setIndex] = useState("");
   const [imagePreview, setImagePreview] = useState();
   useEffect(async () => {
@@ -115,16 +115,20 @@ export default function BannerManager(props) {
               <></>
             )}
           </Grid>
-          <Grid item lg={3}>
+          <Grid item lg={4}>
             <label>Vị trí</label>
-            <SelectIndex
-              display={banner?.display}
-              index={banner?.index}
-              handleChange={handleChangeIndex}
-            />
+            {index ? (
+              <SelectIndex
+                display={banner?.display}
+                index={banner?.index}
+                handleChange={handleChangeIndex}
+              />
+            ) : (
+              <></>
+            )}
           </Grid>
 
-          <Grid item lg={12}>
+          <Grid item lg={8}>
             <label>Hình ảnh</label>
             <ImagePreivewsComponent
               url={imagePreview}

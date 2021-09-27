@@ -69,24 +69,33 @@ export default function EditImage(props) {
       <div className="header-title mb-3">
         <span>Cập nhật hình ảnh </span>
       </div>
-      <div className="mt-4 mb-3">
-        <TextField
-          id="outlined-basic"
-          label="Tiêu đề"
-          variant="outlined"
-          style={{ width: "100%" }}
-          key={titleDefault}
-          defaultValue={titleDefault}
-          onChange={handleChangeTitle}
-        />
-      </div>
-      <div className="mt-3">
-        <label style={{ fontSize: "16px", fontWeight: "500" }}>Hình ảnh:</label>
-        <ImagePreivewsComponent
-          url={image}
-          handleChangeImage={handleChangeImage}
-        />
-      </div>
+      <Grid container spacing={1}>
+        <Grid item lg={12} md={12}>
+          <div className="mt-4 mb-3">
+            <TextField
+              id="outlined-basic"
+              label="Tiêu đề"
+              variant="outlined"
+              style={{ width: "100%" }}
+              key={titleDefault}
+              defaultValue={titleDefault}
+              onChange={handleChangeTitle}
+            />
+          </div>
+        </Grid>
+        <Grid item lg={8}>
+          <div className="mt-3">
+            <label style={{ fontSize: "16px", fontWeight: "500" }}>
+              Hình ảnh:
+            </label>
+            <ImagePreivewsComponent
+              url={image}
+              handleChangeImage={handleChangeImage}
+            />
+          </div>
+        </Grid>
+      </Grid>
+
       <div style={{ marginTop: "70px", bottom: 0 }}>
         <Button
           variant="contained"

@@ -17,6 +17,8 @@ import EditProduct from "../screens/Admin/Product Manager/screens/EditProduct";
 import CreateProduct from "../screens/Admin/Product Manager/screens/CreateProduct";
 import EditNews from "../screens/Admin/Create News/screens/EditNews";
 import AddBanner from "../screens/Admin/Banner Manager/screens/AddBanner";
+import ContactManager from "../screens/Admin/Contact Manager/screens/ContactManager";
+import AddContact from "../screens/Admin/Contact Manager/screens/AddContact";
 const AdminRoutes = (props) => {
   const handleLoading = props.handleLoading;
   return (
@@ -145,6 +147,22 @@ const AdminRoutes = (props) => {
         path={adminSlug.editNews}
         render={(props) => (
           <EditNews {...props} handleLoading={handleLoading} />
+        )}
+      ></Route>
+
+      <Route
+        exact
+        path={adminSlug.contactManager}
+        render={(props) => (
+          <ContactManager {...props} handleLoading={handleLoading} />
+        )}
+      ></Route>
+
+      <Route
+        exact
+        path={adminSlug.addContact}
+        render={(props) => (
+          <AddContact {...props} handleLoading={handleLoading} />
         )}
       ></Route>
     </>
