@@ -34,6 +34,7 @@ export default function CreateNews(props) {
 
   useEffect(async () => {
     if (slug) {
+      props.handleLoading(true);
       await getCategoryNews(slug).then((res) => {
         console.log(res.data);
         setMainCategoryID(res.data.categoryID);

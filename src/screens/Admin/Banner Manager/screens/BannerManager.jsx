@@ -31,8 +31,8 @@ export default function BannerManager(props) {
   const [categorySelect, setCategorySelect] = useState("");
 
   useEffect(async () => {
+    props.handleLoading(true);
     await getAllBanner().then((res) => {
-      // console.log(res);
       setBanner(res.data);
     });
     await getAllCategory().then((result) => {

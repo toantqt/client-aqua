@@ -60,10 +60,13 @@ export default function HomePage(props) {
   const handleLoading = (status) => {
     setShowLoading(status);
   };
-
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [showLoading]);
 
   const drawer = (
     <div>

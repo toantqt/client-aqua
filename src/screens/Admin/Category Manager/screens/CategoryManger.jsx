@@ -36,6 +36,7 @@ export default function CategoryManager(props) {
   const [categoryName, setCategoryName] = useState("");
 
   useEffect(async () => {
+    props.handleLoading(true);
     await getAllCategory().then((result) => {
       setCategory(result.data);
     });

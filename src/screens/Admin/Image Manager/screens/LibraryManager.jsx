@@ -33,6 +33,7 @@ export default function LibraryManager(props) {
   const [openConfirmVideo, setOpenConfirmVideo] = useState(false);
   const [videoID, setVideoID] = useState("");
   useEffect(async () => {
+    props.handleLoading(true);
     if (type === "image") {
       await getImage().then((res) => {
         setImage(res.data);
