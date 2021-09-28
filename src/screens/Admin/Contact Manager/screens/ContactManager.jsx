@@ -8,6 +8,7 @@ import {
   covertDate,
   deleteBanner,
   getAllCategory,
+  deleteContact,
 } from "../../../../api/AdminAPI";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import EditIcon from "@material-ui/icons/Edit";
@@ -26,9 +27,12 @@ export default function ContactManager(props) {
   const [openConfirm, setOpenConfirm] = useState(false);
   const [reload, setReload] = useState(false);
   const [contact, setContact] = useState([]);
+  const [selectID, setSelectID] = useState("");
+  const [type, setType] = useState();
 
   useEffect(async () => {
     props.handleLoading(true);
+    setContact([]);
     await getInformation().then((res) => {
       for (let item of res.data.offices) {
         setContact((contact) => [...contact, { contact: item, type: 1 }]);
@@ -40,10 +44,30 @@ export default function ContactManager(props) {
     props.handleLoading(false);
   }, [reload]);
 
-  const handleDeleteBanner = async () => {};
+  const handleClickDelete = async (data) => {
+    setSelectID(data.contact._id);
+    setType(data.type);
+    setOpenConfirm(true);
+  };
 
   const handleClickEdit = (id) => {
     // history.push({ pathname: AdminSlug.editBanner, search: `?id=${id}` });
+  };
+
+  const handleCloseConfirm = () => {
+    setSelectID("");
+    setOpenConfirm(false);
+  };
+  const handleDeleteContact = async () => {
+    const data = {
+      contactID: selectID,
+      type: type,
+    };
+    props.handleLoading(true);
+    await deleteContact(data).then((res) => {
+      handleCloseConfirm();
+      setReload(!reload);
+    });
   };
 
   const columns = [
@@ -73,9 +97,9 @@ export default function ContactManager(props) {
             <IconButton
               aria-label="delete"
               className="btn-action btn-a-3"
-              //   onClick={() => {
-              //     handleClickDelete(action.row?.action?._id);
-              //   }}
+              onClick={() => {
+                handleClickDelete(action.row.action);
+              }}
             >
               <DeleteForeverIcon />
             </IconButton>
@@ -93,7 +117,7 @@ export default function ContactManager(props) {
       address: e.contact?.address,
       phoneNumber: e.contact?.phoneNumber,
       email: e.contact?.email,
-      action: e.banner,
+      action: e,
     };
   });
 
@@ -104,7 +128,7 @@ export default function ContactManager(props) {
   return (
     <Grid>
       <div className="header-title mb-3">
-        <span>Quản Lý Liên Hệ: ({banner.length}) </span>
+        <span>Quản Lý Liên Hệ: ({contact.length}) </span>
         <Button
           variant="contained"
           color="primary"
@@ -122,12 +146,12 @@ export default function ContactManager(props) {
 
       <div>
         <TableComponent columns={columns} rows={rows} />
-        {/* <ModalConfirmComponent
+        <ModalConfirmComponent
           open={openConfirm}
           handleClose={handleCloseConfirm}
-          title="Xác nhận xóa banner"
-          handleDelete={handleDeleteBanner}
-        /> */}
+          title="Xác nhận xóa liên hệ"
+          handleDelete={handleDeleteContact}
+        />
       </div>
     </Grid>
   );

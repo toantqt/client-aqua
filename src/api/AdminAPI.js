@@ -621,3 +621,18 @@ export const addContact = async (data) => {
       return error.response;
     });
 };
+
+export const deleteContact = async (data) => {
+  return await axios
+    .post(`${url}/delete-contact`, data, {
+      headers: headers,
+    })
+    .then((res) => {
+      console.log(res);
+      return res.data;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error.response;
+    });
+};
