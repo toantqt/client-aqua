@@ -31,6 +31,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.admin-title {
+  height: 125px !important;
+}
 
 .title span {
   font-size: 18px;

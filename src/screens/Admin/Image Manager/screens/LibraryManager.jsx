@@ -139,7 +139,10 @@ export default function LibraryManager(props) {
                 </div>
               </Grid>
 
-              <div className="title">
+              <div
+                className="title admin-title"
+                style={{ height: "120px !important" }}
+              >
                 <span>{e?.title}</span>
                 <div style={{ float: "right" }}>
                   <IconButton
@@ -197,7 +200,10 @@ export default function LibraryManager(props) {
                 }}
               ></div>
             </div>
-            <div className="title" style={{ width: "120px !important" }}>
+            <div
+              className="title admin-title"
+              style={{ width: "120px !important" }}
+            >
               <span>{e?.title}</span>
               <div style={{ float: "right" }}>
                 <IconButton

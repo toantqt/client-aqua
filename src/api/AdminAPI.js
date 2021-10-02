@@ -7,8 +7,8 @@ export const covertDate = (date) => {
   return moment(date).format("DD/MM/YYYY");
 };
 
-const url = "https://truc-anh.herokuapp.com/api";
-// const url = "http://localhost:6699/api";
+// const url = "https://truc-anh.herokuapp.com/api";
+const url = "http://localhost:6699/api";
 
 const headers = { Authorization: `${getAccessToken()}` };
 export const login = async (data) => {
@@ -545,7 +545,12 @@ export const updateNews = async (data) => {
       return e.list === i + 1;
     });
     for (let img of arrImg) {
-      formData.append(title, JSON.stringify(img.image));
+      console.log(img);
+      if (img.image.url) {
+        formData.append(title, JSON.stringify(img.image));
+      } else {
+        formData.append(title, img.image);
+      }
     }
   }
   if (data.thumbnail.file) {
