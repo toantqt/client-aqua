@@ -15,6 +15,7 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Library from "../Library/Library";
+import Cookies from "universal-cookie";
 const useTabStyles = makeStyles({
   root: {
     justifyContent: "center",
@@ -25,6 +26,7 @@ const useTabStyles = makeStyles({
 });
 const News = (props) => {
   const classes = useTabStyles();
+  const cookies = new Cookies();
   const history = useHistory();
   const [value, setValue] = React.useState(0);
   const [subCategory, setSubCategory] = useState([]);
@@ -50,9 +52,27 @@ const News = (props) => {
   useEffect(() => {
     setType(1);
     if (props.category) {
+      props.handleLoading(true);
       if (props.category.subCategory.length != 0) {
-        setSubCategoryID(props.category.subCategory[0]?._id);
-        setActive(props.category.subCategory[0]?.name);
+        let active = cookies.get("active");
+        let flag = false;
+        let value;
+        if (active) {
+          const checkActive = props.category.subCategory.findIndex((e) => {
+            return e.name === active;
+          });
+          if (checkActive !== -1) {
+            setValue(checkActive);
+            setSubCategoryID(props.category.subCategory[checkActive]._id);
+          } else {
+            cookies.remove("active");
+            setSubCategoryID(props.category.subCategory[0]?._id);
+            setValue(0);
+          }
+        } else {
+          setSubCategoryID(props.category.subCategory[0]?._id);
+          setValue(0);
+        }
       } else {
         setSubCategoryID("undefined");
       }
@@ -61,6 +81,8 @@ const News = (props) => {
       props.handleLoading(false);
     }
   }, [props.category]);
+
+  console.log(active);
   useEffect(async () => {
     setNews([]);
 
@@ -85,6 +107,7 @@ const News = (props) => {
   }, [categoryID, subCategoryID, page, type]);
 
   const handleClick = (name, subCategoryID, type) => {
+    cookies.set("active", name, { path: "/" });
     setActive(name);
     setSubCategoryID(subCategoryID);
     setNews([]);
