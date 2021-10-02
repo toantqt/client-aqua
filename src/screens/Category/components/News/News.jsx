@@ -55,8 +55,14 @@ const News = (props) => {
       props.handleLoading(true);
       if (props.category.subCategory.length != 0) {
         let active = cookies.get("active");
-        let flag = false;
-        let value;
+        console.log(active);
+        if (active === "Hình ảnh") {
+          console.log("hinh anh");
+          setType(2);
+        } else if (active === "Video") {
+          setType(3);
+        }
+
         if (active) {
           const checkActive = props.category.subCategory.findIndex((e) => {
             return e.name === active;
@@ -66,6 +72,7 @@ const News = (props) => {
             setSubCategoryID(props.category.subCategory[checkActive]._id);
           } else {
             cookies.remove("active");
+            setType(1);
             setSubCategoryID(props.category.subCategory[0]?._id);
             setValue(0);
           }
@@ -81,6 +88,8 @@ const News = (props) => {
       props.handleLoading(false);
     }
   }, [props.category]);
+
+  console.log(type);
 
   useEffect(async () => {
     setNews([]);
