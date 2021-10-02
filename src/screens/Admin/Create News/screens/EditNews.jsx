@@ -125,7 +125,8 @@ export default function EditNews(props) {
     console.log(data);
     if (
       (data.subCategoryID === "" && subCategory.length != 0) ||
-      data.title === ""
+      data.title === "" ||
+      !data.thumbnail
     ) {
       alert("Xin vui lòng điền đầy đủ thông tin");
     } else {

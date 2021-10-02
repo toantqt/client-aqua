@@ -188,3 +188,14 @@ export const getHomeProduct = async () => {
       return error.response;
     });
 };
+
+export const getHomeNews = async () => {
+  return await axios
+    .get(`${url}/get-home-news`)
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
