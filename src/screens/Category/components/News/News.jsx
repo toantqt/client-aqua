@@ -82,10 +82,8 @@ const News = (props) => {
     }
   }, [props.category]);
 
-  console.log(active);
   useEffect(async () => {
     setNews([]);
-
     if (type != 2 && type != 3) {
       await getNewsCategory(categoryID, subCategoryID, page).then((res) => {
         console.log("data", res.data);

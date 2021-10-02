@@ -94,7 +94,10 @@ export default function CreateNews(props) {
       props.handleLoading(true);
       await addNews(data).then((res) => {
         props.handleLoading(false);
-        history.push(AdminSlug.newsManager);
+        history.push({
+          pathname: AdminSlug.newsManager,
+          search: `?q=${slug}`,
+        });
       });
     }
   };

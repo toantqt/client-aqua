@@ -197,7 +197,7 @@ export default function LibraryManager(props) {
                 }}
               ></div>
             </div>
-            <div className="title">
+            <div className="title" style={{ width: "120px !important" }}>
               <span>{e?.title}</span>
               <div style={{ float: "right" }}>
                 <IconButton
