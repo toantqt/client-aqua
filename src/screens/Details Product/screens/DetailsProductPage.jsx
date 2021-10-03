@@ -18,6 +18,8 @@ const DetailsProductPage = (props) => {
     });
   }, [productID]);
 
+  console.log(product);
+
   return (
     <Grid>
       <HeaderComponent />

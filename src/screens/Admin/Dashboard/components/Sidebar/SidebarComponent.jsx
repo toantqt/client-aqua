@@ -169,7 +169,7 @@ export default function SideBarComponent(props) {
       <ListItem
         button
         onClick={() =>
-          handleClickSlug("productManager", AdminSlug.productManager)
+          handleClickSlugLibrary("san-pham", AdminSlug.productManager)
         }
       >
         <ListItemIcon>
@@ -181,7 +181,7 @@ export default function SideBarComponent(props) {
       <ListItem
         button
         onClick={() =>
-          handleClickSlug("categoryManager", AdminSlug.categoryManager)
+          handleClickSlugLibrary("tom-giong", AdminSlug.productManager)
         }
       >
         <ListItemIcon>

@@ -120,6 +120,12 @@ export default function CreateProduct(props) {
   const handleClickHighlight = () => {
     setHighlight(!highlight);
   };
+  const handlePastedText = (text, html, callback) => {
+    const modifiedHtml = html.replace(
+      /<p class=MsoListParagraph[\s\S]*?>·([\s\S]*?)<\/p>/g,
+      "<li>$1</li>"
+    );
+  };
   return (
     <Grid>
       <div className="header-title mb-3">
@@ -169,6 +175,7 @@ export default function CreateProduct(props) {
                 wrapperClassName="wrapper-class"
                 editorClassName="editor-class"
                 toolbarClassName="toolbar-class"
+                handlePastedText={handlePastedText}
               />
             </div>
             <div className="news-editor mt-3">
@@ -182,6 +189,7 @@ export default function CreateProduct(props) {
                 wrapperClassName="wrapper-class"
                 editorClassName="editor-class"
                 toolbarClassName="toolbar-class"
+                handlePastedText={handlePastedText}
               />
             </div>
             <div className="news-editor mt-3">
@@ -195,6 +203,7 @@ export default function CreateProduct(props) {
                 wrapperClassName="wrapper-class"
                 editorClassName="editor-class"
                 toolbarClassName="toolbar-class"
+                handlePastedText={handlePastedText}
               />
             </div>
           </Grid>

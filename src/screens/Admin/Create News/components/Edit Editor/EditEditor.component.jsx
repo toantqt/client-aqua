@@ -65,6 +65,12 @@ export default function EditEditorComponent(props) {
     setDisplay(value);
     props.handleChangeDisplay(value, props.content - 1);
   };
+  const handlePastedText = (text, html, callback) => {
+    const modifiedHtml = html.replace(
+      /<p class=MsoListParagraph[\s\S]*?>·([\s\S]*?)<\/p>/g,
+      "<li>$1</li>"
+    );
+  };
 
   const listImagePreview = imagePreview.map((e, index) => {
     if (e.type !== "video/mp4") {
@@ -113,6 +119,7 @@ export default function EditEditorComponent(props) {
           wrapperClassName="wrapper-class"
           editorClassName="editor-class"
           toolbarClassName="toolbar-class"
+          handlePastedText={handlePastedText}
         />
       </div>
       <div className="news-image mt-3">

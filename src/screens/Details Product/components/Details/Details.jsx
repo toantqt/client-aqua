@@ -12,37 +12,45 @@ const Details = (props) => {
             title={props?.product?.product?.name}
           />
         </div>
+
         <div className="details-content">
-          <div className="details-name mb-3">
-            <span>{props?.product?.product?.name}</span>
-          </div>
-          <div>
-            <span className="details-title">THÀNH PHẦN:</span>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: props?.product?.product?.ingredient,
-              }}
-              style={{ fontSize: "18px" }}
-            ></div>
-          </div>
-          <div>
-            <span className="details-title">CÔNG DỤNG:</span>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: props?.product?.product?.uses,
-              }}
-              style={{ fontSize: "18px" }}
-            ></div>
-          </div>
-          <div>
-            <span className="details-title">LIỀU LƯỢNG:</span>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: props?.product?.product?.dosage,
-              }}
-              style={{ fontSize: "18px" }}
-            ></div>
-          </div>
+          {props?.product?.category?.slug === "tom-giong" ? (
+            <></>
+          ) : (
+            <>
+              <div className="details-name mb-3">
+                <span>{props?.product?.product?.name}</span>
+              </div>
+              <div>
+                <span className="details-title">THÀNH PHẦN:</span>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: props?.product?.product?.ingredient,
+                  }}
+                  style={{ fontSize: "18px" }}
+                ></div>
+              </div>
+              <div>
+                <span className="details-title">CÔNG DỤNG:</span>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: props?.product?.product?.uses,
+                  }}
+                  style={{ fontSize: "18px" }}
+                ></div>
+              </div>
+              <div>
+                <span className="details-title">LIỀU LƯỢNG:</span>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: props?.product?.product?.dosage,
+                  }}
+                  style={{ fontSize: "18px" }}
+                ></div>
+              </div>
+            </>
+          )}
+
           <div className="details-btn">
             <a>
               {" "}

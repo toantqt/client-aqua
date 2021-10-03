@@ -42,12 +42,14 @@ export default function EditProduct(props) {
   const [editorState3, setEditorState3] = useState(EditorState.createEmpty());
   const [subCategorySelect, setSubCategorySelect] = useState("");
 
+  const [slug, setSlug] = useState("");
+
   useEffect(async () => {
-    const slug = "tin-tuc";
     props.handleLoading(true);
     await getDetailsProduct(productID).then((res) => {
       console.log(res.data);
       setProduct(res.data.product);
+      setSlug(res.data.category.slug);
       setCategoryID(res.data.category._id);
       setSubCategory(res.data.category.subCategory);
       setSubCategorySelect(res.data.product.subCategoryID);
@@ -138,13 +140,22 @@ export default function EditProduct(props) {
       alert("Xin vui lòng điền đầy đủ thông tin!");
     } else {
       await updateProduct(data).then((res) => {
-        history.push("/admin/product-manager");
+        history.push({
+          pathname: "/admin/product-manager",
+          search: `?q=${slug}`,
+        });
       });
     }
   };
 
   const handleClickHighlight = () => {
     setHighlight(!highlight);
+  };
+  const handlePastedText = (text, html, callback) => {
+    const modifiedHtml = html.replace(
+      /<p class=MsoListParagraph[\s\S]*?>·([\s\S]*?)<\/p>/g,
+      "<li>$1</li>"
+    );
   };
   return (
     <Grid>
@@ -198,6 +209,7 @@ export default function EditProduct(props) {
                 wrapperClassName="wrapper-class"
                 editorClassName="editor-class"
                 toolbarClassName="toolbar-class"
+                handlePastedText={handlePastedText}
               />
             </div>
             <div className="news-editor mt-3">
@@ -211,6 +223,7 @@ export default function EditProduct(props) {
                 wrapperClassName="wrapper-class"
                 editorClassName="editor-class"
                 toolbarClassName="toolbar-class"
+                handlePastedText={handlePastedText}
               />
             </div>
             <div className="news-editor mt-3">
@@ -224,6 +237,7 @@ export default function EditProduct(props) {
                 wrapperClassName="wrapper-class"
                 editorClassName="editor-class"
                 toolbarClassName="toolbar-class"
+                handlePastedText={handlePastedText}
               />
             </div>
           </Grid>

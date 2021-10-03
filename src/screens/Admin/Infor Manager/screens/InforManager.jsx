@@ -210,8 +210,14 @@ export default function InforManager(props) {
     };
 
     await updateIntroduce(data).then((res) => {
-        setReload(!reload)
+      setReload(!reload);
     });
+  };
+  const handlePastedText = (text, html, callback) => {
+    const modifiedHtml = html.replace(
+      /<p class=MsoListParagraph[\s\S]*?>·([\s\S]*?)<\/p>/g,
+      "<li>$1</li>"
+    );
   };
   return (
     <Grid>
@@ -241,6 +247,7 @@ export default function InforManager(props) {
             wrapperClassName="wrapper-class"
             editorClassName="editor-class"
             toolbarClassName="toolbar-class"
+            handlePastedText={handlePastedText}
           />
         </div>
         <div className="news-image mt-3">
@@ -276,6 +283,7 @@ export default function InforManager(props) {
             wrapperClassName="wrapper-class"
             editorClassName="editor-class"
             toolbarClassName="toolbar-class"
+            handlePastedText={handlePastedText}
           />
         </div>
         <div className="news-image mt-3">

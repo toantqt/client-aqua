@@ -21,7 +21,8 @@ import AdminSlug from "../../../../resources/AdminSlug";
 import ModalConfirmComponent from "../../../../components/Modal/ModalConfirm.component";
 export default function ProductManager(props) {
   const history = useHistory();
-
+  const search = queryString.parse(props.location.search);
+  const slug = search.q;
   const [product, setProduct] = useState([]);
   const [categoryName, setCategoryName] = useState("");
   const [subCategory, setSubCategory] = useState([]);
@@ -34,7 +35,6 @@ export default function ProductManager(props) {
 
   useEffect(async () => {
     props.handleLoading(true);
-    const slug = "san-pham";
     await getCategoryNews(slug).then((res) => {
       setCategoryID(res.data.categoryID);
       setSubCategory(res.data.subCategory);
@@ -44,7 +44,7 @@ export default function ProductManager(props) {
     });
 
     props.handleLoading(false);
-  }, [reload]);
+  }, [reload, slug]);
 
   const handleChangeCategory = (value) => {
     if (value !== "") {
@@ -151,7 +151,10 @@ export default function ProductManager(props) {
   return (
     <Grid>
       <div className="header-title mb-3">
-        <span>Quản Lý sản phẩm: ({product.length}) </span>
+        <span>
+          Quản Lý {slug === "san-pham" ? "sản phẩm" : "tôm giống"}: (
+          {product.length}){" "}
+        </span>
         <Button
           variant="contained"
           color="primary"
@@ -163,7 +166,7 @@ export default function ProductManager(props) {
           }}
           onClick={handleClickAdd}
         >
-          Thêm sản phẩm
+          Thêm {slug === "san-pham" ? "sản phẩm" : "tôm giống"}
         </Button>
       </div>
 
