@@ -17,7 +17,7 @@ const DetailsNews = (props) => {
           {e.library.map((el, index) => {
             if (el.type === "image") {
               return (
-                <div className="mt-2 mb-2">
+                <div className="mt-2 mb-2" title="Bấm vào để phóng to">
                   <SimpleReactLightbox>
                     <SRLWrapper>
                       <a href={el.url}>
