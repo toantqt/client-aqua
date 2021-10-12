@@ -113,7 +113,7 @@ export default function AddBanner(props) {
             <SelectIndex display={display} handleChange={handleChangeIndex} />
           </Grid>
 
-          <Grid item lg={8}>
+          <Grid item lg={12}>
             <label>Hình ảnh</label>
             <ImagePreivewsComponent
               url={imagePreview}

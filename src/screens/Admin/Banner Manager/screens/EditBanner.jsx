@@ -128,7 +128,7 @@ export default function BannerManager(props) {
             )}
           </Grid>
 
-          <Grid item lg={8}>
+          <Grid item lg={12}>
             <label>Hình ảnh</label>
             <ImagePreivewsComponent
               url={imagePreview}

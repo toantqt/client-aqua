@@ -45,11 +45,14 @@ export default function CreateProduct(props) {
   const [editorState3, setEditorState3] = useState(EditorState.createEmpty());
   const [subCategorySelect, setSubCategorySelect] = useState("");
 
+  const [type, setType] = useState("");
+
   useEffect(async () => {
     props.handleLoading(true);
     await getSubCategory(categoryID).then((res) => {
-      //   console.log(res.data);
+      console.log(res.data);
       setSubCategory(res.data.subCategory);
+      setType(res.data.slug);
       setDefaultSelect({ categoryName: "", _id: "" });
     });
     props.handleLoading(false);
@@ -154,59 +157,62 @@ export default function CreateProduct(props) {
             />
           </Grid>
           <Grid item lg={12}>
-            <label>Hình ảnh</label>
-          </Grid>
-          <div>
-            <ImagePreivewsComponent
-              url={imagePreview}
-              handleChangeImage={handleChangeImage}
-            />
-          </div>
-
-          <Grid item lg={12}>
-            <div className="news-editor mt-5">
-              <p>Thành phần</p>
-
-              <Editor
-                editorState={editorState1}
-                onEditorStateChange={(e) => {
-                  onEditorStateChange(e, 1);
-                }}
-                wrapperClassName="wrapper-class"
-                editorClassName="editor-class"
-                toolbarClassName="toolbar-class"
-                handlePastedText={handlePastedText}
-              />
-            </div>
             <div className="news-editor mt-3">
-              <p>Công dụng</p>
-
-              <Editor
-                editorState={editorState2}
-                onEditorStateChange={(e) => {
-                  onEditorStateChange(e, 2);
-                }}
-                wrapperClassName="wrapper-class"
-                editorClassName="editor-class"
-                toolbarClassName="toolbar-class"
-                handlePastedText={handlePastedText}
-              />
-            </div>
-            <div className="news-editor mt-3">
-              <p>Liều lượng</p>
-
-              <Editor
-                editorState={editorState3}
-                onEditorStateChange={(e) => {
-                  onEditorStateChange(e, 3);
-                }}
-                wrapperClassName="wrapper-class"
-                editorClassName="editor-class"
-                toolbarClassName="toolbar-class"
-                handlePastedText={handlePastedText}
+              <p>Hình ảnh:</p>
+              <ImagePreivewsComponent
+                url={imagePreview}
+                handleChangeImage={handleChangeImage}
               />
             </div>
           </Grid>
+          {type === "san-pham" ? (
+            <Grid item lg={12}>
+              <div className="news-editor mt-5">
+                <p>Thành phần</p>
+
+                <Editor
+                  editorState={editorState1}
+                  onEditorStateChange={(e) => {
+                    onEditorStateChange(e, 1);
+                  }}
+                  wrapperClassName="wrapper-class"
+                  editorClassName="editor-class"
+                  toolbarClassName="toolbar-class"
+                  handlePastedText={handlePastedText}
+                />
+              </div>
+              <div className="news-editor mt-3">
+                <p>Công dụng</p>
+
+                <Editor
+                  editorState={editorState2}
+                  onEditorStateChange={(e) => {
+                    onEditorStateChange(e, 2);
+                  }}
+                  wrapperClassName="wrapper-class"
+                  editorClassName="editor-class"
+                  toolbarClassName="toolbar-class"
+                  handlePastedText={handlePastedText}
+                />
+              </div>
+              <div className="news-editor mt-3">
+                <p>Liều lượng</p>
+
+                <Editor
+                  editorState={editorState3}
+                  onEditorStateChange={(e) => {
+                    onEditorStateChange(e, 3);
+                  }}
+                  wrapperClassName="wrapper-class"
+                  editorClassName="editor-class"
+                  toolbarClassName="toolbar-class"
+                  handlePastedText={handlePastedText}
+                />
+              </div>
+            </Grid>
+          ) : (
+            <></>
+          )}
         </Grid>
         <div className="news-editor mt-3">
           <p>Trạng thái</p>
