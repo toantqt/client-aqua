@@ -64,7 +64,7 @@ const LoginPage = () => {
       <div className="container-login">
         <Grid className="wrap">
           <div className="title-login ">
-            <img src={logo} alt="" width="45%" />
+            <img src={logo} alt="" width="69%" />
           </div>
 
           <div className="form-login mt-5">
