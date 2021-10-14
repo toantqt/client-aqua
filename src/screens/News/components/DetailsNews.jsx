@@ -21,16 +21,22 @@ const DetailsNews = (props) => {
                   <SimpleReactLightbox>
                     <SRLWrapper>
                       <a href={el.url}>
-                        <Image
-                          src={el.url}
-                          style={{
-                            objectFit: "cover",
-                            width: "100%",
-                            height: "500px",
-                            paddingTop: "none",
-                          }}
-                          imageStyle={{ width: "100%", height: "500px" }}
-                        />
+                        <div className="details-news-img">
+                          <Image
+                            src={el.url}
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              paddingTop: "none",
+                              objectFit: "cover",
+                            }}
+                            imageStyle={{
+                              width: "100%",
+                              height: "100%",
+                              objectFit: "cover",
+                            }}
+                          />
+                        </div>
                       </a>
                     </SRLWrapper>
                   </SimpleReactLightbox>
