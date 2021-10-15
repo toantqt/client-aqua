@@ -28,11 +28,7 @@ const ClientRoutes = (props) => {
           path={slug.office}
           render={() => <Office category={category} />}
         ></Route>
-        <Route
-          exact
-          path={slug.introduce}
-          render={(props) => <Introduce />}
-        ></Route>
+        <Route exact path={slug.introduce} render={() => <Introduce />}></Route>
 
         <Route
           exact

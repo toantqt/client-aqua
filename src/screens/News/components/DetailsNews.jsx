@@ -17,26 +17,20 @@ const DetailsNews = (props) => {
           {e.library.map((el, index) => {
             if (el.type === "image") {
               return (
-                <div className="mt-2 mb-2" title="Bấm vào để phóng to">
+                <div
+                  className="mt-5 mb-2"
+                  title="Bấm vào để phóng to"
+                  style={{ width: "80%", margin: "0 auto" }}
+                >
                   <SimpleReactLightbox>
                     <SRLWrapper>
                       <a href={el.url}>
-                        <div className="details-news-img">
-                          <Image
-                            src={el.url}
-                            style={{
-                              width: "100%",
-                              height: "100%",
-                              paddingTop: "none",
-                              objectFit: "cover",
-                            }}
-                            imageStyle={{
-                              width: "100%",
-                              height: "100%",
-                              objectFit: "cover",
-                            }}
-                          />
-                        </div>
+                        <img
+                          src={el.url}
+                          width="100%"
+                          height="100%"
+                          loading="lazy"
+                        />
                       </a>
                     </SRLWrapper>
                   </SimpleReactLightbox>
