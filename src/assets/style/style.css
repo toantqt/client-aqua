@@ -1,3 +1,7 @@
+html,
+body {
+  width: 100%;
+}
 .header-title {
   font-size: 20px;
   font-weight: 500;

@@ -19,6 +19,7 @@ import TableComponent from "../../../../components/Table/Table.component";
 import Button from "@material-ui/core/Button";
 import AdminSlug from "../../../../resources/AdminSlug";
 import ModalConfirmComponent from "../../../../components/Modal/ModalConfirm.component";
+import SearchInputComponent from "../../../../components/Search Input/SearchInput.component";
 export default function ProductManager(props) {
   const history = useHistory();
   const search = queryString.parse(props.location.search);
@@ -36,6 +37,8 @@ export default function ProductManager(props) {
   useEffect(async () => {
     props.handleLoading(true);
     await getCategoryNews(slug).then((res) => {
+      setCategoryName(res.data.categoryName);
+
       setCategoryID(res.data.categoryID);
       setSubCategory(res.data.subCategory);
     });
@@ -152,8 +155,7 @@ export default function ProductManager(props) {
     <Grid>
       <div className="header-title mb-3">
         <span>
-          Quản Lý {slug === "san-pham" ? "sản phẩm" : "tôm giống"}: (
-          {product.length}){" "}
+          Quản Lý {categoryName}: ({product.length}){" "}
         </span>
         <Button
           variant="contained"
@@ -166,20 +168,25 @@ export default function ProductManager(props) {
           }}
           onClick={handleClickAdd}
         >
-          Thêm {slug === "san-pham" ? "sản phẩm" : "tôm giống"}
+          Thêm sản phẩm
         </Button>
       </div>
-
-      {subCategory.length !== 0 ? (
-        <div style={{ width: "30%" }} className="mb-3">
-          <SelectCategory
-            data={subCategory}
-            handleChange={handleChangeCategory}
-          />
-        </div>
-      ) : (
-        <></>
-      )}
+      <Grid container spacing={1}>
+        {subCategory.length !== 0 ? (
+          <Grid item xs={4} className="mb-3">
+            <SelectCategory
+              data={subCategory}
+              handleChange={handleChangeCategory}
+            />
+          </Grid>
+        ) : (
+          <Grid item xs={4}></Grid>
+        )}
+        <Grid item xs={4}></Grid>
+        <Grid item xs={4} className="mb-3">
+          <SearchInputComponent />
+        </Grid>
+      </Grid>
 
       <div>
         <TableComponent columns={columns} rows={rows} />

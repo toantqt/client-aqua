@@ -16,6 +16,8 @@ export default {
   editNews: "/admin/edit-news",
 
   inforManager: "/admin/infor-manager",
+  createInfor: "/admin/create-infor",
+  editInfor: "/admin/edit-infor",
 
   productManager: "/admin/product-manager",
   editProduct: "/admin/edit-product",

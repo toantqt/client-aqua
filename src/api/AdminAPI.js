@@ -7,8 +7,8 @@ export const covertDate = (date) => {
   return moment(date).format("DD/MM/YYYY");
 };
 
-const url = "https://truc-anh.herokuapp.com/api";
-// const url = "http://localhost:6699/api";
+// const url = "https://truc-anh.herokuapp.com/api";
+const url = "http://localhost:6699/api";
 
 const headers = { Authorization: `${getAccessToken()}` };
 export const login = async (data) => {

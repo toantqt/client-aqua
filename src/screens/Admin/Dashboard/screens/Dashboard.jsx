@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import LoadingComponent from "../../../../components/Loading/Loading.component";
-import logo from "../../../../assets/image/Logo.png";
 import AdminRoutes from "../../../../routes/AdminRoutes";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -73,7 +72,7 @@ export default function HomePage(props) {
     <div>
       <div className={classes.toolbar}>
         <div style={{ width: "45%", margin: "0 auto", paddingTop: "10px" }}>
-          <img src={logo} alt="" width="100%" />
+          <img src="" alt="" width="100%" />
         </div>
       </div>
       <Divider />

@@ -24,8 +24,6 @@ export default function SelectCategory(props) {
     _id: props?.value?._id,
   });
 
-  console.log(defaultValue);
-
   const handeChange = (event, value) => {
     if (value) {
       props.handleChange(value);

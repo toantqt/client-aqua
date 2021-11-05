@@ -1,29 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InsertChartIcon from "@material-ui/icons/InsertChart";
-import Collapse from "@material-ui/core/Collapse";
-import ExpandLess from "@material-ui/icons/ExpandLess";
-import ExpandMore from "@material-ui/icons/ExpandMore";
-import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import AdminSlug from "../../../../../resources/AdminSlug";
 import FindInPageIcon from "@material-ui/icons/FindInPage";
 import CategoryIcon from "@material-ui/icons/Category";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import AspectRatioIcon from "@material-ui/icons/AspectRatio";
-import PhotoLibraryIcon from "@material-ui/icons/PhotoLibrary";
-import YouTubeIcon from "@material-ui/icons/YouTube";
-import ImageIcon from "@material-ui/icons/Image";
-import ListAltIcon from "@material-ui/icons/ListAlt";
 import HomeWorkIcon from "@material-ui/icons/HomeWork";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import ContactSupportIcon from "@material-ui/icons/ContactSupport";
-import CastForEducationIcon from "@material-ui/icons/CastForEducation";
+import LineWeightIcon from "@material-ui/icons/LineWeight";
+import Collapse from "@material-ui/core/Collapse";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import TimerIcon from "@material-ui/icons/Timer";
+import BeenhereIcon from "@material-ui/icons/Beenhere";
+import StoreIcon from "@material-ui/icons/Store";
 import "./sidebar.css";
+import { getCategoryType } from "../../../../../api/API";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,6 +45,13 @@ export default function SideBarComponent(props) {
   const [open, setOpen] = React.useState(true);
   const [open1, setOpen1] = React.useState(false);
   const [open2, setOpen2] = React.useState(true);
+  const [product, setProduct] = React.useState([]);
+
+  useEffect(async () => {
+    await getCategoryType("product").then((res) => {
+      setProduct(res.data);
+    });
+  }, []);
 
   const handleClickSlug = (param, url) => {
     setParam(param);
@@ -70,25 +74,21 @@ export default function SideBarComponent(props) {
   const handleClick2 = () => {
     setOpen2(!open2);
   };
-  const arr = [
-    "Thiệp cưới",
-    "Sinh nhật",
-    "Thiệp mời",
-    "Giáng sinh",
-    "Tình nhân",
-    "Q.Tế Phụ Nữ",
-    "Thầy Cô",
-    "Năm mới",
-    "Sổ kí tên",
-    "Bao lì xì",
-    "Bao thư",
-    "Name Card",
-    "Menu",
-    "Thiệp mời công ty",
-    "Thiệp chúc công ty",
-    "Popup sinh nhật",
-    "Popup giáng sinh",
-  ];
+
+  const listsProduct = product.map((e, index) => {
+    return (
+      <ListItem
+        button
+        className={classes.nested + (param == "orderManager" ? " active" : "")}
+        onClick={() => handleClickSlugLibrary(e.slug, AdminSlug.productManager)}
+      >
+        <ListItemIcon>
+          <LineWeightIcon />
+        </ListItemIcon>
+        <ListItemText primary={e.categoryName} className={classes.title} />
+      </ListItem>
+    );
+  });
 
   return (
     // <div>
@@ -120,43 +120,6 @@ export default function SideBarComponent(props) {
       <ListItem
         button
         onClick={() =>
-          handleClickSlugLibrary("quy-trinh-nuoi-tom", AdminSlug.newsManager)
-        }
-      >
-        <ListItemIcon>
-          <ListAltIcon />
-        </ListItemIcon>
-        <ListItemText primary="Quy trình nuôi tôm" className={classes.title} />
-      </ListItem>
-      <ListItem
-        button
-        onClick={() =>
-          handleClickSlugLibrary("tuyen-dung", AdminSlug.newsManager)
-        }
-      >
-        <ListItemIcon>
-          <PersonAddIcon />
-        </ListItemIcon>
-        <ListItemText primary="Tin tuyển dụng" className={classes.title} />
-      </ListItem>
-      <ListItem
-        button
-        onClick={() =>
-          handleClickSlug("categoryManager", AdminSlug.categoryManager)
-        }
-      >
-        <ListItemIcon>
-          <CastForEducationIcon />
-        </ListItemIcon>
-        <ListItemText
-          primary="Liên kết đào tạo
-        "
-          className={classes.title}
-        />
-      </ListItem>
-      <ListItem
-        button
-        onClick={() =>
           handleClickSlug("categoryManager", AdminSlug.categoryManager)
         }
       >
@@ -166,29 +129,58 @@ export default function SideBarComponent(props) {
         <ListItemText primary="Quản lý danh mục" className={classes.title} />
       </ListItem>
 
-      <ListItem
-        button
-        onClick={() =>
-          handleClickSlugLibrary("san-pham", AdminSlug.productManager)
-        }
-      >
+      <ListItem button onClick={handleClick2}>
         <ListItemIcon>
           <CategoryIcon />
         </ListItemIcon>
         <ListItemText primary="Quản lý sản phẩm" className={classes.title} />
+        {open2 ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
+      <Collapse in={open2} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          {listsProduct}
+        </List>
+      </Collapse>
 
-      <ListItem
-        button
-        onClick={() =>
-          handleClickSlugLibrary("tom-giong", AdminSlug.productManager)
-        }
-      >
+      <ListItem button onClick={handleClick2}>
         <ListItemIcon>
-          <InsertChartIcon />
+          <StoreIcon />
         </ListItemIcon>
-        <ListItemText primary="Quản lý tôm giống" className={classes.title} />
+        <ListItemText primary="Quản lý đại lý" className={classes.title} />
+        {open2 ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
+      <Collapse in={open2} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItem
+            button
+            className={
+              classes.nested + (param == "orderManager" ? " active" : "")
+            }
+            // onClick={() =>
+            //   handleClickSlugLibrary(e.slug, AdminSlug.productManager)
+            // }
+          >
+            <ListItemIcon>
+              <TimerIcon />
+            </ListItemIcon>
+            <ListItemText primary="Đang đăng kí" className={classes.title} />
+          </ListItem>
+          <ListItem
+            button
+            className={
+              classes.nested + (param == "orderManager" ? " active" : "")
+            }
+            // onClick={() =>
+            //   handleClickSlugLibrary(e.slug, AdminSlug.productManager)
+            // }
+          >
+            <ListItemIcon>
+              <BeenhereIcon />
+            </ListItemIcon>
+            <ListItemText primary="Đã đăng kí" className={classes.title} />
+          </ListItem>
+        </List>
+      </Collapse>
 
       <ListItem
         button
@@ -201,45 +193,6 @@ export default function SideBarComponent(props) {
         </ListItemIcon>
         <ListItemText primary="Quản lý banner" className={classes.title} />
       </ListItem>
-
-      <ListItem button onClick={handleClick2}>
-        <ListItemIcon>
-          <PhotoLibraryIcon />
-        </ListItemIcon>
-        <ListItemText primary="Quản lý thư viện" className={classes.title} />
-        {open2 ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      <Collapse in={open2} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItem
-            button
-            className={
-              classes.nested + (param == "orderManager" ? " active" : "")
-            }
-            onClick={() =>
-              handleClickSlugLibrary("image", AdminSlug.libraryManager)
-            }
-          >
-            <ListItemIcon>
-              <ImageIcon />
-            </ListItemIcon>
-            <ListItemText primary="Hình ảnh" className={classes.title} />
-          </ListItem>
-
-          <ListItem
-            button
-            className={classes.nested + (param == "approved" ? " active" : "")}
-            onClick={() =>
-              handleClickSlugLibrary("video", AdminSlug.libraryManager)
-            }
-          >
-            <ListItemIcon>
-              <YouTubeIcon />
-            </ListItemIcon>
-            <ListItemText primary="Video" className={classes.title} />
-          </ListItem>
-        </List>
-      </Collapse>
 
       <ListItem
         button

@@ -6,308 +6,201 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import IconButton from "@material-ui/core/IconButton";
 import queryString from "query-string";
-import ImagePreviewComponent from "../../Create News/components/Image Previews/ImagePreviews.component";
-import VideoPreviewComponent from "../../Create News/components/Video Previews/VideoPreviews.component";
-import UploadButtonComponent from "../../Create News/components/Upload Button/UploadButton.component";
-import Button from "@material-ui/core/Button";
-import SaveIcon from "@material-ui/icons/Save";
-import { getIntroduce } from "../../../../api/API";
-import TextField from "@material-ui/core/TextField";
 import {
-  convertFromHTML,
-  ContentState,
-  EditorState,
-  convertToRaw,
-} from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import "draft-js/dist/Draft.css";
-import draftToHtml from "draftjs-to-html";
-import { updateIntroduce } from "../../../../api/AdminAPI";
-
-export default function InforManager(props) {
+  getCategoryNews,
+  getNewsCategory,
+  covertDate,
+  deleteNews,
+} from "../../../../api/AdminAPI";
+import SelectCategory from "../../../../components/Category Select/CategorySelect.component";
+import TableComponent from "../../../../components/Table/Table.component";
+import Button from "@material-ui/core/Button";
+import AdminSlug from "../../../../resources/AdminSlug";
+import ModalConfirmComponent from "../../../../components/Modal/ModalConfirm.component";
+export default function NewsManager(props) {
   const history = useHistory();
   const search = queryString.parse(props.location.search);
   const slug = search.q;
+  const [categoryName, setCategoryName] = useState("");
+  const [subCategory, setSubCategory] = useState([]);
+  const [categoryID, setCategoryID] = useState("");
+  const [categorySelect, setCategorySelect] = useState("");
+  const [news, setNews] = useState([]);
+  const [openConfirm, setOpenConfirm] = useState(false);
+  const [newsID, setNewsID] = useState("");
   const [reload, setReload] = useState(false);
-  const [titlePage, setTitlePage] = useState("");
-  const [introduce, setIntroduce] = useState();
-  const [historyTitle, setHistoryTitle] = useState("");
-  const [historyContent, setHistoryContent] = useState("");
-  const [historyImage, setHistoryImage] = useState([]);
-
-  const [structureTitle, setStructureTitle] = useState("");
-  const [structureContent, setStructureContent] = useState("");
-  const [structureImage, setStructureImage] = useState([]);
-
-  const [image1Preview, setImage1Preview] = useState([]);
-  const [image2Preview, setImage2Preview] = useState([]);
-
-  const [editorState1, setEditorState1] = useState(EditorState.createEmpty());
-  const [editorState2, setEditorState2] = useState(EditorState.createEmpty());
-
-  const [title1, setTitle1] = useState("");
-  const [title2, setTitle2] = useState("");
 
   useEffect(async () => {
     if (slug) {
       props.handleLoading(true);
-      if (slug === "gioi-thieu") {
-        setTitlePage("Giới thiệu về công ty");
-        await getIntroduce().then((res) => {
-          setHistoryTitle(res.data.history.title);
-          setTitle1(res.data.history.title);
-          setHistoryContent(res.data.history.content);
-          setHistoryImage(res.data.history.image);
-          const blocksFromHTML1 = convertFromHTML(res.data.history.content);
-          const content1 = ContentState.createFromBlockArray(blocksFromHTML1);
-          setEditorState1(EditorState.createWithContent(content1));
-
-          setStructureTitle(res.data.structure.title);
-          setTitle2(res.data.structure.title);
-          setStructureContent(res.data.structure.content);
-          setStructureImage(res.data.structure.image);
-          const blocksFromHTML2 = convertFromHTML(res.data.structure.content);
-          const content2 = ContentState.createFromBlockArray(blocksFromHTML2);
-          setEditorState2(EditorState.createWithContent(content2));
-        });
-      } else if (slug === "dao-tao") {
-        setTitlePage("Liên kết đào tạo");
-      }
-
+      setCategoryName("Giới thiệu");
+      await getCategoryNews(slug).then((res) => {
+        console.log(res);
+        setCategoryID(res.data.categoryID);
+        setSubCategory(res.data.subCategory);
+      });
+      await getNewsCategory(slug).then((res) => {
+        setNews(res.data);
+      });
       props.handleLoading(false);
     }
   }, [slug, reload]);
 
-  const deleteImage1Old = (url) => {
-    const newArrImage = historyImage.filter((e) => {
-      return e != url;
-    });
-    setHistoryImage(newArrImage);
-  };
-
-  const deleteImage2Old = (url) => {
-    const newArrImage = structureImage.filter((e) => {
-      return e != url;
-    });
-    setStructureImage(newArrImage);
-  };
-
-  const addImageHistory = (event) => {
-    if (event.target.type === "file") {
-      let files = Array.from(event.target.files);
-      files.forEach((file) => {
-        let reader = new FileReader();
-        reader.onloadend = () => {
-          setHistoryImage((historyImage) => [
-            ...historyImage,
-            { url: reader.result, file: file },
-          ]);
-        };
-        reader.readAsDataURL(file);
-      });
+  const handleChangeCategory = (value) => {
+    if (value !== "") {
+      setCategorySelect(value._id);
+    } else {
+      setCategorySelect("");
     }
   };
 
-  const addImagestructure = (event) => {
-    if (event.target.type === "file") {
-      let files = Array.from(event.target.files);
-      files.forEach((file) => {
-        let reader = new FileReader();
-        reader.onloadend = () => {
-          setStructureImage((structureImage) => [
-            ...structureImage,
-            { url: reader.result, file: file },
-          ]);
-        };
-        reader.readAsDataURL(file);
-      });
-    }
-  };
-
-  console.log(historyImage);
-
-  const ImageHistoryPreview = historyImage.map((e, index) => {
-    if (e.url) {
-      if (e.type !== "video") {
-        return (
-          <ImagePreviewComponent
-            url={e}
-            key={index}
-            deleteImage={deleteImage1Old}
-          />
-        );
+  const rows = news
+    .filter((news) => {
+      if (categorySelect === "") {
+        console.log(news);
+        return news;
       } else {
-        return (
-          <VideoPreviewComponent
-            url={e}
-            key={index}
-            deleteImage={deleteImage1Old}
-          />
-        );
+        return news.news.subCategoryID === categorySelect;
       }
-    }
-  });
+    })
+    .map((e, index) => {
+      return {
+        id: index,
+        stt: index + 1,
+        name: e.news.title,
+        category: e.subCategoryName,
+        date: covertDate(e.news?.created),
+        action: e.news,
+      };
+    });
 
-  const ImageStructurePreview = structureImage.map((e, index) => {
-    if (e.url) {
-      if (e.type !== "video") {
+  console.log(rows);
+  const columns = [
+    { field: "stt", headerName: "STT", width: 90 },
+    { field: "name", headerName: "Bài viết", width: 300 },
+    { field: "category", headerName: "Danh mục", width: 250 },
+    { field: "date", headerName: "Ngày tạo", width: 150 },
+    {
+      field: "action",
+      headerName: "Chức năng",
+      width: 250,
+      renderCell: (action) => {
         return (
-          <ImagePreviewComponent
-            url={e}
-            key={index}
-            deleteImage={deleteImage2Old}
-          />
-        );
-      } else {
-        return (
-          <VideoPreviewComponent
-            url={e}
-            key={index}
-            deleteImage={deleteImage2Old}
-          />
-        );
-      }
-    }
-  });
+          <>
+            <IconButton
+              aria-label="delete"
+              className="btn-action btn-a-1"
+              onClick={() => {
+                handleClickView(action.row?.action?.slug);
+              }}
+            >
+              <VisibilityIcon />
+            </IconButton>
 
-  const onEditorState1Change = (editorState) => {
-    const converHtml = draftToHtml(
-      convertToRaw(editorState.getCurrentContent())
-    );
-    setEditorState1(editorState);
-    setHistoryContent(converHtml);
-  };
-  const onEditorState2Change = (editorState) => {
-    const converHtml = draftToHtml(
-      convertToRaw(editorState.getCurrentContent())
-    );
-    setEditorState2(editorState);
-    setStructureContent(converHtml);
-  };
-  const handleChangeTitle = (event, status) => {
-    if (status === 1) {
-      setHistoryTitle(event.target.value);
-    } else if (status === 2) {
-      setStructureTitle(event.target.value);
-    }
+            <IconButton
+              aria-label="delete"
+              className="btn-action btn-a-2"
+              onClick={() => {
+                handleClickEdit(action.row?.action?._id);
+              }}
+            >
+              <EditIcon />
+            </IconButton>
+            <IconButton
+              aria-label="delete"
+              className="btn-action btn-a-3"
+              onClick={() => {
+                handleClickDelete(action.row?.action?._id);
+              }}
+            >
+              <DeleteForeverIcon />
+            </IconButton>
+          </>
+        );
+      },
+    },
+  ];
+
+  const handleClickView = (slug) => {
+    history.push(`/bai-viet/${slug}`);
   };
 
-  const handleSubmit = async () => {
+  const handleClickAdd = () => {
+    history.push({
+      pathname: AdminSlug.createInfor,
+      search: `?q=${slug}`,
+    });
+  };
+
+  const handleClickDelete = (id) => {
+    setNewsID(id);
+    setOpenConfirm(true);
+  };
+
+  const handleCloseConfirm = () => {
+    setNewsID("");
+    setOpenConfirm(false);
+  };
+
+  const submitDeleteNews = async () => {
     const data = {
-      history: {
-        title: historyTitle,
-        content: historyContent,
-        image: historyImage,
-        total: historyImage.length,
-      },
-      structure: {
-        title: structureTitle,
-        content: structureContent,
-        image: structureImage,
-        total: structureImage.length,
-      },
+      newsID: newsID,
     };
-
-    await updateIntroduce(data).then((res) => {
+    await deleteNews(data).then((res) => {
+      handleCloseConfirm();
       setReload(!reload);
     });
   };
-  const handlePastedText = (text, html, callback) => {
-    const modifiedHtml = html.replace(
-      /<p class=MsoListParagraph[\s\S]*?>·([\s\S]*?)<\/p>/g,
-      "<li>$1</li>"
-    );
+
+  const handleClickEdit = (id) => {
+    history.push({
+      pathname: AdminSlug.editInfor,
+      search: `?id=${id}`,
+    });
   };
   return (
     <Grid>
       <div className="header-title mb-3">
-        <span> {titlePage} :</span>
-      </div>
-      <div>
-        <div className="news-title ">
-          <TextField
-            id="outlined-basic"
-            variant="outlined"
-            label="Tiêu đề"
-            key={title1}
-            defaultValue={title1}
-            style={{ width: "100%" }}
-            onChange={(event) => {
-              handleChangeTitle(event, 1);
+        <span>Giới thiệu về công ty:</span>
+        {news.length === 0 ? (
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            startIcon={<EditIcon />}
+            style={{
+              textTransform: "none",
+              float: "right",
             }}
-          />
-        </div>
-        <div className="news-editor mt-3">
-          <p>Nội dung:</p>
+            onClick={handleClickAdd}
+          >
+            Tạo bài viết
+          </Button>
+        ) : (
+          <></>
+        )}
+      </div>
 
-          <Editor
-            editorState={editorState1}
-            onEditorStateChange={onEditorState1Change}
-            wrapperClassName="wrapper-class"
-            editorClassName="editor-class"
-            toolbarClassName="toolbar-class"
-            handlePastedText={handlePastedText}
+      {subCategory.length !== 0 ? (
+        <div style={{ width: "30%" }} className="mb-3">
+          <SelectCategory
+            data={subCategory}
+            handleChange={handleChangeCategory}
           />
         </div>
-        <div className="news-image mt-3">
-          <p style={{ display: "inline-block" }}>Hình ảnh hoặc video:</p>
-          <div className="wrap-pick-image">
-            <div className="wrapper">
-              {ImageHistoryPreview}
-              <UploadButtonComponent addImage={addImageHistory} />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="mt-5">
-        <div className="news-title ">
-          <TextField
-            id="outlined-basic"
-            variant="outlined"
-            label="Tiêu đề"
-            key={title2}
-            defaultValue={title2}
-            style={{ width: "100%" }}
-            onChange={(event) => {
-              handleChangeTitle(event, 2);
-            }}
-          />
-        </div>
-        <div className="news-editor mt-3">
-          <p>Nội dung:</p>
+      ) : (
+        <></>
+      )}
+      <Grid>
+        <TableComponent columns={columns} rows={rows} />
+      </Grid>
 
-          <Editor
-            editorState={editorState2}
-            onEditorStateChange={onEditorState2Change}
-            wrapperClassName="wrapper-class"
-            editorClassName="editor-class"
-            toolbarClassName="toolbar-class"
-            handlePastedText={handlePastedText}
-          />
-        </div>
-        <div className="news-image mt-3">
-          <p style={{ display: "inline-block" }}>Hình ảnh hoặc video:</p>
-          <div className="wrap-pick-image">
-            <div className="wrapper">
-              {ImageStructurePreview}
-              <UploadButtonComponent addImage={addImagestructure} />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div style={{ marginTop: "70px" }}>
-        <Button
-          variant="contained"
-          color="primary"
-          size="large"
-          startIcon={<SaveIcon />}
-          style={{ float: "right" }}
-          onClick={handleSubmit}
-        >
-          Xác nhận
-        </Button>
-      </div>
+      <ModalConfirmComponent
+        open={openConfirm}
+        handleClose={handleCloseConfirm}
+        title="Xác nhận xóa bài viết"
+        handleDelete={submitDeleteNews}
+      />
     </Grid>
   );
 }
