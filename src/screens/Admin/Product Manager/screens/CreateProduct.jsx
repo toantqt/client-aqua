@@ -36,17 +36,15 @@ export default function CreateProduct(props) {
   const [subCategory, setSubCategory] = useState([]);
   const [name, setName] = useState("");
   const [code, setCode] = useState("");
-  const [price, setPrice] = useState();
+  const [price, setPrice] = useState("");
   const [product, setProduct] = useState();
   const [defaultSelect, setDefaultSelect] = useState();
   const [imagePreview, setImagePreview] = useState([]);
-  const [ingredient, setIngredient] = useState("");
-  const [uses, setUses] = useState("");
-  const [dosage, setDosage] = useState("");
   const [highlight, setHighlight] = useState(false);
   const [count, setCount] = useState(1);
   const [image, setImage] = useState([]);
   const [content, setContent] = useState([]);
+  const [description, setDescription] = useState("");
 
   const [editorState1, setEditorState1] = useState(EditorState.createEmpty());
 
@@ -71,7 +69,7 @@ export default function CreateProduct(props) {
     );
     if (status === 1) {
       setEditorState1(editorState);
-      setIngredient(converHtml);
+      setDescription(converHtml);
     }
   };
 
@@ -89,7 +87,7 @@ export default function CreateProduct(props) {
     } else if (event.target.name === "code") {
       setCode(event.target.value);
     } else if (event.target.name === "price") {
-      setPrice(event.target.price);
+      setPrice(event.target.value);
     }
   };
 
@@ -97,18 +95,31 @@ export default function CreateProduct(props) {
     const data = {
       categoryID: categoryID,
       subCategoryID: subCategorySelect,
+      code: code,
       name: name,
-      ingredient: ingredient,
-      uses: uses,
-      dosage: dosage,
-      highlight: highlight,
+      price: price,
       image: imagePreview,
+      description: description,
+      listsContent: content,
+      listImage: image,
+      totalContent: count,
+      highlight: highlight,
     };
-    if (data.subCategoryID === "" || data.name === "" || !data.image) {
+
+    if (
+      (subCategory.length !== 0 && data.subCategoryID === "") ||
+      data.name === "" ||
+      data.price === "" ||
+      data.image.length === 0
+    ) {
       alert("Xin vui lòng điền đầy đủ thông tin!");
     } else {
       await addProduct(data).then((res) => {
-        history.push("/admin/product-manager");
+        history.push({
+          pathname: "/admin/product-manager",
+          search: `?q=${type}`,
+        });
+        console.log(res);
       });
     }
   };
@@ -181,6 +192,8 @@ export default function CreateProduct(props) {
     const newCount = count + 1;
     setCount(newCount);
   };
+
+  console.log(image);
   return (
     <Grid>
       <div className="header-title mb-3">

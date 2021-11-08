@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import "./header.css";
 import { useHistory } from "react-router-dom";
-import logo from "../../assets/image/Logo.png";
+import logo from "../../assets/image/logo.png";
 import SearchComponent from "../Search/Search.component";
+import SearchHeader from "../../screens/Home/components/Search/SearchHeader";
 export default function HeaderComponent() {
   const history = useHistory();
   const [open, setOpen] = useState(false);
@@ -40,98 +41,61 @@ export default function HeaderComponent() {
   return (
     <Grid>
       <Grid id="header-top">
-        <Grid className="wrap-header">
-          <div className="menu-header">
-            <ul className="menu">
-              <li className="social-connect">
-                <Link to="/" className="mr-3">
-                  <i class="fab fa-facebook"></i>
+        <div className="wrap-body">
+          <Grid container spacing={2}>
+            <Grid item lg={2}>
+              <div className="header-logo">
+                <Link to="/">
+                  <img src={logo} alt="" width="100%" />
                 </Link>
-                <Link to="/" class="ml-3">
-                  <i class="fab fa-youtube"></i>
-                </Link>
-              </li>
-              <li className="search" onClick={handleClickSearch}>
-                <Link>
-                  <i class="fas fa-search"></i>
-                  <span className="ml-2">Tìm kiếm</span>
-                </Link>
-              </li>
-              <li className="h-connect">
-                <Link to="/danh-muc/lien-ket-dao-tao">
-                  <i class="fas fa-briefcase"></i>
-                  <span className="ml-2">Liên kết đào tạo</span>
-                </Link>
-              </li>
-              <li className="h-contact">
-                <Link to="/danh-muc/tuyen-dung">
-                  <i class="fas fa-phone-alt"></i>
-                  <span className="ml-2">Tuyển dụng</span>
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </Grid>
+              </div>
+            </Grid>
+
+            <Grid item lg={8}>
+              <SearchHeader />
+            </Grid>
+            <Grid item lg={2}>
+              <div
+                className=" float-right mt-4"
+                style={{ fontSize: "18px", fontWeight: "500" }}
+              >
+                <div>
+                  <span>Phòng kinh doanh</span>
+                </div>
+                <div>
+                  <span>0907888428</span>
+                </div>
+              </div>
+            </Grid>
+          </Grid>
+        </div>
       </Grid>
       <Grid id="header">
-        <Grid className="wrap-header">
-          <div className="menu-header">
-            <Grid container spacing={1}>
-              <Grid item lg={3}>
-                <div className="menu-logo">
-                  <Link to="/">
-                    <img src={logo} alt="" />
-                  </Link>
-                </div>
-              </Grid>
-              <Grid item lg={9}>
-                <ul className="menu">
-                  <li className="menu-item">
-                    <Link to="/">
-                      <span>Trang chủ</span>
-                    </Link>
-                  </li>
-                  <li className="menu-item">
-                    <Link to="/danh-muc/gioi-thieu">
-                      <span>Giới thiệu</span>
-                    </Link>
-                  </li>
-                  {/* <li className="menu-item">
-               <Link to="/danh-muc/thanh-tich">
-                 <span>Thành tích</span>
-               </Link>
-             </li> */}
-                  <li className="menu-item">
-                    <Link to="/danh-muc/tin-tuc">
-                      <span>Tin tức </span>
-                    </Link>
-                  </li>
-                  <li className="menu-item">
-                    <Link to="/danh-muc/quy-trinh-nuoi-tom">
-                      <span>Quy trình nuôi tôm</span>
-                    </Link>
-                  </li>
-                  <li className="menu-item">
-                    <Link to="/tom-giong">
-                      <span>Tôm giống </span>
-                    </Link>
-                  </li>
-                  <li className="menu-item">
-                    <Link to="/san-pham">
-                      <span>Sản phẩm </span>
-                    </Link>
-                  </li>
-
-                  <li className="menu-item">
-                    <Link to="/danh-muc/van-phong-doi-tac">
-                      <span>Liên hệ</span>
-                    </Link>
-                  </li>
-                </ul>
-              </Grid>
-            </Grid>
-          </div>
-        </Grid>
+        <div className="wrap-body">
+          <ul className="header-option">
+            <li>
+              <Link to="/">DANH MỤC SẢN PHẨM</Link>
+            </li>
+            <li>
+              <Link to="/">TRANG CHỦ</Link>
+            </li>
+            <li>
+              <Link to="/">GIỚI THIỆU</Link>
+            </li>
+            <li>
+              <Link to="/">TIN TỨC</Link>
+            </li>
+            <li>
+              <Link to="/">KỸ THUẬT NUÔI TRỒNG</Link>
+            </li>
+            <li>
+              <Link to="/">HỆ THỐNG CỬA HÀNG</Link>
+            </li>
+            <li>
+              <Link to="/">LIÊN HỆ</Link>
+            </li>
+          </ul>
+        </div>
       </Grid>
       <SearchComponent open={open} handleClose={handleClose} />
     </Grid>

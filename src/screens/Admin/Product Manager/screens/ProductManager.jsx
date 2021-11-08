@@ -72,6 +72,8 @@ export default function ProductManager(props) {
         stt: index + 1,
         name: e.product?.name,
         category: e.subCategoryName,
+        price: e.product?.price,
+        code: e.product?.code,
         date: covertDate(e.product?.created),
         action: e.product,
       };
@@ -79,13 +81,16 @@ export default function ProductManager(props) {
 
   const columns = [
     { field: "stt", headerName: "STT", width: 90 },
-    { field: "name", headerName: "Sản phẩm", width: 300 },
-    { field: "category", headerName: "Danh mục", width: 250 },
+    { field: "name", headerName: "Sản phẩm", width: 200 },
+    { field: "category", headerName: "Danh mục", width: 200 },
+    { field: "code", headerName: "Mã SP", width: 100 },
+    { field: "price", headerName: "Giá", width: 90 },
+
     { field: "date", headerName: "Ngày tạo", width: 150 },
     {
       field: "action",
       headerName: "Chức năng",
-      width: 250,
+      width: 210,
       renderCell: (action) => {
         return (
           <>
