@@ -19,7 +19,6 @@ import TableComponent from "../../../../components/Table/Table.component";
 import Button from "@material-ui/core/Button";
 import AdminSlug from "../../../../resources/AdminSlug";
 import ModalConfirmComponent from "../../../../components/Modal/ModalConfirm.component";
-import SearchInputComponent from "../../../../components/Search Input/SearchInput.component";
 export default function ProductManager(props) {
   const history = useHistory();
   const search = queryString.parse(props.location.search);
@@ -37,8 +36,6 @@ export default function ProductManager(props) {
   useEffect(async () => {
     props.handleLoading(true);
     await getCategoryNews(slug).then((res) => {
-      setCategoryName(res.data.categoryName);
-
       setCategoryID(res.data.categoryID);
       setSubCategory(res.data.subCategory);
     });
@@ -72,8 +69,6 @@ export default function ProductManager(props) {
         stt: index + 1,
         name: e.product?.name,
         category: e.subCategoryName,
-        price: e.product?.price,
-        code: e.product?.code,
         date: covertDate(e.product?.created),
         action: e.product,
       };
@@ -81,16 +76,13 @@ export default function ProductManager(props) {
 
   const columns = [
     { field: "stt", headerName: "STT", width: 90 },
-    { field: "name", headerName: "Sản phẩm", width: 200 },
-    { field: "category", headerName: "Danh mục", width: 200 },
-    { field: "code", headerName: "Mã SP", width: 100 },
-    { field: "price", headerName: "Giá", width: 90 },
-
+    { field: "name", headerName: "Sản phẩm", width: 300 },
+    { field: "category", headerName: "Danh mục", width: 250 },
     { field: "date", headerName: "Ngày tạo", width: 150 },
     {
       field: "action",
       headerName: "Chức năng",
-      width: 210,
+      width: 250,
       renderCell: (action) => {
         return (
           <>
@@ -160,7 +152,8 @@ export default function ProductManager(props) {
     <Grid>
       <div className="header-title mb-3">
         <span>
-          Quản Lý {categoryName}: ({product.length}){" "}
+          Quản Lý {slug === "san-pham" ? "sản phẩm" : "tôm giống"}: (
+          {product.length}){" "}
         </span>
         <Button
           variant="contained"
@@ -173,25 +166,20 @@ export default function ProductManager(props) {
           }}
           onClick={handleClickAdd}
         >
-          Thêm sản phẩm
+          Thêm {slug === "san-pham" ? "sản phẩm" : "tôm giống"}
         </Button>
       </div>
-      <Grid container spacing={1}>
-        {subCategory.length !== 0 ? (
-          <Grid item xs={4} className="mb-3">
-            <SelectCategory
-              data={subCategory}
-              handleChange={handleChangeCategory}
-            />
-          </Grid>
-        ) : (
-          <Grid item xs={4}></Grid>
-        )}
-        <Grid item xs={4}></Grid>
-        <Grid item xs={4} className="mb-3">
-          <SearchInputComponent />
-        </Grid>
-      </Grid>
+
+      {subCategory.length !== 0 ? (
+        <div style={{ width: "30%" }} className="mb-3">
+          <SelectCategory
+            data={subCategory}
+            handleChange={handleChangeCategory}
+          />
+        </div>
+      ) : (
+        <></>
+      )}
 
       <div>
         <TableComponent columns={columns} rows={rows} />

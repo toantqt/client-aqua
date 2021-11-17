@@ -17,11 +17,14 @@ const useStyles = makeStyles({
 });
 
 export default function SelectCategory(props) {
+  console.log(props);
   const classes = useStyles();
   const [defaultValue, setDefaultValue] = useState({
     categoryName: props?.value?.categoryName,
     _id: props?.value?._id,
   });
+
+  console.log(defaultValue);
 
   const handeChange = (event, value) => {
     if (value) {
@@ -42,6 +45,7 @@ export default function SelectCategory(props) {
       }
     }
   }, [props.value, props.data]);
+  console.log(defaultValue);
 
   return (
     <Autocomplete

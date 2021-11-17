@@ -4,8 +4,7 @@
 
 .editor-class {
   max-height: 400px;
-  width: 100% !important;
-  overflow-x: hidden !important;
+  overflow: auto;
   background-color: white;
   padding: 1rem;
   border: 1px solid #ccc;
@@ -45,7 +44,8 @@
 }
 
 .button-add {
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
 }
 .button-add button {
   float: right;

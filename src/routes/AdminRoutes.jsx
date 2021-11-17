@@ -19,8 +19,6 @@ import EditNews from "../screens/Admin/Create News/screens/EditNews";
 import AddBanner from "../screens/Admin/Banner Manager/screens/AddBanner";
 import ContactManager from "../screens/Admin/Contact Manager/screens/ContactManager";
 import AddContact from "../screens/Admin/Contact Manager/screens/AddContact";
-import CreateInfor from "../screens/Admin/Infor Manager/screens/CreateInfor";
-import EditInfor from "../screens/Admin/Infor Manager/screens/EditInfor";
 const AdminRoutes = (props) => {
   const handleLoading = props.handleLoading;
   return (
@@ -117,21 +115,6 @@ const AdminRoutes = (props) => {
         path={adminSlug.inforManager}
         render={(props) => (
           <InforManager {...props} handleLoading={handleLoading} />
-        )}
-      ></Route>
-      <Route
-        exact
-        path={adminSlug.createInfor}
-        render={(props) => (
-          <CreateInfor {...props} handleLoading={handleLoading} />
-        )}
-      ></Route>
-
-      <Route
-        exact
-        path={adminSlug.editInfor}
-        render={(props) => (
-          <EditInfor {...props} handleLoading={handleLoading} />
         )}
       ></Route>
 

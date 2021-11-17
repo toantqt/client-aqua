@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
 import TextField from "@material-ui/core/TextField";
+import logo from "../../../assets/image/Logo.png";
 import "./login.css";
 import { login } from "../../../api/AdminAPI";
 // import LoadingComponent from "../../../components/Loading/Loading.component";
@@ -63,7 +64,7 @@ const LoginPage = () => {
       <div className="container-login">
         <Grid className="wrap">
           <div className="title-login ">
-            <img src="" alt="" width="69%" />
+            <img src={logo} alt="" width="69%" />
           </div>
 
           <div className="form-login mt-5">

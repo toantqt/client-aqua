@@ -6,7 +6,7 @@ const ImageComponent = (props) => {
   return (
     <Image
       src={props.url}
-      style={{ position: "none !important" }}
+      style={{ position: "none !important", height: "100%" }}
       imageStyle={{ objectFit: "initial" }}
     />
   );

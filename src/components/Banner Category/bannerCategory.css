@@ -1,0 +1,12 @@
+.banner-category-content {
+  position: absolute;
+  top: 15%;
+  width: 60%;
+  left: 20%;
+}
+.banner-category-content .bottom-title span {
+  font-size: 45px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: white;
+}

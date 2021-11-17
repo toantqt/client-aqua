@@ -6,8 +6,7 @@ import { getCategoryNews, updateProduct } from "../../../../api/AdminAPI";
 import { getDetailsProduct } from "../../../../api/API";
 import SelectCategory from "../../../../components/Category Select/CategorySelect.component";
 import TextField from "@material-ui/core/TextField";
-import ImagePreviewComponent from "../../Create News/components/Image Previews/ImagePreviews.component";
-import VideoPreviewComponent from "../../Create News/components/Video Previews/VideoPreviews.component";
+import ImagePreivewsComponent from "../../../../components/Image Previews/ImagePreviews.component";
 import {
   convertFromHTML,
   ContentState,
@@ -23,8 +22,6 @@ import SaveIcon from "@material-ui/icons/Save";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
-import EditEditorComponent from "../../Create News/components/Edit Editor/EditEditor.component";
-import UploadButtonComponent from "../../Create News/components/Upload Button/UploadButton.component";
 export default function EditProduct(props) {
   const history = useHistory();
   const search = queryString.parse(props.location.search);
@@ -35,22 +32,21 @@ export default function EditProduct(props) {
   const [product, setProduct] = useState();
   const [defaultSelect, setDefaultSelect] = useState();
   const [imagePreview, setImagePreview] = useState();
+  const [ingredient, setIngredient] = useState("");
+  const [uses, setUses] = useState("");
+  const [dosage, setDosage] = useState("");
   const [highlight, setHighlight] = useState(false);
-  const [subCategorySelect, setSubCategorySelect] = useState("");
-  const [slug, setSlug] = useState("");
-  const [imageProduct, setImageProduct] = useState([]);
-  const [image, setImage] = useState([]);
-  const [content, setContent] = useState([]);
-  const [contentOld, setContentOld] = useState([]);
-  const [price, setPrice] = useState("");
-  const [code, setCode] = useState("");
+
   const [editorState1, setEditorState1] = useState(EditorState.createEmpty());
-  const [description, setDescription] = useState("");
+  const [editorState2, setEditorState2] = useState(EditorState.createEmpty());
+  const [editorState3, setEditorState3] = useState(EditorState.createEmpty());
+  const [subCategorySelect, setSubCategorySelect] = useState("");
+
+  const [slug, setSlug] = useState("");
 
   useEffect(async () => {
     props.handleLoading(true);
     await getDetailsProduct(productID).then((res) => {
-      console.log(res.data);
       setProduct(res.data.product);
       setSlug(res.data.category.slug);
       setCategoryID(res.data.category._id);
@@ -66,30 +62,22 @@ export default function EditProduct(props) {
           });
         }
       }
-      setImageProduct(res.data.product.image);
-      setCode(res.data.product.code);
-      setPrice(res.data.product.price);
+      setImagePreview(res.data.product.image[0]);
 
-      let i = 0;
-      for (let item of res.data.category.subCategory) {
-        if (item._id === res.data.product.subCategoryID) {
-          setDefaultSelect({ categoryName: item.name, _id: item._id });
-        }
-      }
+      const blocksFromHTML1 = convertFromHTML(res.data.product.ingredient);
+      const content1 = ContentState.createFromBlockArray(blocksFromHTML1);
+      setEditorState1(EditorState.createWithContent(content1));
+      setIngredient(res.data.product.ingredient);
 
-      for (let item of res.data.product.details) {
-        for (let img of item.library) {
-          setImage((image) => [...image, { image: img, list: i + 1 }]);
-        }
-        i++;
+      const blocksFromHTML2 = convertFromHTML(res.data.product.uses);
+      const content2 = ContentState.createFromBlockArray(blocksFromHTML2);
+      setEditorState2(EditorState.createWithContent(content2));
+      setUses(res.data.product.uses);
 
-        setContent((content) => [...content, item.content]);
-        setContentOld((content) => [...content, item.content]);
-      }
-
-      const blocksFromHTML = convertFromHTML(res.data.product.description);
-      const content = ContentState.createFromBlockArray(blocksFromHTML);
-      setEditorState1(EditorState.createWithContent(content));
+      const blocksFromHTML3 = convertFromHTML(res.data.product.dosage);
+      const content3 = ContentState.createFromBlockArray(blocksFromHTML3);
+      setEditorState3(EditorState.createWithContent(content3));
+      setDosage(res.data.product.dosage);
     });
     props.handleLoading(false);
   }, [productID]);
@@ -100,7 +88,13 @@ export default function EditProduct(props) {
     );
     if (status === 1) {
       setEditorState1(editorState);
-      setDescription(converHtml);
+      setIngredient(converHtml);
+    } else if (status === 2) {
+      setEditorState2(editorState);
+      setUses(converHtml);
+    } else {
+      setEditorState3(editorState);
+      setDosage(converHtml);
     }
   };
 
@@ -116,40 +110,32 @@ export default function EditProduct(props) {
     setName(event.target.value);
   };
 
-  const handleChangeCode = (event) => {
-    setCode(event.target.value);
-  };
-
-  const handleChangePrice = (event) => {
-    setPrice(event.target.value);
-  };
-
-  const handleChangeImage = (data) => {
-    setImage((image) => [...image, data]);
+  const handleChangeImage = (event) => {
+    if (event.target.type === "file") {
+      let files = Array.from(event.target.files);
+      files.forEach((file) => {
+        let reader = new FileReader();
+        console.log(reader.result);
+        reader.onloadend = () => {
+          setImagePreview({ url: reader.result, file: file });
+        };
+        reader.readAsDataURL(file);
+      });
+    }
   };
 
   const handleSubmit = async () => {
     const data = {
-      productID: productID,
       subCategoryID: subCategorySelect,
       name: name,
-      code: code,
-      price: price,
-      description: description,
+      ingredient: ingredient,
+      uses: uses,
+      dosage: dosage,
       highlight: highlight,
-      image: imageProduct,
-      listsContent: content,
-      listImage: image,
-      totalContent: content.length,
+      image: imagePreview,
+      productID: productID,
     };
-
-    console.log(data);
-    if (
-      (subCategory.length !== 0 && data.subCategoryID === "") ||
-      data.name === "" ||
-      data.price === "" ||
-      data.image.length === 0
-    ) {
+    if (data.subCategoryID === "" || data.name === "") {
       alert("Xin vui lòng điền đầy đủ thông tin!");
     } else {
       await updateProduct(data).then((res) => {
@@ -170,64 +156,6 @@ export default function EditProduct(props) {
       "<li>$1</li>"
     );
   };
-  const addImage = (event) => {
-    if (event.target.type === "file") {
-      let files = Array.from(event.target.files);
-      files.forEach((file) => {
-        let reader = new FileReader();
-        reader.onloadend = () => {
-          setImageProduct((imageProduct) => [
-            ...imageProduct,
-            { url: reader.result, image: file, type: file.type },
-          ]);
-        };
-        reader.readAsDataURL(file);
-      });
-    }
-  };
-
-  const deleteImage = (url) => {
-    const newImagePreview = imageProduct.filter((e) => {
-      return e.url != url.url;
-    });
-    setImageProduct(newImagePreview);
-  };
-
-  const listImagePreview = imageProduct.map((e, index) => {
-    console.log(e);
-    if (e.type !== "video/mp4") {
-      return (
-        <ImagePreviewComponent url={e} key={index} deleteImage={deleteImage} />
-      );
-    } else {
-      return (
-        <VideoPreviewComponent url={e} key={index} deleteImage={deleteImage} />
-      );
-    }
-  });
-
-  const handleDeleteImage = (url) => {
-    const newArrImage = image.filter((e) => {
-      return e != url;
-    });
-    setImage(newArrImage);
-  };
-
-  const handleChangeContent = (data, index) => {
-    let items = [...content];
-    let item = { ...content[index + 1] };
-    item = data;
-    items[index] = item;
-    setContent(items);
-  };
-
-  const handleDeleteImageOld = (url) => {
-    const newArrImage = image.filter((e) => {
-      return e != url;
-    });
-    setImage(newArrImage);
-  };
-
   return (
     <Grid>
       <div className="header-title mb-3">
@@ -235,23 +163,18 @@ export default function EditProduct(props) {
       </div>
       <div>
         <Grid container spacing={2}>
-          {subCategory.length != 0 ? (
-            <Grid item lg={4}>
-              {defaultSelect ? (
-                <SelectCategory
-                  data={subCategory}
-                  value={defaultSelect}
-                  handleChange={handleChangeCategory}
-                />
-              ) : (
-                <></>
-              )}
-            </Grid>
-          ) : (
-            <></>
-          )}
-
-          <Grid item lg={subCategory.length != 0 ? 8 : 12}>
+          <Grid item lg={4}>
+            {defaultSelect ? (
+              <SelectCategory
+                data={subCategory}
+                value={defaultSelect}
+                handleChange={handleChangeCategory}
+              />
+            ) : (
+              <></>
+            )}
+          </Grid>
+          <Grid item lg={8}>
             <TextField
               id="outlined-basic"
               label="Tên sản phẩm"
@@ -262,76 +185,64 @@ export default function EditProduct(props) {
               onChange={handleChangeTitle}
             />
           </Grid>
-          <Grid item lg={4}>
-            <TextField
-              id="outlined-basic"
-              label="Mã sản phẩm"
-              name="code"
-              variant="outlined"
-              style={{ width: "100%" }}
-              key={product?.code}
-              defaultValue={product?.code}
-              onChange={handleChangeCode}
-            />
-          </Grid>
-          <Grid item lg={4}>
-            <TextField
-              id="outlined-basic"
-              label="Giá sản phẩm"
-              name="price"
-              variant="outlined"
-              style={{ width: "100%" }}
-              key={product?.price}
-              defaultValue={product?.price}
-              onChange={handleChangePrice}
-              type="number"
-            />
-          </Grid>
 
           <Grid item lg={12}>
             <div className="news-editor mt-3">
-              <div className="news-editor mt-3">
-                <p>Hình ảnh:</p>
-
-                <div className="wrap-pick-image">
-                  <div className="wrapper">
-                    {listImagePreview}
-                    <UploadButtonComponent addImage={addImage} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Grid>
-          <Grid item lg={12}>
-            <div className="news-editor mt-3">
-              <p>Mô tả ngắn: </p>
-
-              <Editor
-                editorState={editorState1}
-                onEditorStateChange={(e) => {
-                  onEditorStateChange(e, 1);
-                }}
-                wrapperClassName="wrapper-class"
-                editorClassName="editor-class"
-                toolbarClassName="toolbar-class"
-                handlePastedText={handlePastedText}
-              />
-            </div>
-          </Grid>
-          <Grid item lg={12}>
-            {contentOld.map((e, i) => (
-              <EditEditorComponent
-                key={i}
-                content={i + 1}
-                data={e}
+              <p>Hình ảnh</p>
+              <ImagePreivewsComponent
+                url={imagePreview}
                 handleChangeImage={handleChangeImage}
-                handleDeleteImage={handleDeleteImage}
-                handleChangeContent={handleChangeContent}
-                handleDeleteImageOld={handleDeleteImageOld}
-                image={image}
               />
-            ))}
+            </div>
           </Grid>
+          {slug === "san-pham" ? (
+            <Grid item lg={12}>
+              <div className="news-editor mt-5">
+                <p>Thành phần</p>
+
+                <Editor
+                  editorState={editorState1}
+                  onEditorStateChange={(e) => {
+                    onEditorStateChange(e, 1);
+                  }}
+                  wrapperClassName="wrapper-class"
+                  editorClassName="editor-class"
+                  toolbarClassName="toolbar-class"
+                  handlePastedText={handlePastedText}
+                />
+              </div>
+              <div className="news-editor mt-3">
+                <p>Công dụng</p>
+
+                <Editor
+                  editorState={editorState2}
+                  onEditorStateChange={(e) => {
+                    onEditorStateChange(e, 2);
+                  }}
+                  wrapperClassName="wrapper-class"
+                  editorClassName="editor-class"
+                  toolbarClassName="toolbar-class"
+                  handlePastedText={handlePastedText}
+                />
+              </div>
+              <div className="news-editor mt-3">
+                <p>Liều lượng</p>
+
+                <Editor
+                  editorState={editorState3}
+                  onEditorStateChange={(e) => {
+                    onEditorStateChange(e, 3);
+                  }}
+                  wrapperClassName="wrapper-class"
+                  editorClassName="editor-class"
+                  toolbarClassName="toolbar-class"
+                  handlePastedText={handlePastedText}
+                />
+              </div>
+            </Grid>
+          ) : (
+            <></>
+          )}
         </Grid>
         <div className="news-editor mt-3">
           <p>Trạng thái</p>
