@@ -14,11 +14,10 @@ const AboutUSComponent = () => {
               <Image
                 src={about}
                 style={{
-                  position: "none !important",
-                  objectFit: "cover",
                   width: "100%",
-                  paddingTop: "0px !important",
                   height: "100%",
+                  paddingTop: "0px !important",
+                  objectFit: "contain",
                 }}
                 imageStyle={{
                   position: "none !important",

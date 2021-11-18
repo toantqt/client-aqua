@@ -1,0 +1,56 @@
+.contact {
+  width: 100%;
+  height: 600px;
+  position: relative;
+}
+.contact-img {
+  width: 100%;
+  height: 100%;
+}
+.contact-bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.27);
+}
+.contact-form {
+  position: absolute;
+  top: 0;
+  left: 7.5%;
+  padding: 50px 0px 0px 30px;
+}
+.contact-form .contact-title {
+  text-align: center;
+}
+
+.contact-form .contact-title span {
+  font-size: 30px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.contact-form .input-contact {
+  background-color: white;
+  border-radius: 6px;
+}
+
+.contact-form .contact-btn {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.contact-form .contact-btn span {
+  padding: 15px;
+  background-color: #0160b0;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 6px;
+}
+
+.contact-form .contact-btn span:hover {
+  background-color: #fbbb63;
+  transition: all 300ms;
+  cursor: pointer;
+}

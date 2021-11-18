@@ -1,13 +1,8 @@
 import { Route, Redirect, BrowserRouter, HashRouter } from "react-router-dom";
 import HomePage from "./screens/Home/screens/HomePage";
-import CategoryPage from "./screens/Category/screens/CategoryPage";
-import NewsPage from "./screens/News/screens/NewsPage";
-import ProductPage from "./screens/Product/screens/ProductPage";
-import DetailsProductPage from "./screens/Details Product/screens/DetailsProductPage";
 import slug from "./resources/slug";
 import { isLoggedIn, checkRole } from "./auth/auth";
-import Dashboard from "./screens/Admin/Dashboard/screens/Dashboard";
-import LoginPage from "./screens/Login/screens/LoginPage";
+
 function App() {
   return (
     <HashRouter>

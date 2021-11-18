@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Image from "material-ui-image";
-import logo from "../../../../assets/image/logo1.png";
+// import logo from "../../../../assets/image/logo1.png";
 
 const BannerHomeComponent = (props) => {
   return (
     <Grid id="home-banner" className="mt-5">
-      <div className="wrapper-banner ">
+      {/* <div className="wrapper-banner ">
         <Image
           src={props?.banner?.image?.url}
           style={{
@@ -25,7 +25,7 @@ const BannerHomeComponent = (props) => {
             <span>{props?.title}</span>
           </div>
         </div>
-      </div>
+      </div> */}
     </Grid>
   );
 };

@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import "./header.css";
 import { useHistory } from "react-router-dom";
-import logo from "../../assets/image/Logo.png";
 import SearchComponent from "../Search/Search.component";
 import facebookIcon from "../../assets/image/icon/facebook.png";
 import youtubeIcon from "../../assets/image/icon/youtube.png";
+import logo from "../../assets/image/logo.png";
 
 export default function HeaderComponent() {
   const history = useHistory();
@@ -80,13 +80,13 @@ export default function HeaderComponent() {
         <div className="wrap-header wrap-body">
           <Grid container spacing={1} style={{ height: "100%" }}>
             <Grid item lg={2} md={2} xs={12}>
-              {/* <ul>
-                <li>
-                  <Link to="/">
-                    <img src={logo} alt="" />
-                  </Link>
-                </li>
-              </ul> */}
+              {/* <div style={{ width: "60%", height: "100%" }}>
+                <ul>
+                  <li>
+                    <img src={logo} alt="" width="100%" />
+                  </li>
+                </ul>
+              </div> */}
             </Grid>
             <Grid item lg={10} md={10} xs={12}>
               <ul className="menu">
