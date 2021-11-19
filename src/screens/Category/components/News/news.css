@@ -10,7 +10,7 @@
   text-align: center;
   width: 100%;
   border-radius: 10px 10px 0px 0px;
-  border-bottom: 2px solid #08999c;
+  border-bottom: 2px solid #0061b0;
 }
 .MuiAppBar-colorPrimary {
   background-color: white !important;
@@ -23,7 +23,7 @@
   text-transform: none !important;
 }
 .MuiTabs-root button {
-  border: 1.5px solid #08999c;
+  border: 1.5px solid #0061b0;
   border-bottom: none !important;
 }
 .MuiTabs-root button {
@@ -47,7 +47,7 @@
   display: none !important;
 }
 .MuiTab-textColorInherit.Mui-selected {
-  background-color: #08999c;
+  background-color: #0061b0;
   color: white;
 }
 .subCategory ul li {
@@ -57,7 +57,7 @@
   padding-right: 22px;
   padding-top: 15px;
   padding-bottom: 15px;
-  border: 1px solid #08999c;
+  border: 1px solid #0061b0;
   border-bottom: none;
   font-size: 16px;
   font-weight: 500;

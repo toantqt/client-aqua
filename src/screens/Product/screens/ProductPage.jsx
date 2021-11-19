@@ -1,24 +1,54 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation, Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
-import HeaderComponent from "../../../components/Header/Header.component";
-import FooterComponent from "../../../components/Footer/Footer.component";
-import { getCategory } from "../../../api/API";
-import ClientRoutes from "../../../routes/ClientRoutes";
+import { getAllProduct, getCategory } from "../../../api/API";
+import SidebarComponent from "../../../components/Sidebar/Sidebar.component";
+import AdvisoryComponent from "../../../components/Advisory/Advisory.component";
+import ProductHighlightComponent from "../../../components/Product Highlight/ProductHighlight.component";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default function NewsPage(props) {
   const history = useHistory();
   const location = useLocation();
   const route = location.pathname.replace("/", "");
-  const [category, setCategory] = useState();
+  const [categoryID, setCategoryID] = useState();
+  const [subCategoryID, setSubCategoryID] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [subCategory, setSubCategory] = useState([]);
+  const [page, setPage] = useState(0);
+  const [product, setProduct] = useState([]);
 
   useEffect(async () => {
     window.scrollTo(0, 0);
-    setCategory();
-    await getCategory(route).then((res) => {
-      setCategory(res.data);
-    });
-  }, [route]);
+    if (props.slug) {
+      await getCategory(props.slug).then((res) => {
+        setSubCategory(res.data.subCategory);
+        setCategoryID(res.data._id);
+      });
+    }
+  }, [props.slug]);
+
+  useEffect(async () => {
+    setLoading(true);
+    if (subCategoryID === "" && categoryID) {
+      await getAllProduct(categoryID, page).then((res) => {
+        setProduct(res.data);
+      });
+      setLoading(false);
+    }
+  }, [subCategoryID, categoryID]);
+
+  useEffect(() => {}, [subCategoryID]);
+  const handleChange = (id) => {
+    if (subCategoryID !== id) {
+      setSubCategoryID(id);
+      setLoading(true);
+    }
+  };
+
+  const handleLoading = (status) => {
+    setLoading(status);
+  };
 
   const handleClick = () => {
     history.push(`/${route}`);
@@ -26,32 +56,57 @@ export default function NewsPage(props) {
 
   return (
     <Grid>
-      <HeaderComponent />
-      <Grid
-        style={{
-          width: "80%",
-          margin: "0 auto",
-          marginTop: "20px",
-        }}
-      >
-        <div className="head-name">
-          <Link to="/">
-            <span className="head-item">Trang chủ</span>
-          </Link>
-          <i className="fas fa-chevron-right ml-2 mr-2"></i>
-          <span className="head-item" onClick={handleClick}>
-            {category?.categoryName}
-          </span>
-        </div>
-        <div className="mt-5">
-          {/* {loading ? <LoadingComponent /> : <></>} */}
-          <ClientRoutes category={category} />
-        </div>
-      </Grid>
-
-      <Grid style={{ width: "100%", marginTop: "100px" }}>
-        <FooterComponent />
-      </Grid>
+      <div>
+        <Grid container spacing={4}>
+          <Grid item lg={4} md={4} xs={12}>
+            <SidebarComponent
+              category={subCategory}
+              handleChange={handleChange}
+            />
+            <AdvisoryComponent />
+            <ProductHighlightComponent />
+          </Grid>
+          <Grid item lg={8} md={8} xs={12}>
+            {loading ? (
+              <div
+                style={{
+                  width: "100%",
+                  height: "300px",
+                  marginTop: "30px",
+                  textAlign: "center",
+                }}
+              >
+                <CircularProgress />
+              </div>
+            ) : (
+              <>
+                {product.length === 0 ? (
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "300px",
+                      marginTop: "30px",
+                      textAlign: "center",
+                    }}
+                  >
+                    <span style={{ color: "#6e7673" }}>
+                      Danh sách sản phẩm đang trong quá trình cập nhật
+                    </span>
+                  </div>
+                ) : (
+                  <></>
+                )}
+              </>
+            )}
+            {/* <ListsProductComponent
+              categoryID={props?.category?._id}
+              subCategoryID={subCategoryID}
+              loading={loading}
+              handleLoading={handleLoading}
+            /> */}
+          </Grid>
+        </Grid>
+      </div>
     </Grid>
   );
 }

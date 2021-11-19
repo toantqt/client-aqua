@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import { getImage, getVideo } from "../../../../api/API";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import News from "../../../../components/News/News";
+// import News from "../../../../components/News/News";
 import "../../../../components/News/news.css";
 import moment from "moment";
 import { SRLWrapper } from "simple-react-lightbox";
@@ -54,11 +54,11 @@ const Lirary = (props) => {
         <SimpleReactLightbox>
           <SRLWrapper>
             <a href={props?.url}>
-              <News
+              {/* <News
                 img={e?.library[0]?.url}
                 title={e?.title}
                 date={moment(e?.created).format("DD/MM/YYYY")}
-              />
+              /> */}
             </a>
           </SRLWrapper>
         </SimpleReactLightbox>

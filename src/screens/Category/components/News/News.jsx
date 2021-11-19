@@ -2,8 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import "./news.css";
-import ListsNewsComponent from "../../../../components/Lists News/ListsNews.component";
-import { getNewsCategory, getImage, getVideo } from "../../../../api/API";
+// import ListsNewsComponent from "../../../../components/Lists News/ListsNews.component";
+import {
+  getNewsCategory,
+  getImage,
+  getVideo,
+  getCategory,
+} from "../../../../api/API";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import queryString from "query-string";
 import Button from "@material-ui/core/Button";
@@ -24,14 +29,13 @@ const useTabStyles = makeStyles({
     flexGrow: "0",
   },
 });
-const News = (props) => {
+export default function News(props) {
   const classes = useTabStyles();
   const cookies = new Cookies();
   const history = useHistory();
   const [value, setValue] = React.useState(0);
   const [subCategory, setSubCategory] = useState([]);
   const [active, setActive] = useState();
-  const [subCategoryID, setSubCategoryID] = useState();
   const [categoryID, setCategoryID] = useState();
   const [news, setNews] = useState([]);
   const [page, setPage] = useState(0);
@@ -39,113 +43,47 @@ const News = (props) => {
   const [seeMore, setSeeMore] = useState(true);
   const [type, setType] = useState(1);
 
-  console.log(news);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-  useEffect(() => {
-    if (props.location.search) {
-      const search = queryString.parse(props.location.search);
-      setPage(parseInt(search.page));
-    }
-  }, [props.location.search]);
-  useEffect(() => {
-    setType(1);
-    if (props.category) {
-      props.handleLoading(true);
-      if (props.category.subCategory.length != 0) {
-        let active = cookies.get("active");
-        console.log(active);
-        if (active === "Hình ảnh") {
-          console.log("hinh anh");
-          setType(2);
-        } else if (active === "Video") {
-          setType(3);
-        }
-
-        if (active) {
-          const checkActive = props.category.subCategory.findIndex((e) => {
-            return e.name === active;
-          });
-          if (checkActive !== -1) {
-            setValue(checkActive);
-            setSubCategoryID(props.category.subCategory[checkActive]._id);
-          } else {
-            cookies.remove("active");
-            setType(1);
-            setSubCategoryID(props.category.subCategory[0]?._id);
-            setValue(0);
-          }
+  useEffect(async () => {
+    if (props.slug) {
+      await getCategory(props.slug).then((res) => {
+        setSubCategory(res.data.subCategory);
+        if (res.data.subCategory.length === 0) {
+          setCategoryID(res.data._id);
         } else {
-          setSubCategoryID(props.category.subCategory[0]?._id);
-          setValue(0);
+          setCategoryID(res.data.subCategory[0]._id);
         }
-      } else {
-        setSubCategoryID("undefined");
-      }
-      setSubCategory(props.category.subCategory);
-      setCategoryID(props.category._id);
-      props.handleLoading(false);
+      });
     }
-  }, [props.category]);
-
-  console.log(type);
+  }, [props.slug]);
 
   useEffect(async () => {
-    setNews([]);
-    if (type != 2 && type != 3) {
-      await getNewsCategory(categoryID, subCategoryID, page).then((res) => {
-        console.log("data", res.data);
-        if (res.data.length != 0) {
-          for (let item of res.data) {
-            setNews((news) => [...news, item]);
-          }
-          if (res.data.length < 9) {
-            setSeeMore(false);
-          } else {
-            setSeeMore(true);
-          }
-        } else {
-          setSeeMore(false);
-        }
+    if (type === 1) {
+      await getNewsCategory(categoryID, page).then((res) => {
+        setNews(res.data);
       });
       setLoading(false);
     }
-  }, [categoryID, subCategoryID, page, type]);
+  }, [categoryID]);
+
+  const handleChange = (event, newValue) => {
+    console.log(value);
+    setValue(newValue);
+  };
 
   const handleClick = (name, subCategoryID, type) => {
     cookies.set("active", name, { path: "/" });
     setActive(name);
-    setSubCategoryID(subCategoryID);
-    setNews([]);
-    if (type != 1) {
-      setLoading(false);
-    } else {
-      setLoading(true);
-    }
+    setCategoryID(subCategoryID);
+    setLoading(true);
     setType(type);
   };
 
-  const handleClickSeeMore = () => {
-    let a = page + 1;
-    history.push({ search: `?page=${a}` });
-  };
   const lists = subCategory.map((e, index) => {
     let padding = "12px 25px 12px 25px";
     if (subCategory.length <= 3) {
       padding = "12px 50px 12px 50px";
     }
     return (
-      // <li
-      // onClick={() => {
-      //   handleClick(e.name, e._id);
-      // }}
-      //   className={"item " + (e.name === active ? "active" : "")}
-      //   key={index}
-      //   style={{ padding: padding }}
-      // >
-      //   <span>{e.name}</span>
-      // </li>
       <Tab
         label={e.name}
         onClick={() => {
@@ -179,7 +117,6 @@ const News = (props) => {
           <></>
         )}
       </div>
-      {/* <ListsNewsComponent news={news} /> */}
 
       {loading ? (
         <div
@@ -193,56 +130,9 @@ const News = (props) => {
           <CircularProgress />
         </div>
       ) : (
-        <>
-          {type === 1 ? (
-            <>
-              {news.length !== 0 ? (
-                <>
-                  <ListsNewsComponent news={news} />
-                  <div className="mt-4" style={{ textAlign: "center" }}>
-                    {seeMore ? (
-                      <Button
-                        variant="outlined"
-                        onClick={() => {
-                          handleClickSeeMore();
-                        }}
-                        style={{
-                          padding: "10px 30px 10px 30px",
-                          color: "white",
-                          backgroundColor: "#08999C",
-                        }}
-                      >
-                        <span>Xem thêm</span>
-                      </Button>
-                    ) : (
-                      <></>
-                    )}
-                  </div>
-                </>
-              ) : (
-                <div
-                  style={{
-                    width: "100%",
-                    textAlign: "center",
-                    height: "300px",
-                  }}
-                  className="mt-5"
-                >
-                  <span style={{ color: "#6E7673" }}>
-                    Hiện tại chưa có bài viết trong danh mục
-                  </span>
-                </div>
-              )}
-            </>
-          ) : (
-            <>
-              <Library type={type} handleLoading={handleLoading} />
-            </>
-          )}
-        </>
+        <></>
       )}
+      {/* <ListsNewsComponent news={news} /> */}
     </Grid>
   );
-};
-
-export default News;
+}

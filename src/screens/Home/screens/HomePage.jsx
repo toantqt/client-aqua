@@ -22,6 +22,7 @@ export default function HomePage() {
     AOS.init({
       duration: 1000,
     });
+    localStorage.setItem("active-h", 1);
   }, []);
 
   return (

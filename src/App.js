@@ -2,15 +2,17 @@ import { Route, Redirect, BrowserRouter, HashRouter } from "react-router-dom";
 import HomePage from "./screens/Home/screens/HomePage";
 import slug from "./resources/slug";
 import { isLoggedIn, checkRole } from "./auth/auth";
+import CategoryPage from "../src/screens/Category/screens/CategoryPage";
 
 function App() {
   return (
     <HashRouter>
       <Route exact path="/" component={HomePage}></Route>
-      {/* <Route
+      <Route
         path="/danh-muc/:slug"
         render={(props) => <CategoryPage {...props} />}
       ></Route>
+      {/* 
       <Route
         exact
         path={slug.product}

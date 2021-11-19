@@ -52,6 +52,7 @@
 .wrap-header .infor-contact li:first-child {
   border-left: none;
 }
+
 #header ul li span {
   color: black;
   font-weight: 500;
@@ -67,6 +68,13 @@
 }
 #header ul li a:hover span {
   color: white;
+}
+.active {
+  text-decoration: none;
+  background-color: #0061b0;
+}
+.active span {
+  color: white !important;
 }
 .sticky {
   position: fixed;

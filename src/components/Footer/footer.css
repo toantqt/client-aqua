@@ -2,15 +2,17 @@ footer {
   width: 100%;
   overflow: hidden;
   box-shadow: 0 -5px 5px -5px rgb(165, 163, 163);
+  background-color: #0160b0;
 }
 #footer {
-  width: 70%;
+  width: 85%;
   margin: 0 auto;
 }
 .footer-title {
   font-size: 20px;
   font-weight: 500;
   margin-bottom: 10px;
+  color: #ffff00;
 }
 .footer-lists ul {
   list-style-type: none;
@@ -18,11 +20,10 @@ footer {
 }
 .footer-lists ul li {
   font-size: 16px;
-  color: #989898;
+  color: white;
   line-height: 1.5;
   font-weight: 500;
 }
-
-.footer-lists ul li i {
-  margin-right: 10px;
+.footer-lists ul li .footer-lists-title {
+  color: #ffff00;
 }

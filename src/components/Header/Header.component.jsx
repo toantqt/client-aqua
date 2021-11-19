@@ -11,6 +11,14 @@ import logo from "../../assets/image/logo.png";
 export default function HeaderComponent() {
   const history = useHistory();
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(1);
+
+  useEffect(() => {
+    if (localStorage.getItem("active-h")) {
+      setActive(parseInt(localStorage.getItem("active-h")));
+    }
+  }, [localStorage.getItem("active-h")]);
+
   useEffect(() => {
     const header = document.getElementById("header");
     const sticky = header.offsetTop;
@@ -39,6 +47,10 @@ export default function HeaderComponent() {
   };
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleClickActive = (index) => {
+    localStorage.setItem("active-h", index);
   };
   return (
     <Grid>
@@ -91,43 +103,85 @@ export default function HeaderComponent() {
             <Grid item lg={10} md={10} xs={12}>
               <ul className="menu">
                 <li className="menu-item">
-                  <Link to="/">
+                  <Link to="/" className={active === 1 ? "active" : ""}>
                     <span>TRANG CHỦ</span>
                   </Link>
                 </li>
                 <li className="menu-item">
-                  <Link to="/danh-muc/gioi-thieu">
+                  <Link
+                    to="/danh-muc/gioi-thieu"
+                    className={active === 2 ? "active" : ""}
+                    onClick={() => {
+                      handleClickActive(2);
+                    }}
+                  >
                     <span>GIỚI THIỆU</span>
                   </Link>
                 </li>
                 <li className="menu-item">
-                  <Link to="/danh-muc/tin-tuc">
+                  <Link
+                    to="/danh-muc/san-pham"
+                    className={active === 3 ? "active" : ""}
+                    onClick={() => {
+                      handleClickActive(3);
+                    }}
+                  >
                     <span>SẢN PHẨM </span>
                   </Link>
                 </li>
                 <li className="menu-item">
-                  <Link to="/danh-muc/quy-trinh-nuoi-tom">
+                  <Link
+                    to="/danh-muc/canh-bao"
+                    className={active === 4 ? "active" : ""}
+                    onClick={() => {
+                      handleClickActive(4);
+                    }}
+                  >
                     <span>CẢNH BÁO</span>
                   </Link>
                 </li>
                 <li className="menu-item">
-                  <Link to="/tom-giong">
+                  <Link
+                    to="/danh-muc/dai-ly"
+                    className={active === 5 ? "active" : ""}
+                    onClick={() => {
+                      handleClickActive(5);
+                    }}
+                  >
                     <span>ĐẠI LÝ </span>
                   </Link>
                 </li>
                 <li className="menu-item">
-                  <Link to="/san-pham">
+                  <Link
+                    to="/danh-muc/tin-tuc"
+                    className={active === 6 ? "active" : ""}
+                    onClick={() => {
+                      handleClickActive(6);
+                    }}
+                  >
                     <span>TIN TỨC</span>
                   </Link>
                 </li>
 
                 <li className="menu-item">
-                  <Link to="/danh-muc/van-phong-doi-tac">
+                  <Link
+                    to="/danh-muc/tuyen-dung"
+                    className={active === 7 ? "active" : ""}
+                    onClick={() => {
+                      handleClickActive(7);
+                    }}
+                  >
                     <span>TUYỂN DỤNG</span>
                   </Link>
                 </li>
                 <li className="menu-item">
-                  <Link to="/danh-muc/van-phong-doi-tac">
+                  <Link
+                    to="/danh-muc/lien-he"
+                    className={active === 8 ? "active" : ""}
+                    onClick={() => {
+                      handleClickActive(8);
+                    }}
+                  >
                     <span>LIÊN HỆ</span>
                   </Link>
                 </li>
