@@ -40,6 +40,7 @@
 
 .product .wrap-product:hover {
   cursor: pointer;
+  border: none !important;
 }
 .product .wrap-product:hover .img-product {
   border: 2px solid #0061b0;
@@ -132,4 +133,17 @@
 .warning .warning-video {
   width: 100%;
   height: 600px;
+}
+
+@media (min-width: 1920px) {
+  .wrap-product {
+    height: 500px !important;
+  }
+  .wrap-product .img-product {
+    height: 400px !important;
+  }
+  .product .wrap-product .name-product {
+    height: 100px !important;
+    padding: 20px !important;
+  }
 }

@@ -18,12 +18,6 @@ const FooterComponent = () => {
                 <li>
                   <span className="footer-lists-title">Địa chỉ:</span>
                   <span className="ml-2">
-                    Ấp Công Điền, Xã Vĩnh Trạch, TP. Bạc Liêu, Bạc Liêu
-                  </span>
-                </li>
-                <li>
-                  <span className="footer-lists-title">Địa chỉ:</span>
-                  <span className="ml-2">
                     24/30 Lý Tự Trọng, Phường An Cư, Quận Ninh Kiều, TP Cần Thơ
                   </span>
                 </li>
@@ -33,7 +27,7 @@ const FooterComponent = () => {
                 </li>
                 <li>
                   <span className="footer-lists-title">Điện thoại:</span>
-                  <span className="ml-2">029 26 29 55 66 - 1900 88 88 6</span>
+                  <span className="ml-2">0978590952</span>
                 </li>
 
                 <li className="footer-lists-title">

@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const url = "https://truc-anh.herokuapp.com/api";
-const url = "http://localhost:6699/api";
+const url = "https://aquavn.herokuapp.com/api";
+// const url = "http://localhost:6699/api";
 
 export const getHomeBanner = async (slug) => {
   return await axios
@@ -79,9 +79,9 @@ export const getAchievements = async (slug) => {
     });
 };
 
-export const getProduct = async (categoryID, subCategoryID, page) => {
+export const getProduct = async (categoryID, page) => {
   return await axios
-    .get(`${url}/get-product/${categoryID}/${subCategoryID}/${page}`)
+    .get(`${url}/get-product/${categoryID}/${page}`)
     .then(async (res) => {
       return res.data;
     })

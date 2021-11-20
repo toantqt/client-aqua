@@ -1,40 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
-import News from "../../components/News/News";
-import moment from "moment";
-
-const ListsNewsComponent = (props) => {
-  const history = useHistory();
-  const handleClickNews = (slug) => {
-    history.push(`/bai-viet/${slug}`);
-  };
-  const lists = props?.news?.map((e, index) => {
-    return (
-      <Grid
-        item
-        lg={3}
-        md={3}
-        xs={12}
-        onClick={() => {
-          handleClickNews(e.slug);
-        }}
-      >
-        <News
-          img={e?.thumbnail?.url}
-          title={e?.title}
-          date={moment(e?.created).format("DD/MM/YYYY")}
-        />
-      </Grid>
-    );
-  });
+import Image from "material-ui-image";
+import "../News/news.css";
+export default function ListsNewsComponent(props) {
   return (
-    <Grid id="lists-news">
-      <Grid container spacing={3}>
-        {lists}
-      </Grid>
+    <Grid className="wrap-news wrap-n mt-3">
+      <div className="img-news">
+        <Image
+          src={props?.img}
+          style={{
+            height: "100% ",
+            objectFit: "cover",
+            paddingTop: "0px",
+            borderRadius: "6px !important",
+          }}
+          imageStyle={{ borderRadius: "15px 15px 0 0", objectFit: "cover" }}
+        />
+      </div>
+      <div className="title-n">
+        <div className="title-news ">
+          <span>{props?.title}</span>
+        </div>
+      </div>
     </Grid>
   );
-};
-
-export default ListsNewsComponent;
+}

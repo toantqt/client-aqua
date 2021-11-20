@@ -1,58 +1,44 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
-import { Link } from "react-router-dom";
-import HeaderComponent from "../../../components/Header/Header.component";
-import FooterComponent from "../../../components/Footer/Footer.component";
-import Details from "../components/Details/Details";
 import { getDetailsProduct } from "../../../api/API";
-
-const DetailsProductPage = (props) => {
-  const history = useHistory();
-  const productID = props.match.params.productID;
+import GalleryComponent from "../components/Gallery/Gallery.component";
+import "./details.css";
+import DescriptionComponent from "../components/Description/Description.component";
+import DetailsComponent from "../components/Deatails/Details.component";
+export default function DetailsProduct(props) {
+  const id = props.match.params.id;
   const [product, setProduct] = useState();
   useEffect(async () => {
     window.scrollTo(0, 0);
-    await getDetailsProduct(productID).then((res) => {
-      setProduct(res.data);
-    });
-  }, [productID]);
-
-  console.log(product);
+    if (id) {
+      await getDetailsProduct(id).then((res) => {
+        setProduct(res.data);
+      });
+    }
+  }, [id]);
 
   return (
-    <Grid>
-      <HeaderComponent />
-      <Grid
-        style={{
-          width: "80%",
-          margin: "0 auto",
-          marginTop: "20px",
-        }}
-      >
-        <div className="head-name">
-          <Link to="/">
-            <span className="head-item">Trang chủ</span>
-          </Link>
-          <i className="fas fa-chevron-right ml-2 mr-2"></i>
-          <span
-            className="head-item"
-            onClick={() => {
-              history.push(`/${product?.category?.slug}`);
-            }}
-          >
-            {product?.category?.categoryName}
-          </span>
+    <>
+      {product ? (
+        <div className="details-pd">
+          <div className="wrap-content-pd">
+            <Grid container spacing={2}>
+              <Grid item lg={8} md={8} xs={6}>
+                <GalleryComponent image={product?.product?.image} />
+              </Grid>
+              <Grid item lg={4} md={4} xs={6}>
+                <DescriptionComponent data={product?.product} />
+              </Grid>
+            </Grid>
+            <hr />
+            <div className="pb-5">
+              <DetailsComponent data={product?.product} />
+            </div>
+          </div>
         </div>
-        <div className="mt-5">
-          <Details product={product} />
-        </div>
-      </Grid>
-      <Grid style={{ width: "100%", marginTop: "100px" }}>
-        <FooterComponent />
-      </Grid>
-    </Grid>
+      ) : (
+        <></>
+      )}
+    </>
   );
-};
-
-export default DetailsProductPage;
+}

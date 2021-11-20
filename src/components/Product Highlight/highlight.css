@@ -10,7 +10,7 @@
   width: 100%;
   text-align: center;
   padding: 10px;
-  background-color: #08999c;
+  background-color: #0061b0;
   border-radius: 10px 10px 0px 0px;
 }
 .wrap-highlight .header-highlight span {
@@ -24,5 +24,5 @@
   min-height: 500px;
   padding-top: 30px !important;
   padding: 50px;
-  border: 1.5px solid #08999c;
+  border: 1.5px solid #0061b0;
 }

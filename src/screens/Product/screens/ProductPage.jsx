@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation, Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
-import { getAllProduct, getCategory } from "../../../api/API";
+import { getAllProduct, getCategory, getProduct } from "../../../api/API";
 import SidebarComponent from "../../../components/Sidebar/Sidebar.component";
 import AdvisoryComponent from "../../../components/Advisory/Advisory.component";
 import ProductHighlightComponent from "../../../components/Product Highlight/ProductHighlight.component";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import ProductComponent from "../components/Product.component";
 
-export default function NewsPage(props) {
+export default function ProductPage(props) {
   const history = useHistory();
   const location = useLocation();
   const route = location.pathname.replace("/", "");
@@ -30,30 +31,45 @@ export default function NewsPage(props) {
 
   useEffect(async () => {
     setLoading(true);
+    setProduct([]);
     if (subCategoryID === "" && categoryID) {
       await getAllProduct(categoryID, page).then((res) => {
+        setProduct(res.data);
+      });
+      setLoading(false);
+    } else if (subCategoryID !== "") {
+      await getProduct(subCategoryID, page).then((res) => {
         setProduct(res.data);
       });
       setLoading(false);
     }
   }, [subCategoryID, categoryID]);
 
-  useEffect(() => {}, [subCategoryID]);
+  const handleClick = (id) => {
+    history.push(`/danh-muc/chi-tiet-san-pham/${id}`);
+  };
+
   const handleChange = (id) => {
     if (subCategoryID !== id) {
       setSubCategoryID(id);
       setLoading(true);
     }
   };
-
-  const handleLoading = (status) => {
-    setLoading(status);
-  };
-
-  const handleClick = () => {
-    history.push(`/${route}`);
-  };
-
+  const listsProduct = product?.map((e, index) => {
+    return (
+      <Grid
+        item
+        lg={4}
+        md={4}
+        xs={12}
+        onClick={() => {
+          handleClick(e._id);
+        }}
+      >
+        <ProductComponent data={e} key={index} />
+      </Grid>
+    );
+  });
   return (
     <Grid>
       <div>
@@ -94,7 +110,11 @@ export default function NewsPage(props) {
                     </span>
                   </div>
                 ) : (
-                  <></>
+                  <div style={{ width: "100%" }}>
+                    <Grid container spacing={3}>
+                      {listsProduct}
+                    </Grid>
+                  </div>
                 )}
               </>
             )}

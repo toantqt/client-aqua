@@ -2,6 +2,12 @@
   margin: 0 auto;
   height: 500px;
 }
+.wrap-n {
+  height: 350px !important;
+}
+.wrap-n .img-news {
+  height: 250px !important;
+}
 .wrap-news .img-news {
   height: 300px;
 }
@@ -9,7 +15,9 @@
   text-align: center;
   padding: 10px;
 }
-
+.wrap-news .title-news:hover span {
+  color: #0061b0;
+}
 .wrap-news .title-news span {
   font-size: 18px;
   font-weight: 500;
@@ -52,4 +60,10 @@
 .wrap-news .more-news span:hover {
   color: #0061b0;
   font-weight: 500;
+}
+
+.title-n {
+  background: #fff;
+  box-shadow: 0 4px 20px rgb(0 0 0 / 6%);
+  padding: 15px 10px 15px 10px;
 }

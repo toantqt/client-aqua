@@ -46,7 +46,7 @@
 }
 
 .wrap-header .infor-contact li {
-  border-left: 2px solid #003158;
+  border-left: 2px solid #125488;
   text-align: center;
 }
 .wrap-header .infor-contact li:first-child {
@@ -136,5 +136,11 @@
   .menu .social-connect {
     padding-left: 20px !important;
     padding-right: 20px !important;
+  }
+  #header-top {
+    height: 80px;
+  }
+  #header {
+    height: 100px;
   }
 }

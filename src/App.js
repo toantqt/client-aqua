@@ -12,6 +12,7 @@ function App() {
         path="/danh-muc/:slug"
         render={(props) => <CategoryPage {...props} />}
       ></Route>
+
       {/* 
       <Route
         exact

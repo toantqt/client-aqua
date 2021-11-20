@@ -24,21 +24,6 @@ const Lirary = (props) => {
   const [open, setOpen] = useState(false);
   const [light, setLight] = useState(true);
 
-  useEffect(async () => {
-    setLoading(true);
-    if (props?.type === 2) {
-      await getImage().then((res) => {
-        console.log(res.data);
-        setImage(res.data);
-      });
-    } else if (props?.type === 3) {
-      await getVideo().then((res) => {
-        setVideo(res.data);
-      });
-    }
-    setLoading(false);
-  }, [props.type]);
-
   const handleClickVideo = (url) => {
     setLight(true);
     setUrlPlay(url);
@@ -48,86 +33,39 @@ const Lirary = (props) => {
     setOpen(false);
   };
 
-  const listImage = image.map((e, index) => {
-    return (
-      <Grid item lg={3} md={3} xs={12}>
-        <SimpleReactLightbox>
-          <SRLWrapper>
-            <a href={props?.url}>
-              {/* <News
-                img={e?.library[0]?.url}
-                title={e?.title}
-                date={moment(e?.created).format("DD/MM/YYYY")}
-              /> */}
-            </a>
-          </SRLWrapper>
-        </SimpleReactLightbox>
-      </Grid>
-    );
-  });
-  const listVideo = video.map((e, index) => {
-    return (
-      <Grid
-        item
-        lg={3}
-        md={3}
-        xs={12}
-        onClick={() => {
-          handleClickVideo(e.video.url);
-        }}
-      >
-        <Grid className="wrap-news">
-          <div className="news">
-            <div className="img">
-              <ReactPlayer
-                url={e.video.url}
-                width="100%"
-                height="100%"
-                controls={true}
-                light={light}
-              />
-            </div>
-            <div
-              className="img-bg"
-              style={{
-                width: "100%",
-                height: "100%",
-                position: "absolute",
-                top: "0%",
-              }}
-            ></div>
-          </div>
-          <div className="title">
-            <span>{e?.title}</span>
-          </div>
-        </Grid>
-      </Grid>
-    );
-  });
-
   return (
-    <Grid>
-      {loading ? (
+    <Grid className="wrap-news wrap-n mt-3">
+      <div className="news" style={{ position: "relative" }}>
+        <div className="img-news">
+          <ReactPlayer
+            url={props?.video?.video?.url}
+            width="100%"
+            height="100%"
+            controls={true}
+            light={light}
+          />
+        </div>
         <div
+          className="img-bg"
           style={{
             width: "100%",
-            height: "300px",
-            marginTop: "30px",
-            textAlign: "center",
+            height: "100%",
+            position: "absolute",
+            top: "0%",
           }}
-        >
-          <CircularProgress />
+        ></div>
+      </div>
+      <div className="title-n">
+        <div className="title-news">
+          <span>{props?.video?.title}</span>
         </div>
-      ) : (
-        <Grid container spacing={3} className="mt-5">
-          {props?.type === 2 ? listImage : listVideo}
-        </Grid>
-      )}
-      <ModalVideoComponent
+      </div>
+
+      {/* <ModalVideoComponent
         url={urlPlay}
         open={open}
         handleClose={handleClose}
-      />
+      /> */}
     </Grid>
   );
 };

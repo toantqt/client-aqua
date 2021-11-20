@@ -2,15 +2,12 @@ import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import "./advisory.css";
 import Image from "material-ui-image";
-// import bg from "../../assets/image/advisory/img1.png";
-// import icon from "../../assets/image/advisory/img2.png";
-
 const AdvisoryComponent = () => {
   return (
     <Grid className="mt-5 mb-5">
       <div className="wrap-advisory">
         <Image
-          // src={bg}
+          src="https://res.cloudinary.com/aquavn/image/upload/v1637423812/about_sebrry.png"
           style={{
             width: "100%",
             height: "100%",
@@ -21,7 +18,12 @@ const AdvisoryComponent = () => {
         />
         <div className="bg-advisory"></div>
         <div className="content-advisory">
-          <div>{/* <img src={icon} alt="" /> */}</div>
+          <div>
+            <img
+              src="https://res.cloudinary.com/aquavn/image/upload/v1637426816/download_uhczxa.png"
+              alt=""
+            />
+          </div>
           <div className="mt-3">
             <span style={{ fontSize: "36px", fontWeight: "500" }}>
               GỌI NGAY
@@ -31,7 +33,7 @@ const AdvisoryComponent = () => {
           </div>
           <div className="mt-3">
             <span style={{ fontSize: "36px", fontWeight: "500" }}>
-              1900 55 88 32
+              0978 590 952
             </span>
           </div>
         </div>

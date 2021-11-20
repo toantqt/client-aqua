@@ -46,6 +46,9 @@ export default function CategoryPage(props) {
         localStorage.setItem("active-h", 8);
         setCategoryName("Liên hệ");
         break;
+      case "bai-viet":
+        setCategoryName("Bài viết");
+        break;
     }
   }, [params]);
   const handleLoading = () => {

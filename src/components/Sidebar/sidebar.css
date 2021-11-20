@@ -14,10 +14,10 @@
   transition: all 400ms;
 }
 .product-category .active span {
-  color: #f1cf6a !important;
+  color: #0061b0 !important;
 }
 .product-category .active i {
-  color: #f1cf6a;
+  color: #0061b0;
 }
 .product-category .category-item {
   padding: 12px;
@@ -29,10 +29,10 @@
   transition: all 400ms;
 }
 .product-category .category-item:hover span {
-  color: #f1cf6a;
+  color: #0061b0;
 }
 .product-category .category-item:hover i {
-  color: #f1cf6a;
+  color: #0061b0;
 }
 .product-category .category-item span {
   font-size: 17px;

@@ -43,3 +43,12 @@
 #slider-banner .slick-dots li.slick-active button:before {
   color: #08999c !important;
 }
+
+@media (min-width: 1920px) {
+  #slider-banner {
+    height: 650px !important;
+  }
+  .banner-img {
+    height: 650px;
+  }
+}

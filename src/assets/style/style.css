@@ -10,3 +10,10 @@ body {
   width: 85%;
   margin: 0 auto;
 }
+
+@media (min-width: 1920px) {
+  .wrap-body {
+    width: 75%;
+    margin: 0 auto;
+  }
+}

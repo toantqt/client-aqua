@@ -1,42 +1,41 @@
-#office {
-  width: 76%;
+.office {
+  width: 70%;
   margin: 0 auto;
 }
-
-#office .infor-title {
+.office .infor-title {
   text-align: center;
   font-size: 36px;
   font-weight: 500;
-  color: #08999c;
+  color: #0061b0;
 }
 
-#office .infor-item span {
+.office .infor-item span {
   font-size: 16px;
   font-weight: 500;
   color: #989898;
   text-align: justify;
 }
-#office .infor-item i {
+.office .infor-item i {
   font-size: 16px;
   color: #989898;
 }
 
-#office .infor-name {
+.office .infor-name {
   font-size: 18px !important;
   color: #000000 !important;
 }
 
 @media (min-width: 1920px) {
-  #office {
+  .office {
     width: 66%;
   }
-  #office img {
+  .office img {
     height: 180px !important;
   }
   .office {
     margin-bottom: 120px;
   }
-  #office .infor-item span {
+  .office .infor-item span {
     font-size: 20px;
   }
 }
