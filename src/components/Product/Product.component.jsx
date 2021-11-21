@@ -6,10 +6,15 @@ import Image from "material-ui-image";
 
 export default function ProductComponent() {
   const [arr, setArray] = useState([1, 2, 3, 4]);
+  const history = useHistory();
+
+  const handleClick = () => {
+    history.push("/danh-muc/chi-tiet-san-pham/619921125eae7843786c97c4");
+  };
 
   const listsProduct = arr.map((e, index) => {
     return (
-      <Grid item lg={3} md={3} xs={12} key={index}>
+      <Grid item lg={3} md={3} xs={12} key={index} onClick={handleClick}>
         <div className="wrap-product">
           <div className="img-product">
             <Image

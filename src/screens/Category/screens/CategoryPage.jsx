@@ -49,6 +49,10 @@ export default function CategoryPage(props) {
       case "bai-viet":
         setCategoryName("Bài viết");
         break;
+      case "chi-tiet-san-pham":
+        localStorage.setItem("active-h", 3);
+        setCategoryName("Chi tiết sản phẩm");
+        break;
     }
   }, [params]);
   const handleLoading = () => {

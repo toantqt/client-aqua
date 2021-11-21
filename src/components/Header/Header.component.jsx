@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import SearchComponent from "../Search/Search.component";
 import facebookIcon from "../../assets/image/icon/facebook.png";
 import youtubeIcon from "../../assets/image/icon/youtube.png";
-import logo from "../../assets/image/logo.png";
+import logo from "../../assets/image/logoaqua.png";
 
 export default function HeaderComponent() {
   const history = useHistory();
@@ -92,13 +92,13 @@ export default function HeaderComponent() {
         <div className="wrap-header wrap-body">
           <Grid container spacing={1} style={{ height: "100%" }}>
             <Grid item lg={2} md={2} xs={12}>
-              {/* <div style={{ width: "60%", height: "100%" }}>
+              <div style={{ width: "60%", height: "100%" }}>
                 <ul>
                   <li>
-                    <img src={logo} alt="" width="100%" />
+                    <img src={logo} alt="" width="90%" />
                   </li>
                 </ul>
-              </div> */}
+              </div>
             </Grid>
             <Grid item lg={10} md={10} xs={12}>
               <ul className="menu">

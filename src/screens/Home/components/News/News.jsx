@@ -7,9 +7,13 @@ import NewsComponent from "../../../../components/News/News.component";
 export default function News() {
   const history = useHistory();
   const arr = [1, 2, 3];
+
+  const handleClick = () => {
+    history.push("/danh-muc/bai-viet/thuong-hieu-aqua--qua-trinh-hinh-thanh-0");
+  };
   const listsNews = arr.map((e, index) => {
     return (
-      <Grid item lg={4} md={4} xs={12}>
+      <Grid item lg={4} md={4} xs={12} onClick={handleClick}>
         <NewsComponent
           img={news}
           title="Trao tặng 25 máy lọc nước và 10.000 khẩu trang y tế trên địa bàn huyện Hậu Lộc"
