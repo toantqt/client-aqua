@@ -97,7 +97,7 @@ export default function HeaderComponent() {
             <Grid item lg={2} md={2} xs={12}>
               <div style={{ width: "60%", height: "100%" }}>
                 <ul>
-                  <li>
+                  <li style={{ textAlign: "left" }}>
                     <img src={logo} alt="" width="90%" />
                   </li>
                 </ul>
