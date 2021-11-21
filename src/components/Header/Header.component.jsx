@@ -72,8 +72,8 @@ export default function HeaderComponent() {
                 </ul>
               </div>
             </Grid>
-            <Grid item lg={5} md={5} xs={12}></Grid>
-            <Grid item lg={5} md={5} xs={12}>
+            <Grid item lg={4} md={4} xs={12}></Grid>
+            <Grid item lg={6} md={6} xs={12}>
               <ul className="infor-contact">
                 <li>
                   <i class="fas fa-search"></i>
@@ -81,7 +81,7 @@ export default function HeaderComponent() {
                 </li>
                 <li>
                   <i class="fas fa-envelope"></i>
-                  <span>aquavietnam@gmail.com</span>
+                  <span>maylocnuocaquacantho@gmail.com</span>
                 </li>
                 <li>
                   <i class="fas fa-phone-alt"></i> <span>0978 590 952</span>

@@ -39,6 +39,7 @@
   display: table-cell;
   vertical-align: middle;
   color: white;
+  text-align: center;
 }
 
 .wrap-header .infor-contact li span {

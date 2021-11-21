@@ -32,7 +32,7 @@ const FooterComponent = () => {
 
                 <li className="footer-lists-title">
                   <span className="footer-lists-title">Email:</span>
-                  <span className="ml-2">aquavietnam@gmail.com</span>
+                  <span className="ml-2">maylocnuocaquacantho@gmail.com</span>
                 </li>
               </ul>
             </div>
