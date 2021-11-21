@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/client-aqua/static/css/main.ac9dcbb6.chunk.css",
+    "main.css": "/client-aqua/static/css/main.cd856417.chunk.css",
     "main.js": "/client-aqua/static/js/main.1da0a157.chunk.js",
     "main.js.map": "/client-aqua/static/js/main.1da0a157.chunk.js.map",
     "runtime-main.js": "/client-aqua/static/js/runtime-main.0d3a5bc0.js",
@@ -12,7 +12,7 @@
     "static/js/3.9d30a101.chunk.js.map": "/client-aqua/static/js/3.9d30a101.chunk.js.map",
     "index.html": "/client-aqua/index.html",
     "static/css/2.23d8b5c0.chunk.css.map": "/client-aqua/static/css/2.23d8b5c0.chunk.css.map",
-    "static/css/main.ac9dcbb6.chunk.css.map": "/client-aqua/static/css/main.ac9dcbb6.chunk.css.map",
+    "static/css/main.cd856417.chunk.css.map": "/client-aqua/static/css/main.cd856417.chunk.css.map",
     "static/js/2.471a3bf9.chunk.js.LICENSE.txt": "/client-aqua/static/js/2.471a3bf9.chunk.js.LICENSE.txt",
     "static/media/about.13c73378.jpg": "/client-aqua/static/media/about.13c73378.jpg",
     "static/media/banner.cad99a43.png": "/client-aqua/static/media/banner.cad99a43.png",
@@ -27,7 +27,7 @@
     "static/js/runtime-main.0d3a5bc0.js",
     "static/css/2.23d8b5c0.chunk.css",
     "static/js/2.471a3bf9.chunk.js",
-    "static/css/main.ac9dcbb6.chunk.css",
+    "static/css/main.cd856417.chunk.css",
     "static/js/main.1da0a157.chunk.js"
   ]
 }
