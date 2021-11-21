@@ -153,4 +153,8 @@
   #header {
     height: 100px;
   }
+  #header ul li a {
+    padding: 10px 12px 10px 12px !important;
+    border-radius: 4px;
+  }
 }
