@@ -23,7 +23,7 @@ const FooterComponent = () => {
                 </li>
                 <li>
                   <span className="footer-lists-title">Website:</span>
-                  <span className="ml-2">maylocnuocaquacantho@gmail.com</span>
+                  <span className="ml-2">maylocnuocaqua.vn</span>
                 </li>
                 <li>
                   <span className="footer-lists-title">Điện thoại:</span>
