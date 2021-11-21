@@ -58,7 +58,10 @@ export default function HeaderComponent() {
         <div className="wrap-body wrap-header">
           <Grid container spacing={1} style={{ height: "100%" }}>
             <Grid item lg={2} md={2} xs={12}>
-              <div style={{ width: "60%", height: "100%" }}>
+              <div
+                style={{ width: "60%", height: "100%" }}
+                className="img-header-top"
+              >
                 <ul>
                   <li>
                     <img src={facebookIcon} alt="" />

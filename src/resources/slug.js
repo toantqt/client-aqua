@@ -7,4 +7,5 @@ export default {
   introduce: "/danh-muc/gioi-thieu",
   detailsProduct: "/danh-muc/chi-tiet-san-pham/:id",
   dealer: "/danh-muc/dai-ly",
+  contact: "/danh-muc/lien-he",
 };

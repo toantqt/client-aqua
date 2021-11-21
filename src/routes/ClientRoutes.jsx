@@ -6,6 +6,7 @@ import NewsPage from "../screens/News/screens/NewsPage";
 import Introduce from "../screens/Category/components/Introduce/Introduce";
 import DetailsProduct from "../screens/Details Product/screens/DetailsProductPage";
 import OfficePage from "../screens/Office/Office";
+import Contactpage from "../screens/Contact/screens/ContactPage";
 const ClientRoutes = (props) => {
   return (
     <>
@@ -36,6 +37,12 @@ const ClientRoutes = (props) => {
           path={slug.introduce}
           render={(props) => <Introduce {...props} />}
         ></Route>
+        <Route
+          exact
+          path={slug.contact}
+          render={(props) => <Contactpage {...props} />}
+        ></Route>
+
         <Route
           exact
           path={slug.detailsNews}

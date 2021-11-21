@@ -1,34 +1,26 @@
 import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
-import { getInformation } from "../../api/API";
 import Image from "material-ui-image";
 import "./office.css";
-import FormContactComponent from "../../components/Form Contact/FormContact.component";
 import about from "../../assets/image/about/about.jpg";
 
 export default function OfficePage() {
   const [partner, setPartner] = useState([
     {
-      name: "CTY TNHH_TM_DV Xử lý nước sạch AQUA VIỆT NAM.",
-      address:
-        "24/30 Lý Tự Trọng, Phường An Cư,Quận Ninh Kiều,TP Cần Thơ,VN.  ",
-      phoneNumber: "0978590952",
-    },
-    {
       name: "CHI NHÁNH HẬU GIANG.",
       address:
         "số 807,Ấp Long An B,Thị Trấn Cái Tắc, Huyện Châu Thành A,Tỉnh Hậu Giang. ",
-      phoneNumber: "0978590952",
+      phoneNumber: "0978 590 952",
     },
     {
       name: "CHI NHÁNH TIỀN GIANG",
       address: "khu phố Mỹ Lợi,P Nhị Mỹ,Cai Lậy,Tiền Giang. ",
-      phoneNumber: "0978590952",
+      phoneNumber: "0978 590 952",
     },
     {
       name: "CHI NHÁNH BẾN TRE",
       address: "Ấp Phú Thạnh,Xã Phú Túc, Huyện Châu Thành,Tỉnh Bến Tre ",
-      phoneNumber: "0978590952",
+      phoneNumber: "0978 590 952",
     },
   ]);
   // useEffect(async () => {

@@ -12,6 +12,7 @@ const DetailsNews = (props) => {
         <div
           dangerouslySetInnerHTML={{ __html: e.content }}
           style={{ fontSize: "18px" }}
+          className="mt-5"
         ></div>
         <div>
           {e.library.map((el, index) => {
@@ -20,7 +21,7 @@ const DetailsNews = (props) => {
                 <div
                   className="mt-5 mb-2"
                   title="Bấm vào để phóng to"
-                  style={{ width: "80%", margin: "0 auto" }}
+                  style={{ width: "70%", margin: "0 auto" }}
                 >
                   <SimpleReactLightbox>
                     <SRLWrapper>

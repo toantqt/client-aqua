@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Image from "material-ui-image";
 import { Link } from "react-router-dom";
-import about from "../../../../assets/image/about/about.jpg";
 
 const AboutUSComponent = () => {
   return (
@@ -12,7 +11,7 @@ const AboutUSComponent = () => {
           <Grid item lg={5} md={5} xs={12}>
             <div className="img">
               <Image
-                src={about}
+                src="https://res.cloudinary.com/aquavn/image/upload/v1637504204/dc69389d9cf857a60ee9_manrcd.jpg"
                 style={{
                   width: "100%",
                   height: "100%",
