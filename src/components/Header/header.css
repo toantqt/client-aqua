@@ -58,7 +58,7 @@
   font-weight: 500;
 }
 #header ul li a {
-  padding: 10px 15px 10px 15px;
+  padding: 10px;
   border-radius: 4px;
 }
 #header ul li a:hover {
@@ -93,9 +93,6 @@
 }
 .sticky img {
   width: 70%;
-}
-.sticky ul li a {
-  padding: 10px !important;
 }
 
 @media (min-width: 1920px) {
@@ -152,9 +149,5 @@
   }
   #header {
     height: 100px;
-  }
-  #header ul li a {
-    padding: 10px 12px 10px 12px !important;
-    border-radius: 4px;
   }
 }
