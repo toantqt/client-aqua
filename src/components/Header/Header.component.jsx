@@ -84,7 +84,7 @@ export default function HeaderComponent() {
                   <span>aquavietnam@gmail.com</span>
                 </li>
                 <li>
-                  <i class="fas fa-phone-alt"></i> <span>0978653366</span>
+                  <i class="fas fa-phone-alt"></i> <span>0978 590 952</span>
                 </li>
               </ul>
             </Grid>
