@@ -41,7 +41,7 @@
 }
 
 #slider-banner .slick-dots li.slick-active button:before {
-  color: #08999c !important;
+  color: #0061b0 !important;
 }
 
 @media (min-width: 1920px) {
