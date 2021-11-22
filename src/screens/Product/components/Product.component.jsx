@@ -26,9 +26,11 @@ const ProductComponent = (props) => {
       <div className="name-product mt-1">
         <span>{props?.data?.name}</span>
       </div>
-      <div className="price-product mt-3">
-        <span>{props?.data?.price}</span>
-        <span className="ml-1">VND</span>
+      <div className="price-product mt-2 mb-2">
+        {/* <span>{props?.data?.price}</span>
+        <span className="ml-1">VND</span> */}
+        <span>Giá: </span>
+        <span className="ml-1">liên hệ</span>
       </div>
     </div>
   );

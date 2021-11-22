@@ -7,7 +7,7 @@ const AdvisoryComponent = () => {
     <Grid className="mt-5 mb-5">
       <div className="wrap-advisory">
         <Image
-          src="https://res.cloudinary.com/aquavn/image/upload/v1637423812/about_sebrry.png"
+          src="https://res.cloudinary.com/aquavn/image/upload/v1637504204/dc69389d9cf857a60ee9_manrcd.jpg"
           style={{
             width: "100%",
             height: "100%",
