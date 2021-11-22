@@ -1,33 +1,31 @@
 {
   "files": {
-    "main.css": "/client-aqua/static/css/main.98a406dd.chunk.css",
-    "main.js": "/client-aqua/static/js/main.ea71b6e6.chunk.js",
-    "main.js.map": "/client-aqua/static/js/main.ea71b6e6.chunk.js.map",
+    "main.css": "/client-aqua/static/css/main.2dbdab4a.chunk.css",
+    "main.js": "/client-aqua/static/js/main.420c03a9.chunk.js",
+    "main.js.map": "/client-aqua/static/js/main.420c03a9.chunk.js.map",
     "runtime-main.js": "/client-aqua/static/js/runtime-main.0d3a5bc0.js",
     "runtime-main.js.map": "/client-aqua/static/js/runtime-main.0d3a5bc0.js.map",
     "static/css/2.23d8b5c0.chunk.css": "/client-aqua/static/css/2.23d8b5c0.chunk.css",
-    "static/js/2.471a3bf9.chunk.js": "/client-aqua/static/js/2.471a3bf9.chunk.js",
-    "static/js/2.471a3bf9.chunk.js.map": "/client-aqua/static/js/2.471a3bf9.chunk.js.map",
+    "static/js/2.eea375a2.chunk.js": "/client-aqua/static/js/2.eea375a2.chunk.js",
+    "static/js/2.eea375a2.chunk.js.map": "/client-aqua/static/js/2.eea375a2.chunk.js.map",
     "static/js/3.9d30a101.chunk.js": "/client-aqua/static/js/3.9d30a101.chunk.js",
     "static/js/3.9d30a101.chunk.js.map": "/client-aqua/static/js/3.9d30a101.chunk.js.map",
     "index.html": "/client-aqua/index.html",
     "static/css/2.23d8b5c0.chunk.css.map": "/client-aqua/static/css/2.23d8b5c0.chunk.css.map",
-    "static/css/main.98a406dd.chunk.css.map": "/client-aqua/static/css/main.98a406dd.chunk.css.map",
-    "static/js/2.471a3bf9.chunk.js.LICENSE.txt": "/client-aqua/static/js/2.471a3bf9.chunk.js.LICENSE.txt",
+    "static/css/main.2dbdab4a.chunk.css.map": "/client-aqua/static/css/main.2dbdab4a.chunk.css.map",
+    "static/js/2.eea375a2.chunk.js.LICENSE.txt": "/client-aqua/static/js/2.eea375a2.chunk.js.LICENSE.txt",
     "static/media/about.13c73378.jpg": "/client-aqua/static/media/about.13c73378.jpg",
-    "static/media/banner.cad99a43.png": "/client-aqua/static/media/banner.cad99a43.png",
     "static/media/contact.5d82dd1a.jpg": "/client-aqua/static/media/contact.5d82dd1a.jpg",
     "static/media/logoaqua.7030cf77.png": "/client-aqua/static/media/logoaqua.7030cf77.png",
     "static/media/news.17c735fa.png": "/client-aqua/static/media/news.17c735fa.png",
-    "static/media/product.e085fedd.png": "/client-aqua/static/media/product.e085fedd.png",
     "static/media/r1.30324b3e.png": "/client-aqua/static/media/r1.30324b3e.png",
     "static/media/up.d578c47e.png": "/client-aqua/static/media/up.d578c47e.png"
   },
   "entrypoints": [
     "static/js/runtime-main.0d3a5bc0.js",
     "static/css/2.23d8b5c0.chunk.css",
-    "static/js/2.471a3bf9.chunk.js",
-    "static/css/main.98a406dd.chunk.css",
-    "static/js/main.ea71b6e6.chunk.js"
+    "static/js/2.eea375a2.chunk.js",
+    "static/css/main.2dbdab4a.chunk.css",
+    "static/js/main.420c03a9.chunk.js"
   ]
 }
