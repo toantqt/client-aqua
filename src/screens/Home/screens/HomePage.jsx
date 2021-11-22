@@ -12,12 +12,15 @@ import ProductComponent from "../../../components/Product/Product.component";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import ScrollTop from "../../../components/Scroll Top/ScrollTop";
-import banner from "../../../assets/image/banner/banner.png";
 import ReasonComponent from "../components/Reason/Reason.component";
 import WarningComponent from "../components/Warning/Warning.component";
 import ContactComponent from "../components/Contact/Contact.component";
 
 export default function HomePage() {
+  const [banner, setBanner] = useState([
+    "https://res.cloudinary.com/aquavn/image/upload/v1637549512/879a4a2d814a4a14135b_bnjevo.jpg",
+    "https://res.cloudinary.com/aquavn/image/upload/v1637549512/1fee5ba690c15b9f02d0_l5ws37.jpg",
+  ]);
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -28,7 +31,7 @@ export default function HomePage() {
   return (
     <Grid>
       <HeaderComponent />
-      <SliderBanner banner={[banner]} />
+      <SliderBanner banner={banner} />
       <ScrollTop />
       <Grid className="wrap-body">
         <AboutUSComponent />

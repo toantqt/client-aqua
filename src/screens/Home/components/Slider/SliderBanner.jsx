@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./slider.css";
 import Grid from "@material-ui/core/Grid";
 import Slider from "react-slick";
-import ImageComponent from "../../../../components/Image/Image.component";
+import Image from "material-ui-image";
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -29,7 +29,7 @@ function SamplePrevArrow(props) {
 const SliderBanner = (props) => {
   let settings = {
     dots: true,
-    autoplay: true,
+    // autoplay: true,
     autoplaySpeed: 2000,
     infinite: true,
     speed: 800,
@@ -44,13 +44,21 @@ const SliderBanner = (props) => {
       <div className="banner-img" key={index}>
         <div style={{ width: "100%", height: "100%" }}>
           {/* <ImageComponent url={e.image.url} /> */}
-          <ImageComponent url={e} />
+          <Image
+            src={e}
+            style={{
+              width: "100%",
+              height: "100%",
+              paddingTop: "0px !important",
+              objectFit: "cover",
+            }}
+          />
         </div>
       </div>
     );
   });
   return (
-    <Grid style={{ width: "100%", height: "460px" }} id="slider-banner">
+    <Grid style={{ width: "100%", height: "500px" }} id="slider-banner">
       <Slider {...settings}>{listsBanner}</Slider>
     </Grid>
   );

@@ -4,7 +4,7 @@ import ImageGallery from "react-image-gallery";
 export default function GalleryComponent(props) {
   const images = props?.image?.map((e, index) => {
     return {
-      original: e?.url?.replace("http", "https"),
+      original: e?.url?.replace("http:", "https:"),
       thumbnail: e?.url,
     };
   });

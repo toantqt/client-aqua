@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
-import product from "../../assets/image/product/product.png";
 import Image from "material-ui-image";
 
 export default function ProductComponent() {
-  const [arr, setArray] = useState([1, 2, 3, 4]);
+  const [arr, setArray] = useState([
+    "https://res.cloudinary.com/aquavn/image/upload/v1637548480/may_loc_nuoc_3_kyfwgw.png",
+    "https://res.cloudinary.com/aquavn/image/upload/v1637548480/may_loc_nuoc_2_npggvy.png",
+    "https://res.cloudinary.com/aquavn/image/upload/v1637548509/may_nuoc_uong_f4xxmc.png",
+    "https://res.cloudinary.com/aquavn/image/upload/v1637548480/may_loc_nuoc_3_kyfwgw.png",
+  ]);
   const history = useHistory();
 
   const handleClick = () => {
@@ -18,13 +22,14 @@ export default function ProductComponent() {
         <div className="wrap-product">
           <div className="img-product">
             <Image
-              src={product}
+              src={e}
               style={{
                 width: "100%",
                 height: "100%",
                 paddingTop: "0px !important",
-                objectFit: "contain",
+                objectFit: "cover",
               }}
+              imageStyle={{ objectFit: "contain" }}
             />
           </div>
           <div className="name-product">
