@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/client-aqua/static/css/main.2dbdab4a.chunk.css",
-    "main.js": "/client-aqua/static/js/main.70b5b638.chunk.js",
-    "main.js.map": "/client-aqua/static/js/main.70b5b638.chunk.js.map",
+    "main.js": "/client-aqua/static/js/main.1e596ad7.chunk.js",
+    "main.js.map": "/client-aqua/static/js/main.1e596ad7.chunk.js.map",
     "runtime-main.js": "/client-aqua/static/js/runtime-main.0d3a5bc0.js",
     "runtime-main.js.map": "/client-aqua/static/js/runtime-main.0d3a5bc0.js.map",
     "static/css/2.23d8b5c0.chunk.css": "/client-aqua/static/css/2.23d8b5c0.chunk.css",
@@ -26,6 +26,6 @@
     "static/css/2.23d8b5c0.chunk.css",
     "static/js/2.eea375a2.chunk.js",
     "static/css/main.2dbdab4a.chunk.css",
-    "static/js/main.70b5b638.chunk.js"
+    "static/js/main.1e596ad7.chunk.js"
   ]
 }
