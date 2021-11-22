@@ -13,7 +13,7 @@ export default function ProductComponent() {
   const history = useHistory();
 
   const handleClick = () => {
-    history.push("/danh-muc/chi-tiet-san-pham/619921125eae7843786c97c4");
+    history.push("/danh-muc/chi-tiet-san-pham/619b054fd84191162055569b");
   };
 
   const listsProduct = arr.map((e, index) => {
