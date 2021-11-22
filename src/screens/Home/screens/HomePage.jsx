@@ -35,25 +35,25 @@ export default function HomePage() {
       <ScrollTop />
       <Grid className="wrap-body">
         <AboutUSComponent />
-        <div className="mt-5 mb-5">
+        <div className="mt-5 mb-5" data-aos="fade-up">
           <ProductComponent />
         </div>
       </Grid>
-      <div className="bg-reason">
+      <div className="bg-reason" data-aos="fade-up">
         <Grid className="wrap-body">
           <ReasonComponent />
         </Grid>
       </div>
 
       <Grid className="wrap-body">
-        <div className="mt-5 mb-5">
+        <div className="mt-5 mb-5" data-aos="fade-up">
           <NewsComponent />
         </div>
-        <div className="mt-5 mb-5">
+        <div className="mt-5 mb-5" data-aos="fade-up">
           <WarningComponent />
         </div>
       </Grid>
-      <div className="mt-5 mb-5">
+      <div className="mt-5 mb-5" data-aos="fade-up">
         <ContactComponent />
       </div>
 
