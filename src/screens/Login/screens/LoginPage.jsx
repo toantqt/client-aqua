@@ -4,7 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
 import TextField from "@material-ui/core/TextField";
-import logo from "../../../assets/image/Logo.png";
+import logo from "../../../assets/image/logoaqua.png";
+
 import "./login.css";
 import { login } from "../../../api/AdminAPI";
 // import LoadingComponent from "../../../components/Loading/Loading.component";

@@ -7,8 +7,9 @@ export const covertDate = (date) => {
   return moment(date).format("DD/MM/YYYY");
 };
 
-const url = "https://truc-anh.herokuapp.com/api";
-// const url = "http://localhost:6699/api";
+// const url = "https://aquavn.herokuapp.com/api";
+
+const url = "http://localhost:6699/api";
 
 const headers = { Authorization: `${getAccessToken()}` };
 export const login = async (data) => {
@@ -432,17 +433,38 @@ export const deleteProduct = async (data) => {
 
 export const updateProduct = async (data) => {
   const formData = new FormData();
-  if (data.image.file) {
-    formData.append("image", data.image.file);
-  } else {
-    formData.append("image", JSON.stringify(data.image));
+  for (let i = 0; i < data.totalContent; i++) {
+    let title = "listsImage" + i;
+    const arrImg = data.listImage.filter((e) => {
+      return e.list === i + 1;
+    });
+    for (let img of arrImg) {
+      console.log(img);
+      if (img.image.url) {
+        formData.append(title, JSON.stringify(img.image));
+      } else {
+        formData.append(title, img.image);
+      }
+    }
   }
+
+  for (let item of data.image) {
+    if (item.image) {
+      formData.append("image", item.image);
+    } else {
+      formData.append("image", JSON.stringify(item));
+    }
+  }
+  formData.append("totalImageProduct", data.image.length);
+  formData.append("totalContent", data.totalContent);
+  formData.append("listsContent", JSON.stringify(data.listsContent));
+
   formData.append("productID", data.productID);
   formData.append("subCategoryID", data.subCategoryID);
   formData.append("name", data.name);
-  formData.append("ingredient", data.ingredient);
-  formData.append("uses", data.uses);
-  formData.append("dosage", data.dosage);
+  formData.append("code", data.code);
+  formData.append("price", data.price);
+  formData.append("description", data.description);
   formData.append("highlight", data.highlight);
 
   return await axios
@@ -460,21 +482,34 @@ export const updateProduct = async (data) => {
 };
 
 export const addProduct = async (data) => {
+  console.log(data);
   const formData = new FormData();
-
-  formData.append("image", data.image.file);
+  for (let i = 0; i < data.totalContent; i++) {
+    let title = "listsImage" + i;
+    const arrImg = data.listImage.filter((e) => {
+      return e.list === i + 1;
+    });
+    for (let img of arrImg) {
+      formData.append(title, img.image);
+    }
+  }
+  for (let item of data.image) {
+    formData.append("image", item.image);
+  }
 
   formData.append("categoryID", data.categoryID);
   formData.append("subCategoryID", data.subCategoryID);
   formData.append("name", data.name);
-  formData.append("ingredient", data.ingredient);
-  formData.append("uses", data.uses);
-  formData.append("dosage", data.dosage);
+  formData.append("price", data.price);
+  formData.append("code", data.code);
+  formData.append("listsContent", JSON.stringify(data.listsContent));
+  formData.append("description", data.description);
   formData.append("highlight", data.highlight);
+  formData.append("totalContent", data.totalContent);
 
   return await axios
     .post(`${url}/add-product`, formData, {
-      headers: headers,
+      headers:  headers,
     })
     .then((res) => {
       console.log(res);
@@ -638,6 +673,33 @@ export const deleteContact = async (data) => {
     })
     .catch((error) => {
       console.log(error);
+      return error.response;
+    });
+};
+
+export const deleteContactCustomer = async (data) => {
+  return await axios
+    .post(`${url}/delete-contact-customer`, data, {
+      headers:  headers,
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error.response;
+    });
+};
+
+export const getContactCustomer = async () => {
+  return await axios
+    .get(`${url}/get-contact-customer`, {
+      headers:  headers,
+    })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((error) => {
       return error.response;
     });
 };

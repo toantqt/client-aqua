@@ -23,33 +23,13 @@ export default function AddBanner(props) {
     categoryName: "",
     _id: "",
   });
-  const [category, setCategory] = useState([]);
-  const [categoryID, setCategoryID] = useState("");
   const [index, setIndex] = useState(1);
   const [imagePreview, setImagePreview] = useState();
   const [display, setDisplay] = useState();
-  useEffect(async () => {
-    await getAllCategory().then((result) => {
-      setCategory(result.data);
-    });
+  const [url, setUrl] = useState("");
+  useEffect(() => {
     props.handleLoading(false);
   }, []);
-
-  useEffect(() => {
-    if (categoryID === "614af279d2ac34104096a0f4") {
-      setDisplay("home");
-    } else {
-      setDisplay("category");
-    }
-  }, [categoryID]);
-
-  const handleChangeCategory = (value) => {
-    if (value !== "") {
-      setCategoryID(value._id);
-    } else {
-      setCategoryID("");
-    }
-  };
 
   const handleChangeIndex = (value) => {
     if (value !== "") {
@@ -75,19 +55,23 @@ export default function AddBanner(props) {
 
   const handleSubmit = async () => {
     const data = {
-      categoryID: categoryID,
-      display: display,
       banner: imagePreview,
       index: index,
+      url: url,
     };
     console.log(data);
-    if (data.index === "" || data.categoryID === "" || !data.banner) {
+    if (data.index === "" && !data.banner) {
       alert("Xin vui lòng điền đầy đủ thông tin");
     } else {
+      props.handleLoading(true);
       await addBanner(data).then((res) => {
         history.push(AdminSlug.bannerManager);
       });
     }
+  };
+
+  const handleChangeUrl = (event) => {
+    setUrl(event.target.value);
   };
 
   return (
@@ -97,24 +81,24 @@ export default function AddBanner(props) {
       </div>
       <div>
         <Grid container spacing={2}>
-          <Grid item lg={4}>
-            <label>Danh mục:</label>
-            {defaultCatgory ? (
-              <SelectCategory
-                data={category}
-                handleChange={handleChangeCategory}
-              />
-            ) : (
-              <></>
-            )}
-          </Grid>
-          <Grid item lg={4}>
-            <label>Vị trí</label>
-            <SelectIndex display={display} handleChange={handleChangeIndex} />
+          <Grid item lg={12}>
+            <div className="news-editor mt-1">
+              <p>Đường dẫn:</p>
+            </div>
+
+            <TextField
+              id="outlined-search"
+              variant="outlined"
+              style={{ width: "100%" }}
+              placeholder="Đường dẫn"
+              onChange={handleChangeUrl}
+            />
           </Grid>
 
           <Grid item lg={12}>
-            <label>Hình ảnh</label>
+            <div className="news-editor mt-3">
+              <p>Hình ảnh:</p>
+            </div>
             <ImagePreivewsComponent
               url={imagePreview}
               handleChangeImage={handleChangeImage}

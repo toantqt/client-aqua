@@ -15,7 +15,7 @@ export default function AddContact(props) {
   const history = useHistory();
   const [image, setImage] = useState();
   const [reload, setReload] = useState(false);
-  const [type, setType] = useState("");
+  const [type, setType] = useState("office");
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -79,26 +79,7 @@ export default function AddContact(props) {
         <span>Thêm Liên hệ mới: </span>
       </div>
       <Grid container spacing={2}>
-        <Grid item lg={12} md={12}>
-          <RadioGroup
-            row
-            aria-label="position"
-            name="position"
-            defaultValue="top"
-            onChange={handleRadioChange}
-          >
-            <FormControlLabel
-              value="office"
-              control={<Radio color="primary" />}
-              label="Trụ sở chính"
-            />
-            <FormControlLabel
-              value="partner"
-              control={<Radio color="primary" />}
-              label="Chi nhánh"
-            />
-          </RadioGroup>
-        </Grid>
+        
         <Grid item lg={6} md={6} xs={12}>
           {" "}
           <TextField

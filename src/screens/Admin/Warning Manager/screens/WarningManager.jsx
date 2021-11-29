@@ -6,93 +6,65 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import IconButton from "@material-ui/core/IconButton";
 import queryString from "query-string";
-import { deleteProduct } from "../../../../api/AdminAPI";
-import {
-  getCategoryNews,
-  getNewsCategory,
-  covertDate,
-  deleteNews,
-  productManager,
-} from "../../../../api/AdminAPI";
+import { getNewCategory } from "../../../../api/API";
+import { covertDate, deleteNews } from "../../../../api/AdminAPI";
 import SelectCategory from "../../../../components/Category Select/CategorySelect.component";
 import TableComponent from "../../../../components/Table/Table.component";
 import Button from "@material-ui/core/Button";
 import AdminSlug from "../../../../resources/AdminSlug";
 import ModalConfirmComponent from "../../../../components/Modal/ModalConfirm.component";
-import SearchInputComponent from "../../../../components/Search Input/SearchInput.component";
-export default function ProductManager(props) {
+export default function WarningManager(props) {
   const history = useHistory();
-  const search = queryString.parse(props.location.search);
-  const slug = search.q;
-  const [product, setProduct] = useState([]);
   const [categoryName, setCategoryName] = useState("");
   const [subCategory, setSubCategory] = useState([]);
   const [categoryID, setCategoryID] = useState("");
   const [categorySelect, setCategorySelect] = useState("");
+  const [news, setNews] = useState([]);
   const [openConfirm, setOpenConfirm] = useState(false);
   const [newsID, setNewsID] = useState("");
-  const [productID, setProductID] = useState("");
   const [reload, setReload] = useState(false);
 
   useEffect(async () => {
     props.handleLoading(true);
-    await getCategoryNews(slug).then((res) => {
-      setCategoryName(res.data.categoryName);
-      setCategoryID(res.data.categoryID);
-      setSubCategory(res.data.subCategory);
+    await getNewCategory("6197aad918d226427084d755", 9999).then((res) => {
+      setNews(res.data);
     });
-    await productManager(slug).then((res) => {
-      setProduct(res.data);
-    });
-
     props.handleLoading(false);
-  }, [reload, slug]);
+  }, [reload]);
 
-  const handleChangeCategory = (value) => {
-    if (value !== "") {
-      setCategorySelect(value._id);
-    } else {
-      setCategorySelect("");
-    }
-  };
-
-  console.log(product);
-  const rows = product
-    .filter((product) => {
-      if (categorySelect === "") {
-        return product;
-      } else {
-        return product.product.subCategoryID === categorySelect;
-      }
-    })
-    .map((e, index) => {
-      return {
-        id: index,
-        stt: index + 1,
-        name: e.product?.name,
-        category: e.subCategoryName,
-        price: e.product?.price,
-        code: e.product?.code,
-        date: covertDate(e.product?.created),
-        action: e.product,
-      };
-    });
+  const rows = news.map((e, index) => {
+    return {
+      id: index,
+      stt: index + 1,
+      name: e.title,
+      category: "Bài viết",
+      date: covertDate(e.created),
+      action: e,
+    };
+  });
 
   const columns = [
     { field: "stt", headerName: "STT", width: 90 },
-    { field: "name", headerName: "Sản phẩm", width: 200 },
-    { field: "category", headerName: "Danh mục", width: 200 },
-    { field: "code", headerName: "Mã SP", width: 100 },
-    { field: "price", headerName: "Giá", width: 90 },
-
+    { field: "name", headerName: "Bài viết", width: 300 },
+    { field: "category", headerName: "Danh mục", width: 250 },
     { field: "date", headerName: "Ngày tạo", width: 150 },
     {
       field: "action",
       headerName: "Chức năng",
-      width: 210,
+      width: 250,
       renderCell: (action) => {
         return (
           <>
+            <IconButton
+              aria-label="delete"
+              className="btn-action btn-a-1"
+              onClick={() => {
+                handleClickView(action.row?.action?.slug);
+              }}
+            >
+              <VisibilityIcon />
+            </IconButton>
+
             <IconButton
               aria-label="delete"
               className="btn-action btn-a-2"
@@ -118,31 +90,31 @@ export default function ProductManager(props) {
   ];
 
   const handleClickView = (slug) => {
-    history.push(`/bai-viet/${slug}`);
+    history.push(`/danh-muc/bai-viet/${slug}`);
   };
 
   const handleClickAdd = () => {
     history.push({
-      pathname: AdminSlug.createProduct,
-      search: `?id=${categoryID}`,
+      pathname: AdminSlug.createNews,
+      search: `?q=bai-viet`,
     });
   };
 
   const handleClickDelete = (id) => {
-    setProductID(id);
+    setNewsID(id);
     setOpenConfirm(true);
   };
 
   const handleCloseConfirm = () => {
-    setProductID("");
+    setNewsID("");
     setOpenConfirm(false);
   };
 
-  const submitDeleteProduct = async () => {
+  const submitDeleteNews = async () => {
     const data = {
-      productID: productID,
+      newsID: newsID,
     };
-    await deleteProduct(data).then((res) => {
+    await deleteNews(data).then((res) => {
       handleCloseConfirm();
       setReload(!reload);
     });
@@ -150,7 +122,7 @@ export default function ProductManager(props) {
 
   const handleClickEdit = (id) => {
     history.push({
-      pathname: AdminSlug.editProduct,
+      pathname: AdminSlug.editNews,
       search: `?id=${id}`,
     });
   };
@@ -158,9 +130,7 @@ export default function ProductManager(props) {
   return (
     <Grid>
       <div className="header-title mb-3">
-        <span>
-          Quản Lý {categoryName}: ({product.length}){" "}
-        </span>
+        <span>Quản Lý Bài Viết: ({news.length}) </span>
         <Button
           variant="contained"
           color="primary"
@@ -172,35 +142,19 @@ export default function ProductManager(props) {
           }}
           onClick={handleClickAdd}
         >
-          Thêm sản phẩm
+          Tạo bài viết
         </Button>
       </div>
-      <Grid container spacing={1}>
-        {subCategory.length !== 0 ? (
-          <Grid item xs={4} className="mb-3">
-            <SelectCategory
-              data={subCategory}
-              handleChange={handleChangeCategory}
-            />
-          </Grid>
-        ) : (
-          <Grid item xs={4}></Grid>
-        )}
-        <Grid item xs={4}></Grid>
-        <Grid item xs={4} className="mb-3">
-          <SearchInputComponent />
-        </Grid>
-      </Grid>
 
-      <div>
+      <Grid>
         <TableComponent columns={columns} rows={rows} />
-      </div>
+      </Grid>
 
       <ModalConfirmComponent
         open={openConfirm}
         handleClose={handleCloseConfirm}
-        title="Xác nhận xóa sản phẩm"
-        handleDelete={submitDeleteProduct}
+        title="Xác nhận xóa bài viết"
+        handleDelete={submitDeleteNews}
       />
     </Grid>
   );

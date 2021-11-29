@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import LoadingComponent from "../../../../components/Loading/Loading.component";
-import logo from "../../../../assets/image/Logo.png";
 import AdminRoutes from "../../../../routes/AdminRoutes";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -13,6 +12,9 @@ import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import HeaderComponent from "../components/Header/HeaderComponent";
 import SideBarComponent from "../components/Sidebar/SidebarComponent";
+import logo from "../../../../assets/image/logoaqua.png";
+
+
 import "./dashboard.css";
 const drawerWidth = 240;
 
@@ -32,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
     },
-    backgroundColor: "#009999 !important",
+    backgroundColor: "#0061b0 !important",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -72,12 +74,11 @@ export default function HomePage(props) {
   const drawer = (
     <div>
       <div className={classes.toolbar}>
-        <div style={{ width: "45%", margin: "0 auto", paddingTop: "10px" }}>
-          <img src={logo} alt="" width="100%" />
+        <div style={{ width: "100%", margin: "0 auto", textAlign: "center" }}>
+          <img src={logo} alt="" width="40%" />
         </div>
       </div>
-      <Divider />
-      <div className="sidebar">
+      <div className="sidebar mt-3">
         <SideBarComponent />
       </div>
     </div>

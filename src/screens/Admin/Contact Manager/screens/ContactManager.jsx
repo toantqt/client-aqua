@@ -128,7 +128,7 @@ export default function ContactManager(props) {
   return (
     <Grid>
       <div className="header-title mb-3">
-        <span>Quản Lý Liên Hệ: ({contact.length}) </span>
+        <span>Quản Lý Đại Lý: ({contact.length}) </span>
         <Button
           variant="contained"
           color="primary"

@@ -6,64 +6,54 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import IconButton from "@material-ui/core/IconButton";
 import queryString from "query-string";
-import {
-  getCategoryNews,
-  getNewsCategory,
-  covertDate,
-  deleteNews,
-} from "../../../../api/AdminAPI";
+import { getDealer, covertDate, deleteDealer } from "../../../../api/AdminAPI";
 import SelectCategory from "../../../../components/Category Select/CategorySelect.component";
 import TableComponent from "../../../../components/Table/Table.component";
 import Button from "@material-ui/core/Button";
 import AdminSlug from "../../../../resources/AdminSlug";
 import ModalConfirmComponent from "../../../../components/Modal/ModalConfirm.component";
-export default function NewsManager(props) {
+import SearchInputComponent from "../../../../components/Search Input/SearchInput.component";
+export default function DealerManager(props) {
   const history = useHistory();
   const search = queryString.parse(props.location.search);
   const slug = search.q;
-  const [categoryName, setCategoryName] = useState("");
-  const [subCategory, setSubCategory] = useState([]);
-  const [categoryID, setCategoryID] = useState("");
-  const [categorySelect, setCategorySelect] = useState("");
-  const [news, setNews] = useState([]);
+
+  const [dealer, setDealer] = useState([]);
+  const [id, setID] = useState("");
   const [openConfirm, setOpenConfirm] = useState(false);
-  const [newsID, setNewsID] = useState("");
   const [reload, setReload] = useState(false);
 
   useEffect(async () => {
-    if (slug) {
-      props.handleLoading(true);
-      if (slug === "gioi-thieu") {
-        setCategoryName("Giới thiệu về công ty");
-      }
-      await getNewsCategory(slug).then((res) => {
-        console.log(res.data);
-        setNews(res.data);
-      });
-      props.handleLoading(false);
-    }
-  }, [slug, reload]);
+    props.handleLoading(true);
+    await getDealer(slug).then((res) => {
+      console.log(res.data);
+      setDealer(res.data);
+    });
+    props.handleLoading(false);
+  }, [reload, slug]);
 
-  const rows = news.map((e, index) => {
+  const rows = dealer.map((e, index) => {
     return {
       id: index,
-      stt: index + 1,
-      name: e.news.title,
-      category: e.subCategoryName,
-      date: covertDate(e.news?.created),
-      action: e.news,
+      name: e.name,
+      email: e.email,
+      phoneNumber: e.phoneNumber,
+      address: e.address,
+      date: covertDate(e.createdAt),
+      action: e,
     };
   });
 
-  console.log(rows);
   const columns = [
-    { field: "stt", headerName: "STT", width: 90 },
-    { field: "name", headerName: "Bài viết", width: 400 },
+    { field: "name", headerName: "Họ tên", width: 170 },
+    { field: "email", headerName: "Email", width: 170 },
+    { field: "phoneNumber", headerName: "Điện thoại", width: 150 },
+    { field: "address", headerName: "Địa chỉ", width: 190 },
     { field: "date", headerName: "Ngày tạo", width: 150 },
     {
       field: "action",
       headerName: "Chức năng",
-      width: 250,
+      width: 150,
       renderCell: (action) => {
         return (
           <>
@@ -91,48 +81,46 @@ export default function NewsManager(props) {
     },
   ];
 
-  const handleClickView = (slug) => {
-    history.push(`/bai-viet/${slug}`);
-  };
-
-  const handleClickAdd = () => {
-    history.push({
-      pathname: AdminSlug.createInfor,
-      search: `?q=${slug}`,
-    });
-  };
-
   const handleClickDelete = (id) => {
-    setNewsID(id);
+    setID(id);
     setOpenConfirm(true);
   };
 
   const handleCloseConfirm = () => {
-    setNewsID("");
+    setID("");
     setOpenConfirm(false);
   };
 
-  const submitDeleteNews = async () => {
+  const submitDeleteProduct = async () => {
     const data = {
-      newsID: newsID,
+      dealerID: id,
     };
-    await deleteNews(data).then((res) => {
-      handleCloseConfirm();
+    props.handleLoading(true);
+    await deleteDealer(data).then((res) => {
+      setOpenConfirm(false);
       setReload(!reload);
     });
   };
 
   const handleClickEdit = (id) => {
     history.push({
-      pathname: AdminSlug.editInfor,
+      pathname: AdminSlug.editDealer,
       search: `?id=${id}`,
     });
   };
+
+  const handleClickAdd = () => {
+    history.push(AdminSlug.addDealer);
+  };
+
   return (
     <Grid>
       <div className="header-title mb-3">
-        <span>{categoryName}:</span>
-        {news?.length === 0 ? (
+        <span>
+          Quản Lý Đại Lý: ({slug === "true" ? "Đã đăng kí" : "Đang đăng kí"} -{" "}
+          {dealer.length}){" "}
+        </span>
+        {slug === "true" ? (
           <Button
             variant="contained"
             color="primary"
@@ -144,22 +132,29 @@ export default function NewsManager(props) {
             }}
             onClick={handleClickAdd}
           >
-            Tạo bài viết
+            Thêm đại lý
           </Button>
         ) : (
           <></>
         )}
       </div>
-
-      <Grid>
-        <TableComponent columns={columns} rows={rows} />
+      <Grid container spacing={1}>
+        <Grid item xs={4}></Grid>
+        <Grid item xs={4}></Grid>
+        <Grid item xs={4} className="mb-3">
+          <SearchInputComponent />
+        </Grid>
       </Grid>
+
+      <div>
+        <TableComponent columns={columns} rows={rows} />
+      </div>
 
       <ModalConfirmComponent
         open={openConfirm}
         handleClose={handleCloseConfirm}
-        title="Xác nhận xóa bài viết"
-        handleDelete={submitDeleteNews}
+        title="Xác nhận xóa đại lý"
+        handleDelete={submitDeleteProduct}
       />
     </Grid>
   );

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import slug from "../../../../resources/slug";
 import Grid from "@material-ui/core/Grid";
-import EditorNewsComponent from "../components/Editor News/EditorNews.component";
-import "./createNews.css";
+import EditorNewsComponent from "../../Create News/components/Editor News/EditorNews.component";
+import "../../Create News/screens/createNews.css";
 // import SelectCategoryAuthorComponent from "../../components/Select Category Author/SelectCategoryAuthor.component";
 // import { createNews } from "../../../../api/AdminAPI";
 import TextField from "@material-ui/core/TextField";
@@ -12,7 +12,7 @@ import queryString from "query-string";
 import SelectCategory from "../../../../components/Category Select/CategorySelect.component";
 import ImagePreivewsComponent from "../../../../components/Image Previews/ImagePreviews.component";
 import AdminSlug from "../../../../resources/AdminSlug";
-export default function CreateNews(props) {
+export default function CreateInfor(props) {
   const history = useHistory();
   const search = queryString.parse(props.location.search);
   const slug = search.q;
@@ -21,7 +21,6 @@ export default function CreateNews(props) {
   const [content, setContent] = useState([]);
   const [title, setTitle] = useState("");
   const [mainCategoryID, setMainCategoryID] = useState("");
-  const [subCategoryID, setSubCategoryID] = useState("");
   const [homePage, setHomePage] = useState("normal");
   const [categoryPage, setCategoryPage] = useState("normal");
   const [subCategoryPage, setSubCategoryPage] = useState("normal");
@@ -35,16 +34,9 @@ export default function CreateNews(props) {
   useEffect(async () => {
     if (slug) {
       props.handleLoading(true);
-      if (slug === "bai-viet") {
-        setMainCategoryID("6197aad918d226427084d755");
-        setSubCategory([]);
-      } else {
-        await getCategoryNews(slug).then((res) => {
-          console.log(res.data);
-          setMainCategoryID(res.data.categoryID);
-          setSubCategory(res.data.subCategory);
-        });
-      }
+      await getCategoryNews(slug).then((res) => {
+        setMainCategoryID(res.data.categoryID);
+      });
       props.handleLoading(false);
     }
   }, [slug]);
@@ -72,28 +64,20 @@ export default function CreateNews(props) {
     items[index] = item;
     setContent(items);
   };
-  const handleChangeMainCategory = (id) => {
-    setMainCategoryID(id);
-  };
-  const handChangeSubCategory = (id) => {
-    setSubCategoryID(id);
-  };
 
   const handleClickCreateNews = async () => {
     const data = {
       categoryID: mainCategoryID,
-      subCategoryID: categorySelect,
+      subCategoryID: "",
       mainTitle: title,
       listsContent: content,
       listImage: image,
       totalContent: count,
-      thumbnail: thumbnail,
-      author: author,
+      thumbnail: "",
+      author: "",
     };
 
-    if (data.categoryID == "") {
-      alert("Xin vui lòng chọn danh mục!");
-    } else if (data.mainTitle === "") {
+    if (data.mainTitle === "") {
       alert("Xin vui lòng thêm tiêu đề!");
     } else {
       props.handleLoading(true);
@@ -107,49 +91,9 @@ export default function CreateNews(props) {
     }
   };
 
-  const handleChangeCategory = (value) => {
-    if (value !== "") {
-      setCategorySelect(value._id);
-    } else {
-      setCategorySelect("");
-    }
-  };
-
-  const handleChangeThumbnail = (event) => {
-    if (event.target.type === "file") {
-      let files = Array.from(event.target.files);
-      files.forEach((file) => {
-        let reader = new FileReader();
-        console.log(reader.result);
-        reader.onloadend = () => {
-          setThumnail({ url: reader.result, file: file });
-        };
-        reader.readAsDataURL(file);
-      });
-    }
-  };
-
-  const handleChangeAuthor = (event) => {
-    setAuthor(event.target.value);
-  };
-
   return (
     <Grid container spacing={2} xs={12} style={{ backgroundColor: "white" }}>
-      {subCategory.length != 0 ? (
-        <Grid item lg={4}>
-          <div className=" news-title">
-            <p className="mb-5">Danh mục:</p>
-            <SelectCategory
-              data={subCategory}
-              handleChange={handleChangeCategory}
-            />
-          </div>
-        </Grid>
-      ) : (
-        <></>
-      )}
-
-      <Grid item lg={subCategory.length != 0 ? 8 : 12}>
+      <Grid item lg={12}>
         <div className="news-title ">
           <p>Tiêu đề:</p>
           <TextField
@@ -157,15 +101,6 @@ export default function CreateNews(props) {
             variant="outlined"
             style={{ width: "100%" }}
             onChange={handleChangeTitle}
-          />
-        </div>
-      </Grid>
-      <Grid item lg={12}>
-        <div className=" news-title">
-          <p className="mb-5">Thumbnail:</p>
-          <ImagePreivewsComponent
-            url={thumbnail}
-            handleChangeImage={handleChangeThumbnail}
           />
         </div>
       </Grid>
@@ -180,17 +115,6 @@ export default function CreateNews(props) {
             handleChangeContent={handleChangeContent}
           />
         ))}
-      </Grid>
-      <Grid item lg={12}>
-        <div className="news-title ">
-          <p>Tác giả:</p>
-          <TextField
-            id="outlined-basic"
-            variant="outlined"
-            style={{ width: "100%" }}
-            onChange={handleChangeAuthor}
-          />
-        </div>
       </Grid>
 
       <div className="button-add">

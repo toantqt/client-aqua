@@ -12,6 +12,7 @@ import {
   covertDate,
   deleteNews,
 } from "../../../../api/AdminAPI";
+import { getNewCategory } from "../../../../api/API";
 import SelectCategory from "../../../../components/Category Select/CategorySelect.component";
 import TableComponent from "../../../../components/Table/Table.component";
 import Button from "@material-ui/core/Button";
@@ -37,21 +38,19 @@ export default function NewsManager(props) {
         case "tin-tuc":
           setCategoryName("Tin Tức");
           break;
-        case "quy-trinh-nuoi-tom":
-          setCategoryName("Quy Trình Nuôi Tôm");
-          break;
         case "tuyen-dung":
-          setCategoryName("Tin Tuyển dụng");
+          setCategoryName("Tuyển Dụng");
           break;
       }
+
       await getCategoryNews(slug).then((res) => {
         setCategoryID(res.data.categoryID);
         setSubCategory(res.data.subCategory);
       });
-
       await getNewsCategory(slug).then((res) => {
         setNews(res.data);
       });
+
       props.handleLoading(false);
     }
   }, [slug, reload]);
@@ -132,7 +131,7 @@ export default function NewsManager(props) {
   ];
 
   const handleClickView = (slug) => {
-    history.push(`/bai-viet/${slug}`);
+    history.push(`/danh-muc/bai-viet/${slug}`);
   };
 
   const handleClickAdd = () => {
@@ -190,7 +189,7 @@ export default function NewsManager(props) {
         </Button>
       </div>
 
-      {subCategory.length !== 0 ? (
+      {subCategory?.length !== 0 ? (
         <div style={{ width: "30%" }} className="mb-3">
           <SelectCategory
             data={subCategory}

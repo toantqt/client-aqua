@@ -7,63 +7,54 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import IconButton from "@material-ui/core/IconButton";
 import queryString from "query-string";
 import {
-  getCategoryNews,
-  getNewsCategory,
   covertDate,
-  deleteNews,
+  getContactCustomer,
+  deleteContactCustomer,
 } from "../../../../api/AdminAPI";
 import SelectCategory from "../../../../components/Category Select/CategorySelect.component";
 import TableComponent from "../../../../components/Table/Table.component";
 import Button from "@material-ui/core/Button";
 import AdminSlug from "../../../../resources/AdminSlug";
 import ModalConfirmComponent from "../../../../components/Modal/ModalConfirm.component";
-export default function NewsManager(props) {
-  const history = useHistory();
-  const search = queryString.parse(props.location.search);
-  const slug = search.q;
-  const [categoryName, setCategoryName] = useState("");
-  const [subCategory, setSubCategory] = useState([]);
-  const [categoryID, setCategoryID] = useState("");
-  const [categorySelect, setCategorySelect] = useState("");
-  const [news, setNews] = useState([]);
+import SearchInputComponent from "../../../../components/Search Input/SearchInput.component";
+import ModalViewComponent from "../../../../components/Modal/ModalView.component";
+export default function QuestionManager(props) {
   const [openConfirm, setOpenConfirm] = useState(false);
-  const [newsID, setNewsID] = useState("");
+  const [id, setID] = useState("");
+  const [contact, setContact] = useState([]);
   const [reload, setReload] = useState(false);
-
+  const [data, setData] = useState();
+  const [openView, setOpenView] = useState(false);
   useEffect(async () => {
-    if (slug) {
-      props.handleLoading(true);
-      if (slug === "gioi-thieu") {
-        setCategoryName("Giới thiệu về công ty");
-      }
-      await getNewsCategory(slug).then((res) => {
-        console.log(res.data);
-        setNews(res.data);
-      });
-      props.handleLoading(false);
-    }
-  }, [slug, reload]);
+    props.handleLoading(true);
+    await getContactCustomer().then((res) => {
+      setContact(res.data);
+    });
+    props.handleLoading(false);
+  }, [reload]);
 
-  const rows = news.map((e, index) => {
+  const rows = contact.map((e, index) => {
     return {
       id: index,
       stt: index + 1,
-      name: e.news.title,
-      category: e.subCategoryName,
-      date: covertDate(e.news?.created),
-      action: e.news,
+      name: e.name,
+      email: e.email,
+      phoneNumber: e.phoneNumber,
+      date: covertDate(e.createdAt),
+      action: e,
     };
   });
 
-  console.log(rows);
   const columns = [
     { field: "stt", headerName: "STT", width: 90 },
-    { field: "name", headerName: "Bài viết", width: 400 },
+    { field: "name", headerName: "Họ tên", width: 200 },
+    { field: "email", headerName: "Email", width: 200 },
+    { field: "phoneNumber", headerName: "Điện thoại", width: 200 },
     { field: "date", headerName: "Ngày tạo", width: 150 },
     {
       field: "action",
       headerName: "Chức năng",
-      width: 250,
+      width: 140,
       renderCell: (action) => {
         return (
           <>
@@ -71,10 +62,10 @@ export default function NewsManager(props) {
               aria-label="delete"
               className="btn-action btn-a-2"
               onClick={() => {
-                handleClickEdit(action.row?.action?._id);
+                handleClickView(action?.row?.action);
               }}
             >
-              <EditIcon />
+              <VisibilityIcon />
             </IconButton>
             <IconButton
               aria-label="delete"
@@ -91,75 +82,54 @@ export default function NewsManager(props) {
     },
   ];
 
-  const handleClickView = (slug) => {
-    history.push(`/bai-viet/${slug}`);
+  const handleClickView = (data) => {
+    setData(data);
+    setOpenView(true);
   };
 
-  const handleClickAdd = () => {
-    history.push({
-      pathname: AdminSlug.createInfor,
-      search: `?q=${slug}`,
-    });
+  const handleCloseView = () => {
+    setData();
+    setOpenView(false);
   };
-
   const handleClickDelete = (id) => {
-    setNewsID(id);
+    setID(id);
     setOpenConfirm(true);
   };
 
   const handleCloseConfirm = () => {
-    setNewsID("");
+    setID("");
     setOpenConfirm(false);
   };
 
-  const submitDeleteNews = async () => {
+  const submitDeleteProduct = async () => {
     const data = {
-      newsID: newsID,
+      id: id,
     };
-    await deleteNews(data).then((res) => {
-      handleCloseConfirm();
+    props.handleLoading(true);
+    await deleteContactCustomer(data).then((res) => {
+      setOpenConfirm(false);
       setReload(!reload);
     });
   };
 
-  const handleClickEdit = (id) => {
-    history.push({
-      pathname: AdminSlug.editInfor,
-      search: `?id=${id}`,
-    });
-  };
   return (
     <Grid>
       <div className="header-title mb-3">
-        <span>{categoryName}:</span>
-        {news?.length === 0 ? (
-          <Button
-            variant="contained"
-            color="primary"
-            size="small"
-            startIcon={<EditIcon />}
-            style={{
-              textTransform: "none",
-              float: "right",
-            }}
-            onClick={handleClickAdd}
-          >
-            Tạo bài viết
-          </Button>
-        ) : (
-          <></>
-        )}
+        <span>Danh sách gửi tư vấn:</span>
       </div>
-
-      <Grid>
+      <div>
         <TableComponent columns={columns} rows={rows} />
-      </Grid>
-
+      </div>
       <ModalConfirmComponent
         open={openConfirm}
         handleClose={handleCloseConfirm}
-        title="Xác nhận xóa bài viết"
-        handleDelete={submitDeleteNews}
+        title="Xác nhận xóa liên hệ"
+        handleDelete={submitDeleteProduct}
+      />{" "}
+      <ModalViewComponent
+        open={openView}
+        handleClose={handleCloseView}
+        data={data}
       />
     </Grid>
   );

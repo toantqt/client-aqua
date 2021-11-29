@@ -3,7 +3,8 @@ import HomePage from "./screens/Home/screens/HomePage";
 import slug from "./resources/slug";
 import { isLoggedIn, checkRole } from "./auth/auth";
 import CategoryPage from "../src/screens/Category/screens/CategoryPage";
-
+import Dashboard from "../src/screens/Admin/Dashboard/screens/Dashboard";
+import LoginPage from "../src/screens/Login/screens/LoginPage";
 function App() {
   return (
     <HashRouter>
@@ -32,6 +33,7 @@ function App() {
         path="/chi-tiet-san-pham/:productID"
         render={(props) => <DetailsProductPage {...props} />}
       ></Route>
+      */}
       <Route
         path="/admin"
         render={() =>
@@ -42,7 +44,7 @@ function App() {
           )
         }
       ></Route>
-      <Route path="/auth/login" component={LoginPage}></Route> */}
+      <Route path="/auth/login" component={LoginPage}></Route>
     </HashRouter>
   );
 }

@@ -1,6 +1,6 @@
 .dashboard-content {
   width: 100%;
-  height: auto;
+min-height:1200px;  
 }
 .header-title {
   font-size: 18px;

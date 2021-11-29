@@ -10,19 +10,18 @@ import ReactPlayer from "react-player";
 import moment from "moment";
 import { SRLWrapper } from "simple-react-lightbox";
 import SimpleReactLightbox from "simple-react-lightbox";
-import News from "../../../../components/News/News";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import Image from "material-ui-image";
 import ModalConfirmComponent from "../../../../components/Modal/ModalConfirm.component";
 import { deleteImage, deleteVideo } from "../../../../api/AdminAPI";
 import ModalVideoComponent from "../../../../components/Modal Video/ModalVideo.component";
+import "./video.css"
 
 export default function LibraryManager(props) {
   const search = queryString.parse(props.location.search);
   const type = search.q;
   const history = useHistory();
-  const [image, setImage] = useState([]);
   const [video, setVideo] = useState([]);
   const [total, setTotal] = useState();
   const [imageID, setImageID] = useState("");
@@ -34,20 +33,12 @@ export default function LibraryManager(props) {
   const [videoID, setVideoID] = useState("");
   useEffect(async () => {
     props.handleLoading(true);
-    if (type === "image") {
-      await getImage().then((res) => {
-        setImage(res.data);
-        setTotal(res.data.length);
-      });
-    } else if (type === "video") {
-      await getVideo().then((res) => {
-        setVideo(res.data);
-        setTotal(res.data.length);
-      });
-    }
+    await getVideo().then((res) => {
+      setVideo(res.data);
+      setTotal(res.data.length);
+    });
     props.handleLoading(false);
   }, [type, reload]);
-  console.log(image);
 
   const handleEditImage = (id) => {
     history.push({ pathname: AdminSlug.editImage, search: `?id=${id}` });
@@ -74,11 +65,7 @@ export default function LibraryManager(props) {
   };
 
   const handleClickAdd = (type) => {
-    if (type === "image") {
-      history.push(AdminSlug.createImage);
-    } else if (type === "video") {
-      history.push(AdminSlug.createVideo);
-    }
+    history.push(AdminSlug.createVideo);
   };
 
   const handleClickVideo = (url) => {
@@ -112,132 +99,67 @@ export default function LibraryManager(props) {
     history.push({ pathname: AdminSlug.editVideo, search: `?id=${id}` });
   };
 
-  let lists;
-
-  if (type === "image") {
-    lists = image.map((e, index) => {
-      return (
-        <Grid item xl={2} lg={3} md={3} xs={12}>
-          <SimpleReactLightbox>
-            <SRLWrapper>
-              <Grid className="wrap-news">
-                <div className="news">
-                  <div className="img">
-                    <Image
-                      src={e?.library[0]?.url}
-                      style={{
-                        height: "100% ",
-                        objectFit: "cover",
-                        paddingTop: "0px",
-                        borderRadius: "6px",
-                      }}
-                    />
-                  </div>
-                  <div className="news-date">
-                    {moment(e?.createAt).format("DD/MM/YYYY")}
-                  </div>
-                </div>
-              </Grid>
-
-              <div
-                className="title admin-title"
-                style={{ height: "120px !important" }}
-              >
-                <span>{e?.title}</span>
-                <div style={{ float: "right" }}>
-                  <IconButton
-                    aria-label="delete"
-                    className="btn-action btn-a-3"
-                    onClick={() => {
-                      handleEditImage(e._id);
-                    }}
-                  >
-                    <EditIcon style={{ color: "blue" }} />
-                  </IconButton>
-                  <IconButton
-                    aria-label="delete"
-                    className="btn-action btn-a-3"
-                    onClick={() => {
-                      handleDeleteImage(e._id);
-                    }}
-                  >
-                    <DeleteForeverIcon style={{ color: "red" }} />
-                  </IconButton>
-                </div>
-              </div>
-            </SRLWrapper>
-          </SimpleReactLightbox>
-        </Grid>
-      );
-    });
-  } else {
-    lists = video.map((e, index) => {
-      return (
-        <Grid item xl={2} lg={3} md={3} xs={12}>
-          <Grid className="wrap-news">
-            <div
-              className="news"
-              onClick={() => {
-                handleClickVideo(e.video.url);
-              }}
-            >
-              <div className="img">
-                <ReactPlayer
-                  url={e.video.url}
-                  width="100%"
-                  height="100%"
-                  controls={true}
-                  light={true}
-                />
-              </div>
-              <div
-                className="img-bg"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  position: "absolute",
-                  top: "0%",
+  const lists = video.map((e, index) => {
+    return (
+      <Grid item  lg={3} md={3} xs={12}>
+      <Grid className="wrap-news wrap-n mt-3">
+      <div className="news" style={{ position: "relative" }}  onClick={() => {
+              handleClickVideo(e.video.url);
+            }}>
+        <div className="img-news">
+          <ReactPlayer
+            url={e.video.url}
+            width="100%"
+            height="100%"
+            controls={true}
+            light={true}
+          />
+        </div>
+        <div
+          className="img-bg"
+          style={{
+            width: "100%",
+            height: "100%",
+            position: "absolute",
+            top: "0%",
+          }}
+        ></div>
+      </div>
+      <div className="title-n" style={{height:"125px"}}> 
+        <div className="title-news">
+          <span>{e.title}</span>
+        </div>
+        <div style={{ float: "right" }}>
+              <IconButton
+                aria-label="delete"
+                className="btn-action btn-a-3"
+                onClick={() => {
+                  handleEditVideo(e._id);
                 }}
-              ></div>
+              >
+                <EditIcon style={{ color: "blue" }} />
+              </IconButton>
+              <IconButton
+                aria-label="delete"
+                className="btn-action btn-a-3"
+                onClick={() => {
+                  handleDeleteVideo(e._id);
+                }}
+              >
+                <DeleteForeverIcon style={{ color: "red" }} />
+              </IconButton>
             </div>
-            <div
-              className="title admin-title"
-              style={{ width: "120px !important" }}
-            >
-              <span>{e?.title}</span>
-              <div style={{ float: "right" }}>
-                <IconButton
-                  aria-label="delete"
-                  className="btn-action btn-a-3"
-                  onClick={() => {
-                    handleEditVideo(e._id);
-                  }}
-                >
-                  <EditIcon style={{ color: "blue" }} />
-                </IconButton>
-                <IconButton
-                  aria-label="delete"
-                  className="btn-action btn-a-3"
-                  onClick={() => {
-                    handleDeleteVideo(e._id);
-                  }}
-                >
-                  <DeleteForeverIcon style={{ color: "red" }} />
-                </IconButton>
-              </div>
-            </div>
-          </Grid>
-        </Grid>
-      );
-    });
-  }
+      </div>
+      </Grid>
+      </Grid>
+
+    );
+  });
 
   return (
     <Grid>
       <div className="header-title mb-3">
-        <span>
-          {type === "image" ? "Quản Lý Hình Ảnh" : "Quản Lý Video"}: ({total}){" "}
-        </span>{" "}
+        <span>Quản Lý Video: ({total}) </span>{" "}
         <Button
           variant="contained"
           color="primary"
@@ -249,11 +171,11 @@ export default function LibraryManager(props) {
           }}
           onClick={() => handleClickAdd(type)}
         >
-          {type === "image" ? "Thêm hình ảnh" : "Thêm Video"}
+          Thêm Video
         </Button>
       </div>
       <div>
-        <Grid container spacing={3} className="mt-5">
+        <Grid container spacing={3} >
           {lists}
         </Grid>
       </div>

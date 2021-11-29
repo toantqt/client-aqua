@@ -35,9 +35,6 @@ export default function BannerManager(props) {
     await getAllBanner().then((res) => {
       setBanner(res.data);
     });
-    await getAllCategory().then((result) => {
-      setCategory(result.data);
-    });
     props.handleLoading(false);
   }, [reload]);
 
@@ -88,9 +85,7 @@ export default function BannerManager(props) {
 
   const columns = [
     { field: "stt", headerName: "STT", width: 90 },
-
-    { field: "category", headerName: "Danh mục", width: 250 },
-    { field: "index", headerName: "Vị trí", width: 110 },
+    { field: "index", headerName: "Vị trí", width: 150 },
     { field: "date", headerName: "Ngày tạo", width: 150 },
     {
       field: "action",
@@ -133,24 +128,15 @@ export default function BannerManager(props) {
     },
   ];
 
-  const rows = banner
-    .filter((category) => {
-      if (categorySelect === "") {
-        return category;
-      } else {
-        return category.banner.categoryID === categorySelect;
-      }
-    })
-    .map((e, index) => {
-      return {
-        id: index,
-        stt: index + 1,
-        category: e.category?.categoryName,
-        index: e.banner?.index,
-        date: covertDate(e.banner?.created),
-        action: e.banner,
-      };
-    });
+  const rows = banner.map((e, index) => {
+    return {
+      id: index,
+      stt: index + 1,
+      index: "Trang chủ",
+      date: covertDate(e.banner?.created),
+      action: e.banner,
+    };
+  });
 
   const handleClickAdd = () => {
     history.push(AdminSlug.addBanner);
@@ -173,13 +159,6 @@ export default function BannerManager(props) {
         >
           Thêm banner mới
         </Button>
-      </div>
-      <div style={{ width: "30%" }} className="mb-3">
-        <SelectCategory
-          value={defaultCategory}
-          data={category}
-          handleChange={handleChangeCategory}
-        />
       </div>
 
       <div>

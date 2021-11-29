@@ -1,0 +1,14 @@
+.wrap-video{
+    height:300px;
+}
+
+.wrap-video .video{
+    height:200px
+}
+
+.admin-title {
+    height:100px;
+    background: #fff;
+    box-shadow: 0 4px 20px rgb(0 0 0 / 6%);
+    padding: 15px 10px 15px 10px;
+}

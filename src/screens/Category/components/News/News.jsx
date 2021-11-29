@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import "./news.css";
 // import ListsNewsComponent from "../../../../components/Lists News/ListsNews.component";
 import {
-  getNewsCategory,
+  getNewCategory,
   getImage,
   getVideo,
   getCategory,
@@ -62,7 +62,7 @@ export default function News(props) {
   useEffect(async () => {
     setNews([]);
     if (type === 1) {
-      await getNewsCategory(categoryID, page).then((res) => {
+      await getNewCategory(categoryID, page).then((res) => {
         setNews(res.data);
       });
       setLoading(false);

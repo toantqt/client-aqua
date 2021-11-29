@@ -4,9 +4,7 @@ import { useHistory } from "react-router-dom";
 import AdminSlug from "../../../../resources/AdminSlug";
 import TableComponent from "../../../../components/Table/Table.component";
 import {
-  getAllBanner,
   covertDate,
-  deleteBanner,
   getAllCategory,
   addCategory,
   deleteCategory,
