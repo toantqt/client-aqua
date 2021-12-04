@@ -50,10 +50,9 @@ export default function AddContact(props) {
     if (data.type === "") {
       alert("Xin vui lòng điền đầy đủ thông tin!");
     } else {
-      console.log(data);
       props.handleLoading(true);
       await addContact(data).then((res) => {
-        history.push(AdminSlug.contactManager);
+        history.push(AdminSlug.dealerManager);
       });
     }
   };
@@ -79,7 +78,6 @@ export default function AddContact(props) {
         <span>Thêm Liên hệ mới: </span>
       </div>
       <Grid container spacing={2}>
-        
         <Grid item lg={6} md={6} xs={12}>
           {" "}
           <TextField

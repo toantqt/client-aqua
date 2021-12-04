@@ -168,6 +168,17 @@ export const getVideo = async () => {
     });
 };
 
+export const getHomeVideo = async () => {
+  return await axios
+    .get(`${url}/get-home-video`)
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
 export const getDetailsVideo = async (videoID) => {
   return await axios
     .get(`${url}/get-details-video/${videoID}`)
@@ -204,6 +215,17 @@ export const getHomeNews = async () => {
 export const getCategoryType = async (type) => {
   return await axios
     .get(`${url}/get-category-type/${type}`)
+    .then(async (res) => {
+      return res.data;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export const sendContact = async (data) => {
+  return await axios
+    .post(`${url}/contact-customer`, data)
     .then(async (res) => {
       return res.data;
     })

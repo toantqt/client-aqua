@@ -2,35 +2,22 @@ import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Image from "material-ui-image";
 import "./office.css";
-import about from "../../assets/image/about/about.jpg";
-
+import { getInformation } from "../../api/API";
 export default function OfficePage() {
-  const [partner, setPartner] = useState([
-    {
-      name: "CHI NHÁNH HẬU GIANG.",
-      address:
-        "số 807,Ấp Long An B,Thị Trấn Cái Tắc, Huyện Châu Thành A,Tỉnh Hậu Giang. ",
-      phoneNumber: "0978 590 952",
-    },
-    {
-      name: "CHI NHÁNH TIỀN GIANG",
-      address: "khu phố Mỹ Lợi,P Nhị Mỹ,Cai Lậy,Tiền Giang. ",
-      phoneNumber: "0978 590 952",
-    },
-    {
-      name: "CHI NHÁNH BẾN TRE",
-      address: "Ấp Phú Thạnh,Xã Phú Túc, Huyện Châu Thành,Tỉnh Bến Tre ",
-      phoneNumber: "0978 590 952",
-    },
-  ]);
-  // useEffect(async () => {
-  //   await getInformation().then((res) => {
-  //     setOffice(res.data.offices);
-  //     setPartner(res.data.partners);
-  //   });
-  // }, []);
+  const [contact, setContact] = useState([]);
+  useEffect(async () => {
+    window.scrollTo(0, 0);
+    await getInformation().then((res) => {
+      for (let item of res.data.offices) {
+        setContact((contact) => [...contact, item]);
+      }
+      for (let item of res.data.partners) {
+        setContact((contact) => [...contact, item]);
+      }
+    });
+  }, []);
 
-  const listsPartner = partner.map((e, index) => {
+  const listsPartner = contact.map((e, index) => {
     return (
       <Grid
         item
@@ -43,7 +30,7 @@ export default function OfficePage() {
         <Grid container spacing={1}>
           <Grid item lg={5} md={5} xs={12} style={{ height: "150px" }}>
             <Image
-              src={about}
+              src={e?.image?.url}
               style={{
                 width: "100%",
                 height: "100%",
@@ -55,7 +42,7 @@ export default function OfficePage() {
           </Grid>
           <Grid item lg={7} md={7} xs={12}>
             <div className="mb-3">
-              <span className="infor-name">{e.name}</span>
+              <span className="infor-name">{e?.name}</span>
             </div>
             <div>
               <Grid container spacing={1}>
@@ -63,7 +50,7 @@ export default function OfficePage() {
                   <i class="fas fa-home"></i>
                 </Grid>
                 <Grid item xs={11}>
-                  <span>{e.address}</span>
+                  <span>{e?.address}</span>
                 </Grid>
               </Grid>
             </div>
@@ -73,7 +60,7 @@ export default function OfficePage() {
                   <i class="fas fa-phone-alt"></i>
                 </Grid>
                 <Grid item xs={11}>
-                  <span>{e.phoneNumber}</span>
+                  <span>{e?.phoneNumber}</span>
                 </Grid>
               </Grid>
             </div>

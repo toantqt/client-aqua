@@ -63,7 +63,6 @@ export default function EditDealer(props) {
       await updateDealer(data).then((res) => {
         history.push({
           pathname: AdminSlug.dealerManager,
-          search: `?q=${data.confirm}`,
         });
       });
     }

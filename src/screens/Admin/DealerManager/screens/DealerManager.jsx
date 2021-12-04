@@ -26,7 +26,6 @@ export default function DealerManager(props) {
   useEffect(async () => {
     props.handleLoading(true);
     await getDealer(slug).then((res) => {
-      console.log(res.data);
       setDealer(res.data);
     });
     props.handleLoading(false);

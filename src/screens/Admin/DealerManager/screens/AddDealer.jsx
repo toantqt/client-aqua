@@ -32,12 +32,7 @@ export default function AddDealer(props) {
   };
 
   const handleSubmit = async () => {
-    if (
-      data.email === "" ||
-      data.name === "" ||
-      data.phoneNumber === "" ||
-      data.address === ""
-    ) {
+    if (data.name === "" || data.phoneNumber === "" || data.address === "") {
       alert("Xin vui lòng điền đầy đủ thông tin");
     } else {
       addDealer(data).then((res) => {

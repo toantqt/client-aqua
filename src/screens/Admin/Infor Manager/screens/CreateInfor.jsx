@@ -73,7 +73,10 @@ export default function CreateInfor(props) {
       listsContent: content,
       listImage: image,
       totalContent: count,
-      thumbnail: "",
+      thumbnail: {
+        url: "",
+        publicID: "",
+      },
       author: "",
     };
 

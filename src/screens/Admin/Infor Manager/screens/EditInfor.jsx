@@ -125,8 +125,7 @@ export default function EditInfor(props) {
     console.log(data);
     if (
       (data.subCategoryID === "" && subCategory.length != 0) ||
-      data.title === "" ||
-      !data.thumbnail
+      data.title === ""
     ) {
       alert("Xin vui lòng điền đầy đủ thông tin");
     } else {

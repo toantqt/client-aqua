@@ -9,7 +9,8 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
-const ModalViewComponent = (props) => {
+import check from "../../assets/image/Modal/check.png";
+const ModalSuccessComponent = (props) => {
   return (
     <Dialog open={props?.open} onClose={props?.handleClose} maxWidth="sm">
       <Box position="absolute" top={0} right={0}>
@@ -18,28 +19,8 @@ const ModalViewComponent = (props) => {
         </IconButton>
       </Box>
       <DialogContent style={{ textAlign: "center" }} className="mt-3">
-        <DialogTitle> Thông tin khách hàng cần liên hệ</DialogTitle>
-        <div
-          style={{
-            fontSize: "16px",
-            fontWeight: "500",
-            textAlign: "left !important",
-          }}
-        >
-          <div>
-            <span>Họ và tên: {props?.data?.name}</span>
-          </div>
-          <div>
-            <span>Điện thoại: {props?.data?.phoneNumber}</span>
-          </div>
-          <div>
-            <span>Email: {props?.data?.email}</span>
-          </div>
-
-          <div>
-            <span>Ghi chú: {props?.data?.note}</span>
-          </div>
-        </div>
+        <img src={check} alt="" width="30%" />
+        <DialogTitle> {props?.title}</DialogTitle>
       </DialogContent>
       <DialogActions>
         <Button
@@ -57,4 +38,4 @@ const ModalViewComponent = (props) => {
   );
 };
 
-export default ModalViewComponent;
+export default ModalSuccessComponent;
