@@ -15,13 +15,24 @@ export default function News() {
     });
   }, []);
 
-  const handleClick = () => {
-    history.push("/danh-muc/bai-viet/thuong-hieu-aqua--qua-trinh-hinh-thanh-0");
+  const handleClick = (slug) => {
+    history.push(`/danh-muc/bai-viet/${slug}`);
   };
   const listsNews = news.map((e, index) => {
     return (
-      <Grid item lg={4} md={4} xs={12} onClick={handleClick} key={index}>
-        <NewsComponent img={e.thumbnail.url} title={e.title} description="" />
+      <Grid
+        item
+        lg={4}
+        md={4}
+        xs={12}
+        onClick={() => handleClick(e?.slug)}
+        key={index}
+      >
+        <NewsComponent
+          img={e?.thumbnail?.url}
+          title={e?.title}
+          description=""
+        />
       </Grid>
     );
   });
