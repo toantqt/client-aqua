@@ -11,7 +11,7 @@ const DetailsNews = (props) => {
       <div>
         <div
           dangerouslySetInnerHTML={{ __html: e.content }}
-          style={{ fontSize: "18px" }}
+          style={{ fontSize: "16px !important" }}
           className="mt-5"
         ></div>
         <div>

@@ -35,6 +35,9 @@ export default function NewsManager(props) {
     if (slug) {
       props.handleLoading(true);
       switch (slug) {
+        case "gioi-thieu":
+          setCategoryName("Giới Thiệu");
+          break;
         case "tin-tuc":
           setCategoryName("Tin Tức");
           break;
