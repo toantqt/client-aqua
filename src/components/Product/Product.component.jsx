@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Image from "material-ui-image";
+import { getHomeProduct } from "../../api/API";
 
 export default function ProductComponent() {
   const [arr, setArray] = useState([
@@ -10,19 +11,33 @@ export default function ProductComponent() {
     "https://res.cloudinary.com/aquavn/image/upload/v1637548509/may_nuoc_uong_f4xxmc.png",
     "https://res.cloudinary.com/aquavn/image/upload/v1637548480/may_loc_nuoc_3_kyfwgw.png",
   ]);
+  const [product, setProduct] = useState([]);
   const history = useHistory();
 
-  const handleClick = () => {
-    history.push("/danh-muc/chi-tiet-san-pham/619b054fd84191162055569b");
+  useEffect(async () => {
+    await getHomeProduct().then((res) => {
+      setProduct(res.data);
+    });
+  }, []);
+
+  const handleClick = (id) => {
+    history.push(`/danh-muc/chi-tiet-san-pham/${id}`);
   };
 
-  const listsProduct = arr.map((e, index) => {
+  const listsProduct = product.map((e, index) => {
     return (
-      <Grid item lg={3} md={3} xs={12} key={index} onClick={handleClick}>
+      <Grid
+        item
+        lg={3}
+        md={3}
+        xs={12}
+        key={index}
+        onClick={() => handleClick(e?._id)}
+      >
         <div className="wrap-product">
           <div className="img-product">
             <Image
-              src={e}
+              src={e?.image[0]?.url}
               style={{
                 width: "100%",
                 height: "100%",
@@ -33,7 +48,7 @@ export default function ProductComponent() {
             />
           </div>
           <div className="name-product">
-            <span>MÁY LỌC NƯỚC AQUADM - RO 2 VÒI - TỦ 4D</span>
+            <span>{e?.name}</span>
           </div>
         </div>
       </Grid>

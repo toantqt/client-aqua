@@ -3,6 +3,7 @@ import "./slider.css";
 import Grid from "@material-ui/core/Grid";
 import Slider from "react-slick";
 import Image from "material-ui-image";
+import { getAllBanner } from "../../../../api/AdminAPI";
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -27,6 +28,7 @@ function SamplePrevArrow(props) {
 }
 
 const SliderBanner = (props) => {
+  const [banner, setBanner] = useState([]);
   let settings = {
     dots: true,
     autoplay: true,
@@ -39,13 +41,21 @@ const SliderBanner = (props) => {
     // prevArrow: <SamplePrevArrow />,
   };
 
-  const listsBanner = props?.banner?.map((e, index) => {
+  useEffect(async () => {
+    await getAllBanner().then((res) => {
+      setBanner(res.data);
+    });
+  }, []);
+
+  console.log(banner);
+
+  const listsBanner = banner?.map((e, index) => {
     return (
       <div className="banner-img" key={index}>
         <div style={{ width: "100%", height: "100%" }}>
           {/* <ImageComponent url={e.image.url} /> */}
           <Image
-            src={e}
+            src={e?.banner?.image?.url}
             style={{
               width: "100%",
               height: "100%",

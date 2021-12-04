@@ -24,6 +24,7 @@ export const getCategory = async (slug) => {
       return error.response;
     });
 };
+
 export const getSubCategory = async (categoryID) => {
   return await axios
     .get(`${url}/get-subCategory/${categoryID}`)
