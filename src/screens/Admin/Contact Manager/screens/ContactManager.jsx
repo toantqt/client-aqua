@@ -50,10 +50,6 @@ export default function ContactManager(props) {
     setOpenConfirm(true);
   };
 
-  const handleClickEdit = (id) => {
-    // history.push({ pathname: AdminSlug.editBanner, search: `?id=${id}` });
-  };
-
   const handleCloseConfirm = () => {
     setSelectID("");
     setOpenConfirm(false);
@@ -85,15 +81,6 @@ export default function ContactManager(props) {
       renderCell: (action) => {
         return (
           <>
-            <IconButton
-              aria-label="delete"
-              className="btn-action btn-a-2"
-              //   onClick={() => {
-              //     handleClickEdit(action.row?.action?._id);
-              //   }}
-            >
-              <EditIcon />
-            </IconButton>
             <IconButton
               aria-label="delete"
               className="btn-action btn-a-3"

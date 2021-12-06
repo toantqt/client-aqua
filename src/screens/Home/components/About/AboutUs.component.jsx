@@ -46,7 +46,7 @@ const AboutUSComponent = () => {
                 <div className="mt-3">
                   <span>
                     Chính vì thế, các thiết bị xử lý nước sạch, nước siêu sạch
-                    cảu công ty chũng tôi đã và đang được khách hàng đánh giá
+                    của công ty chũng tôi đã và đang được khách hàng đánh giá
                     cao và ngày càng được ưu chuộng tại Việt Nam.
                   </span>
                 </div>
