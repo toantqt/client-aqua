@@ -3,14 +3,9 @@ import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Image from "material-ui-image";
 import { getHomeProduct } from "../../api/API";
+import slug from "../../resources/slug";
 
 export default function ProductComponent() {
-  const [arr, setArray] = useState([
-    "https://res.cloudinary.com/aquavn/image/upload/v1637548480/may_loc_nuoc_3_kyfwgw.png",
-    "https://res.cloudinary.com/aquavn/image/upload/v1637548480/may_loc_nuoc_2_npggvy.png",
-    "https://res.cloudinary.com/aquavn/image/upload/v1637548509/may_nuoc_uong_f4xxmc.png",
-    "https://res.cloudinary.com/aquavn/image/upload/v1637548480/may_loc_nuoc_3_kyfwgw.png",
-  ]);
   const [product, setProduct] = useState([]);
   const history = useHistory();
 
@@ -22,6 +17,9 @@ export default function ProductComponent() {
 
   const handleClick = (id) => {
     history.push(`/danh-muc/chi-tiet-san-pham/${id}`);
+  };
+  const handleClickTitle = () => {
+    history.push(slug.product);
   };
 
   const listsProduct = product.map((e, index) => {
@@ -57,7 +55,7 @@ export default function ProductComponent() {
   return (
     <Grid className="product">
       <div className="header-title">
-        <span>SẢN PHẨM</span>
+        <span onClick={handleClickTitle}>SẢN PHẨM</span>
       </div>
       <div className="mt-3">
         <Grid container spacing={3}>

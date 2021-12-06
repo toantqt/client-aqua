@@ -8,6 +8,10 @@ import facebookIcon from "../../assets/image/icon/facebook.png";
 import youtubeIcon from "../../assets/image/icon/youtube.png";
 import logo from "../../assets/image/logoaqua.png";
 
+import MenuIcon from "@material-ui/icons/Menu";
+import Button from "@material-ui/core/Button";
+import SearchIcon from "@material-ui/icons/Search";
+
 export default function HeaderComponent() {
   const history = useHistory();
   const [open, setOpen] = useState(false);
@@ -53,147 +57,203 @@ export default function HeaderComponent() {
     localStorage.setItem("active-h", index);
   };
   return (
-    <Grid>
-      <Grid id="header-top">
-        <div className="wrap-body wrap-header">
-          <Grid container spacing={1} style={{ height: "100%" }}>
-            <Grid item lg={2} md={2} xs={12}>
-              <div
-                style={{ width: "60%", height: "100%" }}
-                className="img-header-top"
-              >
-                <ul>
+    <>
+      <Grid id="header-desktop">
+        <Grid id="header-top">
+          <div className="wrap-body wrap-header">
+            <Grid container spacing={1} style={{ height: "100%" }}>
+              <Grid item lg={2} md={2} xs={12}>
+                <div
+                  style={{ width: "60%", height: "100%" }}
+                  className="img-header-top"
+                >
+                  <ul>
+                    <li>
+                      <img src={facebookIcon} alt="" />
+                    </li>
+                    <li>
+                      <img src={youtubeIcon} alt="" />
+                    </li>
+                  </ul>
+                </div>
+              </Grid>
+              <Grid item lg={4} md={4} xs={12}></Grid>
+              <Grid item lg={6} md={6} xs={12}>
+                <ul className="infor-contact">
                   <li>
-                    <img src={facebookIcon} alt="" />
+                    <i class="fas fa-search"></i>
+                    <span>Tìm kiếm</span>
                   </li>
                   <li>
-                    <img src={youtubeIcon} alt="" />
+                    <i class="fas fa-envelope"></i>
+                    <span>maylocnuocaquacantho@gmail.com</span>
+                  </li>
+                  <li>
+                    <i class="fas fa-phone-alt"></i> <span>0978 590 952</span>
                   </li>
                 </ul>
-              </div>
+              </Grid>
             </Grid>
-            <Grid item lg={4} md={4} xs={12}></Grid>
-            <Grid item lg={6} md={6} xs={12}>
-              <ul className="infor-contact">
-                <li>
-                  <i class="fas fa-search"></i>
-                  <span>Tìm kiếm</span>
-                </li>
-                <li>
-                  <i class="fas fa-envelope"></i>
-                  <span>maylocnuocaquacantho@gmail.com</span>
-                </li>
-                <li>
-                  <i class="fas fa-phone-alt"></i> <span>0978 590 952</span>
-                </li>
-              </ul>
-            </Grid>
-          </Grid>
-        </div>
-      </Grid>
-      <Grid id="header">
-        <div className="wrap-header wrap-body">
-          <Grid container spacing={1} style={{ height: "100%" }}>
-            <Grid item lg={2} md={2} xs={12}>
-              <div style={{ width: "60%", height: "100%" }}>
-                <ul>
-                  <li style={{ textAlign: "left" }}>
-                    <img src={logo} alt="" width="90%" />
+          </div>
+        </Grid>
+        <Grid id="header">
+          <div className="wrap-header wrap-body">
+            <Grid container spacing={1} style={{ height: "100%" }}>
+              <Grid item lg={2} md={2} xs={12}>
+                <div style={{ width: "60%", height: "100%" }}>
+                  <ul>
+                    <li style={{ textAlign: "left" }}>
+                      <img src={logo} alt="" width="90%" />
+                    </li>
+                  </ul>
+                </div>
+              </Grid>
+              <Grid item lg={10} md={10} xs={12}>
+                <ul className="menu">
+                  <li className="menu-item">
+                    <Link to="/" className={active === 1 ? "active" : ""}>
+                      <span>TRANG CHỦ</span>
+                    </Link>
                   </li>
-                </ul>
-              </div>
-            </Grid>
-            <Grid item lg={10} md={10} xs={12}>
-              <ul className="menu">
-                <li className="menu-item">
-                  <Link to="/" className={active === 1 ? "active" : ""}>
-                    <span>TRANG CHỦ</span>
-                  </Link>
-                </li>
-                <li className="menu-item">
-                  <Link
-                    to="/danh-muc/gioi-thieu"
-                    className={active === 2 ? "active" : ""}
-                    onClick={() => {
-                      handleClickActive(2);
-                    }}
-                  >
-                    <span>GIỚI THIỆU</span>
-                  </Link>
-                </li>
-                <li className="menu-item">
-                  <Link
-                    to="/danh-muc/san-pham"
-                    className={active === 3 ? "active" : ""}
-                    onClick={() => {
-                      handleClickActive(3);
-                    }}
-                  >
-                    <span>SẢN PHẨM </span>
-                  </Link>
-                </li>
-                <li className="menu-item">
-                  <Link
-                    to="/danh-muc/canh-bao"
-                    className={active === 4 ? "active" : ""}
-                    onClick={() => {
-                      handleClickActive(4);
-                    }}
-                  >
-                    <span>CẢNH BÁO</span>
-                  </Link>
-                </li>
-                <li className="menu-item">
-                  <Link
-                    to="/danh-muc/dai-ly"
-                    className={active === 5 ? "active" : ""}
-                    onClick={() => {
-                      handleClickActive(5);
-                    }}
-                  >
-                    <span>ĐẠI LÝ </span>
-                  </Link>
-                </li>
-                <li className="menu-item">
-                  <Link
-                    to="/danh-muc/tin-tuc"
-                    className={active === 6 ? "active" : ""}
-                    onClick={() => {
-                      handleClickActive(6);
-                    }}
-                  >
-                    <span>TIN TỨC</span>
-                  </Link>
-                </li>
+                  <li className="menu-item">
+                    <Link
+                      to="/danh-muc/gioi-thieu"
+                      className={active === 2 ? "active" : ""}
+                      onClick={() => {
+                        handleClickActive(2);
+                      }}
+                    >
+                      <span>GIỚI THIỆU</span>
+                    </Link>
+                  </li>
+                  <li className="menu-item">
+                    <Link
+                      to="/danh-muc/san-pham"
+                      className={active === 3 ? "active" : ""}
+                      onClick={() => {
+                        handleClickActive(3);
+                      }}
+                    >
+                      <span>SẢN PHẨM </span>
+                    </Link>
+                  </li>
+                  <li className="menu-item">
+                    <Link
+                      to="/danh-muc/canh-bao"
+                      className={active === 4 ? "active" : ""}
+                      onClick={() => {
+                        handleClickActive(4);
+                      }}
+                    >
+                      <span>CẢNH BÁO</span>
+                    </Link>
+                  </li>
+                  <li className="menu-item">
+                    <Link
+                      to="/danh-muc/dai-ly"
+                      className={active === 5 ? "active" : ""}
+                      onClick={() => {
+                        handleClickActive(5);
+                      }}
+                    >
+                      <span>ĐẠI LÝ </span>
+                    </Link>
+                  </li>
+                  <li className="menu-item">
+                    <Link
+                      to="/danh-muc/tin-tuc"
+                      className={active === 6 ? "active" : ""}
+                      onClick={() => {
+                        handleClickActive(6);
+                      }}
+                    >
+                      <span>TIN TỨC</span>
+                    </Link>
+                  </li>
 
-                <li className="menu-item">
-                  <Link
-                    to="/danh-muc/tuyen-dung"
-                    className={active === 7 ? "active" : ""}
-                    onClick={() => {
-                      handleClickActive(7);
-                    }}
-                  >
-                    <span>TUYỂN DỤNG</span>
-                  </Link>
+                  <li className="menu-item">
+                    <Link
+                      to="/danh-muc/tuyen-dung"
+                      className={active === 7 ? "active" : ""}
+                      onClick={() => {
+                        handleClickActive(7);
+                      }}
+                    >
+                      <span>TUYỂN DỤNG</span>
+                    </Link>
+                  </li>
+                  <li className="menu-item">
+                    <Link
+                      to="/danh-muc/lien-he"
+                      className={active === 8 ? "active" : ""}
+                      onClick={() => {
+                        handleClickActive(8);
+                      }}
+                    >
+                      <span>LIÊN HỆ</span>
+                    </Link>
+                  </li>
+                </ul>
+              </Grid>
+            </Grid>
+          </div>
+        </Grid>
+        <SearchComponent open={open} handleClose={handleClose} />
+      </Grid>
+      <Grid id="header-mobile">
+        <Grid id="header-mobile-top">
+          <Grid container spacing={1} style={{ height: "100%" }}>
+            <Grid item lg={3} md={3} xs={3} style={{ paddingBottom: "0px" }}>
+              <ul className="wrap-header-mb-top">
+                <li className="icon-header-mb-top">
+                  <img src={facebookIcon} alt="" width="80%" />
                 </li>
-                <li className="menu-item">
-                  <Link
-                    to="/danh-muc/lien-he"
-                    className={active === 8 ? "active" : ""}
-                    onClick={() => {
-                      handleClickActive(8);
-                    }}
-                  >
-                    <span>LIÊN HỆ</span>
-                  </Link>
+                <li className="icon-header-mb-top">
+                  <img src={youtubeIcon} alt="" width="80%" />
                 </li>
               </ul>
             </Grid>
+            <Grid
+              item
+              lg={9}
+              md={9}
+              xs={9}
+              className="wrap-header-mb-top"
+              style={{ paddingBottom: "0px" }}
+            >
+              <div className="content-header-mb-top">
+                <div>
+                  <i class="fas fa-phone-alt"></i> <span>0978 590 952</span>
+                </div>
+              </div>
+            </Grid>
           </Grid>
-        </div>
+        </Grid>
+        <Grid id="header-mobile-bottom">
+          <Grid container spacing={1} style={{ height: "100px" }}>
+            <Grid item xs={2}>
+              <Button
+                className="button-menu"
+                // onClick={toggleDrawer("left", true)}
+              >
+                <MenuIcon fontSize="large" style={{ color: "#0061b0" }} />
+              </Button>
+            </Grid>
+            <Grid item xs={8} style={{ height: "100px" }}>
+              <div className="mobile-logo">
+                <Link to="/">
+                  <img src={logo} alt="" width="40%" />
+                </Link>
+              </div>
+            </Grid>
+            <Grid item xs={2}>
+              <Button className="button-menu">
+                <SearchIcon fontSize="large" style={{ color: "#0061b0" }} />
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
       </Grid>
-      <SearchComponent open={open} handleClose={handleClose} />
-    </Grid>
+    </>
   );
 }

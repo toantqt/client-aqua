@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const AboutUSComponent = () => {
   return (
-    <Grid className=" mb-5 about">
+    <Grid className="mb-5 about">
       <div className="wrap-aboutUs">
         <Grid container spacing={4}>
           <Grid item lg={5} md={5} xs={12}>

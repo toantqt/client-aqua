@@ -6,6 +6,9 @@ body {
   font-weight: 500;
   color: #3f51b5;
 }
+.header-title span:hover {
+  cursor: pointer;
+}
 .wrap-body {
   width: 85%;
   margin: 0 auto;
@@ -14,6 +17,12 @@ body {
 @media (min-width: 1920px) {
   .wrap-body {
     width: 75%;
+    margin: 0 auto;
+  }
+}
+@media only screen and (max-width: 780px) {
+  .wrap-body {
+    width: 90%;
     margin: 0 auto;
   }
 }

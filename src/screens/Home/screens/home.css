@@ -149,3 +149,31 @@
     padding: 20px !important;
   }
 }
+@media only screen and (max-width: 780px) {
+  .reason {
+    height: auto;
+  }
+  .bg-reason {
+    height: auto;
+  }
+  .content-reason img {
+    margin-top: 20px;
+  }
+  .reason .image-reason {
+    padding: 0px;
+  }
+  .reason .content-reason .header-content {
+    text-align: center;
+  }
+
+  .warning .warning-video {
+    height: 300px;
+  }
+  .contact {
+    height: 620px !important;
+  }
+  .contact-form {
+    left: 5% !important;
+    padding: 50px 0px 50px 0px !important;
+  }
+}

@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import ReactPlayer from "react-player";
 import { getHomeVideo } from "../../../../api/API";
+import slug from "../../../../resources/slug";
 
 export default function WarningComponent() {
   const history = useHistory();
@@ -13,10 +14,14 @@ export default function WarningComponent() {
       setVideo(res.data[0]);
     });
   }, []);
+
+  const handleClickTitle = () => {
+    history.push(slug.warning);
+  };
   return (
     <Grid className="warning">
       <div className="header-title">
-        <span>CẢNH BÁO</span>
+        <span onClick={handleClickTitle}>CẢNH BÁO</span>
       </div>
       <div className="warning-video mt-3">
         <ReactPlayer

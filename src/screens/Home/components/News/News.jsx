@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import news from "../../../../assets/image/news/news.png";
 import NewsComponent from "../../../../components/News/News.component";
 import { getHomeNews } from "../../../../api/API";
+import slug from "../../../../resources/slug";
 export default function News() {
   const history = useHistory();
   const arr = [1, 2, 3];
@@ -17,6 +18,10 @@ export default function News() {
 
   const handleClick = (slug) => {
     history.push(`/danh-muc/bai-viet/${slug}`);
+  };
+
+  const handleClickTitle = () => {
+    history.push(slug.news);
   };
   const listsNews = news.map((e, index) => {
     return (
@@ -40,7 +45,7 @@ export default function News() {
   return (
     <Grid className="news">
       <div className="header-title">
-        <span>Tin tức</span>
+        <span onClick={handleClickTitle}>Tin tức</span>
       </div>
       <div className="mt-3">
         <Grid container spacing={3}>

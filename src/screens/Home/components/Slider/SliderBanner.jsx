@@ -54,15 +54,7 @@ const SliderBanner = (props) => {
       <div className="banner-img" key={index}>
         <div style={{ width: "100%", height: "100%" }}>
           {/* <ImageComponent url={e.image.url} /> */}
-          <Image
-            src={e?.banner?.image?.url}
-            style={{
-              width: "100%",
-              height: "100%",
-              paddingTop: "0px !important",
-              objectFit: "cover",
-            }}
-          />
+          <img src={e?.banner?.image?.url} alt="" width="100%" height="100%" />
         </div>
       </div>
     );

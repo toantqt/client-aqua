@@ -17,12 +17,12 @@ export default function ReasonComponent() {
           </div>
           <div className="mt-3">
             <Grid container spacing={3}>
-              <Grid item lg={2} md={2} xs={2}>
+              <Grid item lg={2} md={2} xs={3}>
                 <div>
                   <img src={ic1} alt="" width="100%" />
                 </div>
               </Grid>
-              <Grid item lg={10} md={10} xs={10}>
+              <Grid item lg={10} md={10} xs={9}>
                 <div className="top-content">
                   <span>TƯ VẤN NHIỆT TÌNH</span>
                 </div>
@@ -33,12 +33,12 @@ export default function ReasonComponent() {
                   </span>
                 </div>
               </Grid>
-              <Grid item lg={2} md={2} xs={2}>
+              <Grid item lg={2} md={2} xs={3}>
                 <div>
                   <img src={ic2} alt="" width="100%" />
                 </div>
               </Grid>
-              <Grid item lg={10} md={10} xs={10}>
+              <Grid item lg={10} md={10} xs={9}>
                 <div className="top-content">
                   <span>SẢN PHẨM CHẤT LƯỢNG</span>
                 </div>
@@ -49,13 +49,13 @@ export default function ReasonComponent() {
                   </span>
                 </div>
               </Grid>
-              <Grid item lg={2} md={2} xs={2}>
+              <Grid item lg={2} md={2} xs={3}>
                 <div>
                   <img src={ic3} alt="" width="100%" />
                 </div>
               </Grid>
 
-              <Grid item lg={10} md={10} xs={10}>
+              <Grid item lg={10} md={10} xs={9}>
                 <div className="top-content">
                   <span>GIÁ CẢ HỢP LÝ</span>
                 </div>
@@ -72,15 +72,7 @@ export default function ReasonComponent() {
       </Grid>
       <Grid item lg={6} md={6} xs={12}>
         <div className="image-reason">
-          <Image
-            src={r1}
-            style={{
-              width: "100%",
-              height: "100%",
-              paddingTop: "0px !important",
-              objectFit: "contain",
-            }}
-          />
+          <img src={r1} width="100%" />
         </div>
       </Grid>
     </Grid>
