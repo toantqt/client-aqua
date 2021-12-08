@@ -26,3 +26,9 @@
   padding: 50px;
   border: 1.5px solid #0061b0;
 }
+
+@media only screen and (max-width: 780px) {
+  #p-highlight {
+    display: none;
+  }
+}

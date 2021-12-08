@@ -23,10 +23,10 @@ export default function DetailsProduct(props) {
         <div className="details-pd">
           <div className="wrap-content-pd">
             <Grid container spacing={2}>
-              <Grid item lg={8} md={8} xs={6}>
+              <Grid item lg={8} md={8} xs={12}>
                 <GalleryComponent image={product?.product?.image} />
               </Grid>
-              <Grid item lg={4} md={4} xs={6}>
+              <Grid item lg={4} md={4} xs={12}>
                 <DescriptionComponent data={product?.product} />
               </Grid>
             </Grid>

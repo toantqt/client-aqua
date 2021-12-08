@@ -39,7 +39,7 @@ const ProductHighlightComponent = (props) => {
     );
   });
   return (
-    <Grid className="mt-5 mb-5">
+    <Grid className="mt-5 mb-5" id="p-highlight">
       <div className="wrap-highlight">
         <div className="header-highlight">
           <span>Sản phẩm nổi bật</span>

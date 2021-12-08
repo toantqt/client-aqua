@@ -54,7 +54,6 @@ export default function ReasonComponent() {
                   <img src={ic3} alt="" width="100%" />
                 </div>
               </Grid>
-
               <Grid item lg={10} md={10} xs={9}>
                 <div className="top-content">
                   <span>GIÁ CẢ HỢP LÝ</span>

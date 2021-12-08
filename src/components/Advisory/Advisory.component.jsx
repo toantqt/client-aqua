@@ -4,7 +4,7 @@ import "./advisory.css";
 import Image from "material-ui-image";
 const AdvisoryComponent = () => {
   return (
-    <Grid className="mt-5 mb-5">
+    <Grid className="mt-5 mb-5" id="advisory">
       <div className="wrap-advisory">
         <Image
           src="https://res.cloudinary.com/aquavn/image/upload/v1637504204/dc69389d9cf857a60ee9_manrcd.jpg"

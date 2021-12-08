@@ -61,7 +61,7 @@ export default function ProductPage(props) {
         item
         lg={4}
         md={4}
-        xs={12}
+        xs={6}
         onClick={() => {
           handleClick(e._id);
         }}
