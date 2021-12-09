@@ -11,12 +11,36 @@ import logo from "../../assets/image/logoaqua.png";
 import MenuIcon from "@material-ui/icons/Menu";
 import Button from "@material-ui/core/Button";
 import SearchIcon from "@material-ui/icons/Search";
-
+import Drawer from "@material-ui/core/Drawer";
+import List from "@material-ui/core/List";
+import Divider from "@material-ui/core/Divider";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import { makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
+const useStyles = makeStyles((theme) => ({
+  list: {
+    width: 300,
+  },
+  fullList: {
+    width: "auto",
+  },
+  nested: {
+    paddingLeft: theme.spacing(4),
+  },
+}));
 export default function HeaderComponent() {
   const history = useHistory();
+  const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(1);
-
+  const [state, setState] = React.useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
   useEffect(() => {
     if (localStorage.getItem("active-h")) {
       setActive(parseInt(localStorage.getItem("active-h")));
@@ -56,6 +80,98 @@ export default function HeaderComponent() {
   const handleClickActive = (index) => {
     localStorage.setItem("active-h", index);
   };
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setState({ ...state, [anchor]: open });
+  };
+  const handleClickSidebar = (status, url) => {
+    localStorage.setItem("active-h", status);
+    if (url === "") {
+      history.push("/");
+    } else {
+      history.push(`/danh-muc/${url}`);
+    }
+  };
+
+  const list = (anchor) => (
+    <div
+      className={clsx(classes.list, {
+        [classes.fullList]: anchor === "top" || anchor === "bottom",
+      })}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        <div style={{ textAlign: "center" }} className="mt-2 mb-1">
+          <img src={logo} alt="" width="40%" />
+        </div>
+        <Divider />
+
+        {[
+          { name: "Trang chủ", slug: "" },
+          { name: "Giới thiệu", slug: "gioi-thieu" },
+          { name: "Sản phẩm", slug: "san-pham" },
+          { name: "Cảnh báo", slug: "canh-bao" },
+          { name: "Đại lý", slug: "dai-ly" },
+          { name: "Tin tức", slug: "tin-tuc" },
+          { name: "Tuyển dụng", slug: "tuyen-dung" },
+          { name: "Liên hệ", slug: "lien-he" },
+        ].map((text, index) => (
+          <ListItem
+            button
+            key={text.name}
+            onClick={() => {
+              handleClickSidebar(1, text.slug);
+            }}
+          >
+            <ListItemText
+              primary={text.name}
+              style={{ fontWeight: "500 !important" }}
+            />
+          </ListItem>
+        ))}
+        <Divider />
+        {/* {productMobile} */}
+        <Divider />
+
+        <div
+          style={{
+            background: "#0160b0 ",
+            color: "white",
+            padding: "10px",
+            fontWeight: "500",
+            bottom: 0,
+            height: "300px",
+          }}
+        >
+          <div>
+            <span style={{ color: "#ffff00" }}>
+              CÔNG TY TNHH THƯƠNG MẠI DỊCH VỤ XỬ LÝ NƯỚC SẠCH AQUA VIỆT NAM
+            </span>
+          </div>
+          <div className="mt-2">
+            <span>
+              24/30 Lý Tự Trọng, Phường An Cư, Quận Ninh Kiều, TP Cần Thơ
+            </span>
+          </div>
+          <div className="mt-2">
+            <span>maylocnuocaquacantho@gmail.com</span>
+          </div>
+
+          <div className="mt-2">
+            <span>0978 590 952</span>
+          </div>
+        </div>
+      </List>
+    </div>
+  );
   return (
     <>
       <Grid id="header-desktop">
@@ -234,10 +350,17 @@ export default function HeaderComponent() {
             <Grid item xs={2}>
               <Button
                 className="button-menu"
-                // onClick={toggleDrawer("left", true)}
+                onClick={toggleDrawer("left", true)}
               >
                 <MenuIcon fontSize="large" style={{ color: "#0061b0" }} />
               </Button>
+              <Drawer
+                anchor={"left"}
+                open={state["left"]}
+                onClose={toggleDrawer("left", false)}
+              >
+                {list("left")}
+              </Drawer>
             </Grid>
             <Grid item xs={8} style={{ height: "100px" }}>
               <div className="mobile-logo">

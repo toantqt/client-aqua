@@ -64,4 +64,7 @@
   .banner-img img {
     height: auto;
   }
+  #slider-banner .slick-dots {
+    bottom: 10px;
+  }
 }

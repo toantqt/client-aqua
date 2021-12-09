@@ -1,0 +1,8 @@
+@media only screen and (max-width: 780px) {
+  #contact {
+    width: 100% !important;
+  }
+  #contact .img-contact {
+    height: 300px !important;
+  }
+}

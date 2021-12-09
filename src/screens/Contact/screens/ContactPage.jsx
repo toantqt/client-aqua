@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Image from "material-ui-image";
-
+import "./contact.css";
 export default function Contactpage(props) {
   useEffect(async () => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <Grid style={{ width: "65%", margin: "0 auto" }}>
+    <Grid style={{ width: "65%", margin: "0 auto" }} id="contact">
       <Grid container spacing={1}>
         <Grid
           item
@@ -16,6 +16,7 @@ export default function Contactpage(props) {
           md={12}
           xs={12}
           style={{ width: "100%", height: "500px" }}
+          className="img-contact"
         >
           <Image
             src="https://res.cloudinary.com/aquavn/image/upload/v1637504204/dc69389d9cf857a60ee9_manrcd.jpg"
