@@ -148,6 +148,9 @@
     height: 100px !important;
     padding: 20px !important;
   }
+  .bg-reason {
+    height: 600px !important;
+  }
 }
 @media only screen and (max-width: 780px) {
   .reason {
