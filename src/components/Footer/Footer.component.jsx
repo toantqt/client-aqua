@@ -26,8 +26,8 @@ const FooterComponent = () => {
                   <span className="ml-2">maylocnuocaqua.vn</span>
                 </li>
                 <li>
-                  <span className="footer-lists-title">Điện thoại:</span>
-                  <span className="ml-2">0978 590 952</span>
+                  <span className="footer-lists-title">Hotline:</span>
+                  <span className="ml-2">19009253</span>
                 </li>
 
                 <li className="footer-lists-title">
