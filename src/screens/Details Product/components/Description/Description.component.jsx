@@ -20,8 +20,10 @@ export default function DescriptionComponent(props) {
       </div>
       <div className="price-pd mt-2">
         <span>Giá:</span>
-        <span className="ml-2">{props?.data?.price}</span>
-        <span className="ml-1">VND</span>
+        <span className="ml-2">
+          {props?.data?.price?.toLocaleString("it-IT")}
+        </span>
+        <span className="ml-1">đ</span>
       </div>
       <hr />
 

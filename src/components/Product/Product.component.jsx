@@ -47,6 +47,9 @@ export default function ProductComponent() {
           </div>
           <div className="name-product">
             <span>{e?.name}</span>
+            <div className="price-product">
+              <span>{e?.price.toLocaleString("it-IT")} đ</span>
+            </div>
           </div>
         </div>
       </Grid>
