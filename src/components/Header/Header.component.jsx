@@ -339,7 +339,7 @@ export default function HeaderComponent() {
             >
               <div className="content-header-mb-top">
                 <div>
-                  <i class="fas fa-phone-alt"></i> <span>0978 590 952</span>
+                  <i class="fas fa-phone-alt"></i> <span>1900 92 53</span>
                 </div>
               </div>
             </Grid>
