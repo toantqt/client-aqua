@@ -166,7 +166,7 @@ export default function HeaderComponent() {
           </div>
 
           <div className="mt-2">
-            <span>0978 590 952</span>
+            <span>1900 92 53</span>
           </div>
         </div>
       </List>

@@ -44,7 +44,7 @@ export default function Contactpage(props) {
             </span>
           </div>
           <div style={{ fontSize: "18px", fontWeight: "500" }}>
-            <span>Điện thoại: 0978 590 952</span>
+            <span>Hotline: 1900 92 53</span>
           </div>
           <div style={{ fontSize: "18px", fontWeight: "500" }}>
             <span>Email: maylocnuocaquacantho@gmail.com</span>

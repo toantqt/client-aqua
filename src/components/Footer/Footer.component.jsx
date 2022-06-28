@@ -27,7 +27,7 @@ const FooterComponent = () => {
                 </li>
                 <li>
                   <span className="footer-lists-title">Hotline:</span>
-                  <span className="ml-2">19009253</span>
+                  <span className="ml-2">1900 92 53</span>
                 </li>
 
                 <li className="footer-lists-title">
