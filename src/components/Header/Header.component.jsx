@@ -205,7 +205,7 @@ export default function HeaderComponent() {
                     <span>maylocnuocaquacantho@gmail.com</span>
                   </li>
                   <li>
-                    <i class="fas fa-phone-alt"></i> <span>0978 590 952</span>
+                    <i class="fas fa-phone-alt"></i> <span>1900 92 53</span>
                   </li>
                 </ul>
               </Grid>
