@@ -33,7 +33,7 @@ const AdvisoryComponent = () => {
           </div>
           <div className="mt-3">
             <span style={{ fontSize: "36px", fontWeight: "500" }}>
-              0978 590 952
+              1900 92 53
             </span>
           </div>
         </div>
