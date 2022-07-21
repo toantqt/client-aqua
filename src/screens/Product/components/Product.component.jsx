@@ -30,7 +30,9 @@ const ProductComponent = (props) => {
         {/* <span>{props?.data?.price}</span>
         <span className="ml-1">VND</span> */}
         <span>Giá: </span>
-        <span className="ml-1">liên hệ</span>
+        <span className="ml-1">
+          {props?.data?.price?.toLocaleString("it-IT")} đ
+        </span>
       </div>
     </div>
   );

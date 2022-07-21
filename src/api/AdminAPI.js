@@ -509,7 +509,7 @@ export const addProduct = async (data) => {
 
   return await axios
     .post(`${url}/add-product`, formData, {
-      headers:  headers,
+      headers: headers,
     })
     .then((res) => {
       console.log(res);
@@ -573,7 +573,6 @@ export const getNewsEdit = async (id) => {
 
 export const updateNews = async (data) => {
   const formData = new FormData();
-
   for (let i = 0; i < data.totalContent; i++) {
     let title = "listsImage" + i;
     const arrImg = data.listImage.filter((e) => {
@@ -680,7 +679,7 @@ export const deleteContact = async (data) => {
 export const deleteContactCustomer = async (data) => {
   return await axios
     .post(`${url}/delete-contact-customer`, data, {
-      headers:  headers,
+      headers: headers,
     })
     .then((res) => {
       return res.data;
@@ -694,7 +693,7 @@ export const deleteContactCustomer = async (data) => {
 export const getContactCustomer = async () => {
   return await axios
     .get(`${url}/get-contact-customer`, {
-      headers:  headers,
+      headers: headers,
     })
     .then((res) => {
       return res.data;
